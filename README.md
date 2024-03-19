@@ -52,8 +52,10 @@ Not that I can think of
     - knex
     - express
     - cors/typescript
+    - dotenv
     - nodemon
     - multer
+    - mysql2
     - (possibly path or cloudinary)
     - react-modal
     - jsonwebtoken
@@ -132,7 +134,7 @@ List endpoints that your server will implement, including HTTP methods, paramete
         }
 
     - log in user 
-        - /users/:id 
+        - /user/:id 
         - params: email, password
         - response:
         {
