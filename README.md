@@ -74,13 +74,13 @@ No external APIs for this project
 
 ### Mockups
 
-![](HomePage.jpeg)
-![](ProfilePage.jpeg)
-![](DesignPage.jpeg)
+![](./mock_ups/HomePage.jpeg)
+![](./mock_ups/ProfilePage.jpeg)
+![](./mock_ups/DesignPage.jpeg)
 
 ### Data
 
-![](DataMap.png)
+![](./mock_ups/DataMap.png)
 
 ### Endpoints
 
@@ -172,7 +172,7 @@ done - create client (score: 1)
         - pages: HomePage, DetailsPage, UserPage
         -cd routes: "/", "/:itemID", "/:userID"
 
-- create serve (score: 1)
+done - create serve (score: 1)
     - routes, controllers
 
 - create migration (score: 2)
