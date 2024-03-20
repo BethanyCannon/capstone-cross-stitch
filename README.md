@@ -181,7 +181,7 @@ done - create seed (score: 2)
     - create 20 x stitch designs
     - create 1 user
 
-- feature-layout (score: 3)
+done - feature-layout (score: 3)
     - front end:
         - set up sass: mixins, variables, typography, global styling
         - create header & nav bar
