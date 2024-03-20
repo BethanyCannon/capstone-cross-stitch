@@ -2,6 +2,8 @@
  * @param { import("knex").Knex } knex
  * @returns { Promise<void> }
  */
+//npx knex migrate:latest
+//npx knex seed:run
 exports.up = function(knex) {
   return knex.schema.createTable("user", (table) => {
     table.increments("id").primary;

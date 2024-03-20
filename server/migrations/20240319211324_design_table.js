@@ -14,6 +14,8 @@ exports.up = function(knex) {
     table.integer("thread_count").notNullable();
     table.integer("height_size").notNullable();
     table.integer("height_width").notNullable();
+    table.string("description");
+    table.string("design_name");
     table.timestamp("created_at").defaultTo(knex.fn.now());
       table
         .timestamp("updated_at")
