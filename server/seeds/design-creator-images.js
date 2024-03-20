@@ -3,7 +3,9 @@
  * @returns { Promise<void> } 
  */
 
-//
+// https://www.antiquepatternlibrary.org/html/warm/main.htm
+
+
 // https://www.antiquepatternlibrary.org/pub/PDF/6-JA030PrisCross1.pdf
 // https://www.antiquepatternlibrary.org/pub/PDF/DMCAlpha2.pdf
 // https://www.antiquepatternlibrary.org/pub/PDF/DMCAlpha1.pdf
@@ -17,6 +19,35 @@
 //https://www.antiquepatternlibrary.org/pub/PDF/DMCPdeCNou3redrawn.pdf
 //https://www.antiquepatternlibrary.org/pub/PDF/FischbackSudslavischeOrnamente.pdf
 
+const userData = [
+  {
+    id: 1,
+    email: "bethcan@email.com",
+    password: "pass",
+    first_name: "Beth",
+    last_name: "Can",
+    avatar: "http://localhost:8080/avatars/avatar1.png",
+  },
+];
+
+const creatorData =[
+  {
+    id: 1,
+    first_name: "Jane",
+    last_name: "Doe",
+  },
+  {
+    id: 2,
+    first_name: "John",
+    last_name: "Smith",
+  },
+  {
+    id: 3,
+    first_name: "Antique",
+    last_name: "Pattern Library",
+  }
+];
+
 const designData =[
   {
     id: 1,
@@ -25,8 +56,6 @@ const designData =[
     thread_count: 5,
     height_size: 5,
     height_width: 5,
-    date_created: 1710902379648,
-    date_updated: 1710902379648,
     description: null,
   },
   {
@@ -36,8 +65,6 @@ const designData =[
     thread_count: 5,
     height_size: 5,
     height_width: 5,
-    date_created: 1710903382713,
-    date_updated: 1710903382713,
     description: null,
   },
   {
@@ -47,9 +74,7 @@ const designData =[
     thread_count: 5,
     height_size: 5,
     height_width: 5,
-    date_created: 1710902379648,
-    date_updated: 1710902379648,
-    description: null,
+    description: "truely amazing",
   },
   {
     id: 4,
@@ -58,9 +83,7 @@ const designData =[
     thread_count: 5,
     height_size: 5,
     height_width: 5,
-    date_created: 1710903382713,
-    date_updated: 1710903382713,
-    description: null,
+    description: "inspiring",
   },
   {
     id: 5,
@@ -69,8 +92,6 @@ const designData =[
     thread_count: 5,
     height_size: 5,
     height_width: 5,
-    date_created: 1710903382713,
-    date_updated: 1710903382713,
     description: null,
   }, 
   {
@@ -80,8 +101,6 @@ const designData =[
     thread_count: 5,
     height_size: 5,
     height_width: 5,
-    date_created: 1710903382713,
-    date_updated: 1710903382713,
     description: null,
   },
   {
@@ -91,8 +110,6 @@ const designData =[
     thread_count: 5,
     height_size: 5,
     height_width: 5,
-    date_created: 1710903382713,
-    date_updated: 1710903382713,
     description: null,
   },
   {
@@ -102,8 +119,6 @@ const designData =[
     thread_count: 5,
     height_size: 5,
     height_width: 5,
-    date_created: 1710902379648,
-    date_updated: 1710902379648,
     description: null,
   },
   {
@@ -113,8 +128,6 @@ const designData =[
     thread_count: 5,
     height_size: 5,
     height_width: 5,
-    date_created: 1710902379648,
-    date_updated: 1710902379648,
     description: null,
   },
   {
@@ -124,8 +137,6 @@ const designData =[
     thread_count: 5,
     height_size: 5,
     height_width: 5,
-    date_created: 1710902379648,
-    date_updated: 1710902379648,
     description: null,
   },
   {
@@ -135,8 +146,6 @@ const designData =[
     thread_count: 5,
     height_size: 5,
     height_width: 5,
-    date_created: 1710902379648,
-    date_updated: 1710902379648,
     description: null,
   },
   {
@@ -146,8 +155,6 @@ const designData =[
     thread_count: 5,
     height_size: 5,
     height_width: 5,
-    date_created: 1710902379648,
-    date_updated: 1710902379648,
     description: null,
   },
   {
@@ -157,8 +164,6 @@ const designData =[
     thread_count: 5,
     height_size: 5,
     height_width: 5,
-    date_created: 1710902379648,
-    date_updated: 1710902379648,
     description: null,
   },
   {
@@ -168,8 +173,6 @@ const designData =[
     thread_count: 5,
     height_size: 5,
     height_width: 5,
-    date_created: 1710902379648,
-    date_updated: 1710902379648,
     description: null,
   },
   {
@@ -179,8 +182,6 @@ const designData =[
     thread_count: 5,
     height_size: 5,
     height_width: 5,
-    date_created: 1710902379648,
-    date_updated: 1710902379648,
     description: null,
   },
   {
@@ -190,8 +191,6 @@ const designData =[
     thread_count: 5,
     height_size: 5,
     height_width: 5,
-    date_created: 1710902379648,
-    date_updated: 1710902379648,
     description: null,
   },
   {
@@ -201,8 +200,6 @@ const designData =[
     thread_count: 5,
     height_size: 5,
     height_width: 5,
-    date_created: 1710902379648,
-    date_updated: 1710902379648,
     description: null,
   },
   {
@@ -212,8 +209,6 @@ const designData =[
     thread_count: 5,
     height_size: 5,
     height_width: 5,
-    date_created: 1710902379648,
-    date_updated: 1710902379648,
     description: null,
   },
   {
@@ -223,8 +218,6 @@ const designData =[
     thread_count: 5,
     height_size: 5,
     height_width: 5,
-    date_created: 1710902379648,
-    date_updated: 1710902379648,
     description: null,
   },
   {
@@ -234,8 +227,6 @@ const designData =[
     thread_count: 5,
     height_size: 5,
     height_width: 5,
-    date_created: 1710902379648,
-    date_updated: 1710902379648,
     description: null,
   },
   {
@@ -245,133 +236,11 @@ const designData =[
     thread_count: 5,
     height_size: 5,
     height_width: 5,
-    date_created: 1710902379648,
-    date_updated: 1710902379648,
     description: null,
   },
-  // {
-  //   id: 22,
-  //   design_name: "name 1",
-  //   creator_id: 1,
-  //   thread_count: 5,
-  //   height_size: 5,
-  //   height_width: 5,
-  //   date_created: "1710902379648",
-  //   date_updated: "1710902379648",
-  //   description: null,
-  // },
-  // {
-  //   id: 23,
-  //   design_name: "name 1",
-  //   creator_id: 1,
-  //   thread_count: 5,
-  //   height_size: 5,
-  //   height_width: 5,
-  //   date_created: "1710902379648",
-  //   date_updated: "1710902379648",
-  //   description: null,
-  // },
-  // {
-  //   id: 24,
-  //   design_name: "name 1",
-  //   creator_id: 1,
-  //   thread_count: 5,
-  //   height_size: 5,
-  //   height_width: 5,
-  //   date_created: "1710902379648",
-  //   date_updated: "1710902379648",
-  //   description: null,
-  // },
-  // {
-  //   id: 25,
-  //   design_name: "name 1",
-  //   creator_id: 1,
-  //   thread_count: 5,
-  //   height_size: 5,
-  //   height_width: 5,
-  //   date_created: "1710902379648",
-  //   date_updated: "1710902379648",
-  //   description: null,
-  // },
-  // {
-  //   id: 26,
-  //   design_name: "name 1",
-  //   creator_id: 1,
-  //   thread_count: 5,
-  //   height_size: 5,
-  //   height_width: 5,
-  //   date_created: "1710902379648",
-  //   date_updated: "1710902379648",
-  //   description: null,
-  // },
-  // {
-  //   id: 27,
-  //   design_name: "name 1",
-  //   creator_id: 1,
-  //   thread_count: 5,
-  //   height_size: 5,
-  //   height_width: 5,
-  //   date_created: "1710902379648",
-  //   date_updated: "1710902379648",
-  //   description: null,
-  // },
-  // {
-  //   id: 28,
-  //   design_name: "name 1",
-  //   creator_id: 1,
-  //   thread_count: 5,
-  //   height_size: 5,
-  //   height_width: 5,
-  //   date_created: "1710902379648",
-  //   date_updated: "1710902379648",
-  //   description: null,
-  // },
-  // {
-  //   id: 29,
-  //   design_name: "name 1",
-  //   creator_id: 1,
-  //   thread_count: 5,
-  //   height_size: 5,
-  //   height_width: 5,
-  //   date_created: "1710902379648",
-  //   date_updated: "1710902379648",
-  //   description: null,
-  // },
-  // {
-  //   id: 30,
-  //   design_name: "name 1",
-  //   creator_id: 1,
-  //   thread_count: 5,
-  //   height_size: 5,
-  //   height_width: 5,
-  //   date_created: "1710902379648",
-  //   date_updated: "1710902379648",
-  //   description: null,
-  // },
-]
+];
 
-const creatorData =[
-  {
-    id: 1,
-    first_name: "Jane",
-    last_name: "Doe",
-    date_created: 1710902379648,
-  },
-  {
-    id: 2,
-    first_name: "John",
-    last_name: "Smith",
-    date_created: 1710902379648,
-  },
-  {
-    id: 3,
-    first_name: "Antique",
-    last_name: "Pattern Library",
-    date_created: 1710903382713,
-  }
-]
-
-const imagesData =[
+const imageData =[
   {
     id: 1,
     design_id: 1,
@@ -537,14 +406,46 @@ const imagesData =[
     design_id: 21,
     image_url: "http://localhost:8080/designs/design33.png"
   },
-]
+];
+
+const favouritesData = [
+  {
+    id: 1,
+    user_id: 1,
+    design_id: 2,
+  },
+  {
+    id: 2,
+    user_id: 1,
+    design_id: 3,
+  },
+  {
+    id: 3,
+    user_id: 1,
+    design_id: 5,
+  },
+  {
+    id: 4,
+    user_id: 1,
+    design_id: 7,
+  },
+  {
+    id: 5,
+    user_id: 1,
+    design_id: 10,
+  },
+];
 
 exports.seed = async function(knex) {
   // Deletes ALL existing entries
-  await knex('design').del()
-  await knex('design').insert(designData)
+  await knex('user').del()
+  await knex('user').insert(userData)
   await knex('creator').del()
   await knex('creator').insert(creatorData)
+  await knex('design').del()
+  await knex('design').insert(designData)
   await knex('images').del()
-  await knex('images').insert(imagesData)
+  await knex('images').insert(imageData)
+  await knex('favourites').del()
+  await knex('favourites').insert(favouritesData)
 };

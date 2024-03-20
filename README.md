@@ -175,9 +175,9 @@ done - create client (score: 1)
 done - create serve (score: 1)
     - routes, controllers
 
-- create migration (score: 2)
+done - create migration (score: 2)
 
-- create seed (score: 2)
+done - create seed (score: 2)
     - create 20 x stitch designs
     - create 1 user
 
