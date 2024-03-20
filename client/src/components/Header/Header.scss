@@ -1,0 +1,60 @@
+@use "../../styles/partials/typography" as *;
+@use "../../styles/partials/variables" as *;
+@use "../../styles/partials/mixins" as *;
+
+.nav-bar{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background-color: $LightBlue;
+    margin: 0;
+    padding-bottom: 16px;
+
+    @include tablet {
+        flex-direction: row;
+        padding-bottom: 0;
+    }
+
+    &__logo {
+        max-width: 100%;
+
+        @include tablet {
+            max-height: 75px;
+        }
+    }
+
+    &__container {
+        display: flex;
+        align-self: center;
+        width: 90%;
+
+        @include tablet {
+            width: auto;
+            margin-left: auto;
+            margin-right: 1rem;
+        }
+    }
+
+    &__search-container {
+        display: flex;
+        background-color: white;
+        width: 90%;
+        border-radius: 20px;
+        border: 1px solid $Black;
+
+       & input {
+            border: none;
+            width: 100%;
+            background-color: transparent;
+            margin-left: 0.5rem;
+        }
+
+        & img {
+            margin-right: 0.5rem;
+        }
+    }
+    & p {
+        margin-left: 1rem;
+        align-self: center;
+    }
+}
