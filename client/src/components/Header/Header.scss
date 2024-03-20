@@ -2,11 +2,15 @@
 @use "../../styles/partials/variables" as *;
 @use "../../styles/partials/mixins" as *;
 
+header{
+    background-color: $LightBlue;
+}
+
 .nav-bar{
-    display: flex;
+
     flex-direction: column;
     justify-content: center;
-    background-color: $LightBlue;
+    display: flex;
     margin: 0;
     padding-bottom: 16px;
 
@@ -15,9 +19,21 @@
         padding-bottom: 0;
     }
 
-    &__logo {
-        max-width: 100%;
+    @include desktop {
+        max-width: 1080px;
+        margin-left: auto;
+        margin-right: auto;
+    }
 
+    &__link {
+        max-width: 100%;
+        display: flex;
+        justify-content: center;
+    }
+
+    &__logo{
+        max-width: 100%;
+        
         @include tablet {
             max-height: 75px;
         }
@@ -53,8 +69,14 @@
             margin-right: 0.5rem;
         }
     }
-    & p {
+    &__login {
         margin-left: 1rem;
         align-self: center;
+
+        &:hover {
+            color: $DarkBlack;
+            cursor: pointer;
+            border-bottom: 2px solid $DarkBlack;
+        }
     }
 }
