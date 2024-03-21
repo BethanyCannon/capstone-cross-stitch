@@ -14,7 +14,7 @@ const designRoutes = require("./routes/design-routes")
 const userRoutes = require("./routes/user-routes")
 
 app.use("/design", designRoutes)
-app.use("user", userRoutes)
+app.use("/user", userRoutes)
 
 app.listen(port, () => {
     console.log(`Server is running at http://localhost:${port}`);

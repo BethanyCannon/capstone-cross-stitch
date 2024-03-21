@@ -5,9 +5,9 @@ const router = express.Router();
 //app.use(express.static("public"))
 
 router
-    .get("/:id",)
-    .post("/newuser")
-    .post("/:id")
-    .delete("/:id/favourites/:id")
+    // .get("/:id",)
+    // .post("/newuser")
+    // .post("/:id")
+    // .delete("/:id/favourites/:id")
 
 module.exports = router; 
