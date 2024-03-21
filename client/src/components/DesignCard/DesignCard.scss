@@ -1,0 +1,24 @@
+@use "../../styles//partials/mixins" as *;
+@use "../../styles/partials/typography" as *;
+@use "../../styles/partials/variables" as *;
+
+.design-card {
+    background-color: $AntiWhite;
+    width: 90%;
+    align-self: center;
+    margin: 16px;
+    border-radius: 20px;
+    overflow: hidden;
+
+    &__img {
+        background-color: $Silver;
+        width: 100%;
+        // height: 100%;
+        height: 250px;
+    }
+
+    & div {
+        text-align: center;
+        padding: 8px 0;
+    }
+}
