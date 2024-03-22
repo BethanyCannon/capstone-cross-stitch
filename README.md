@@ -187,7 +187,7 @@ done - feature-layout (score: 3)
         - create header & nav bar
         - create footer
     
-- feature-homepage (4)
+done - feature-homepage (4)
     - frontend: 
         - create page components (similar to mock up)
             - cross stitch card with data filled - .map
