@@ -95,7 +95,7 @@ List endpoints that your server will implement, including HTTP methods, paramete
             "id": 1,
             "design_name": "Cool Design",
             "creator_name": "Jane Doe"               (comes from foreign key "creator_id": "Jane Doe")
-            "img_url": "ASK ABOUT THIS ONE",
+            "img_url": ["url", "url"]
         }
 
     - user data

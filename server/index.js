@@ -9,6 +9,7 @@ const port = PORT || 5051;
 
 app.use(cors({ origin: allowedOrigins }));
 app.use(express.json());
+app.use(express.static('public'))
 
 const designRoutes = require("./routes/design-routes")
 const userRoutes = require("./routes/user-routes")

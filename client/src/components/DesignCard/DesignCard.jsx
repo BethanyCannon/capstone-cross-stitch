@@ -1,14 +1,14 @@
 import "./DesignCard.scss"
 
-function Card() {
+function Card({newDesign}) {
+    console.log(newDesign.image[0].image_url)
 
  return(
     <div className="design-card">
-        {/* <img src="" /> */}
-        <object className="design-card__img"/>
+        <img className="design-card__img" src={newDesign.image[0].image_url} />
         <div>
-            <p>Title</p>
-            <p>Creator</p>
+            <p>{newDesign.design_name}</p>
+            <p>{newDesign.creator_name}</p>
         </div>
     </div>
  )   
