@@ -72,6 +72,7 @@ header{
     &__login {
         margin-left: 1rem;
         align-self: center;
+        text-wrap: nowrap;
 
         &:hover {
             color: $DarkBlack;

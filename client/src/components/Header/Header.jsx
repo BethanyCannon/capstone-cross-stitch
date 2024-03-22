@@ -2,6 +2,7 @@ import "./Header.scss";
 import stitchLogo from "../../assets/stitch.svg";
 import searchIcon from "../../assets/search.svg"
 import {Link} from "react-router-dom";
+import Login from "../../components/Login/Login";
 
 function Header() {
     return (
@@ -16,7 +17,7 @@ function Header() {
                         <img src={searchIcon} alt="search icon" />
                     </div>
                     <div className="nav-bar__login">
-                    <p>Login</p>
+                    <Login />
                     </div>
                 </div>
             </nav>
