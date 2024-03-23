@@ -1,7 +1,6 @@
 import "./DesignCard.scss"
 
 function Card({newDesign}) {
-    console.log(newDesign.image[0].image_url)
 
  return(
     <div className="design-card">
