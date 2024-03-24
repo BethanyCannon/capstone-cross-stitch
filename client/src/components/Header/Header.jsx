@@ -9,10 +9,9 @@ import axios from "axios";
 function Header() {
     const [profile, setProfile] = useState(null);
     const [isLoading, setIsLoading] = useState(true);
-    // const [failedAuth, setFailedAuth] = useState(false);
-    const [isLoggedIn, setIsLoggedIn] = useState(false)
+    const [isLoggedIn, setIsLoggedIn] = useState(false);
 
-console.log(profile)
+    console.log(profile)
 
     const getUser = async () => {
         const token = sessionStorage.getItem("token");
@@ -69,7 +68,7 @@ console.log(profile)
                     (
                     <div>
                         {profile ? 
-                        (<img src={profile.avatar} className="nav-bar__avatar" />)  :
+                        (<img src={`http://localhost:8080/avatars/${profile.avatar}`} className="nav-bar__avatar" />)  :
                         (<object className="nav-bar__avatar" type="image/jpeg" />)}
                     </div>
                     )

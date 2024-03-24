@@ -48,6 +48,7 @@ Not that I can think of
     - react
     - react-router-dom
     - axios
+    react-modal
 - Server libraries:
     - knex
     - express
@@ -56,9 +57,8 @@ Not that I can think of
     - nodemon
     - multer
     - mysql2
-    - (possibly path or cloudinary)
-    - react-modal
     - jsonwebtoken
+    - bcryptjs
 
 ### APIs
 

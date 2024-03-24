@@ -3,6 +3,7 @@ import Modal from "react-modal";
 import { useState } from "react";
 import closeIcon from "../../assets/close.svg";
 import axios from "axios";
+import SignUp from "../SignUp/SignUp"
 
 Modal.setAppElement('#root');
 
@@ -11,7 +12,7 @@ function Login({setIsLoggedIn}) {
     const [modalIsOpen, setIsOpen] = useState(false);
     const [error, setError] = useState(null);
 
-    const handleSubmit = async (event) => {
+    const handleLogin = async (event) => {
         event.preventDefault();
 
         try {
@@ -19,7 +20,6 @@ function Login({setIsLoggedIn}) {
                 email: event.target.email.value,
                 password: event.target.password.value
               });
-
               sessionStorage.setItem("token", response.data.token);
               setIsLoggedIn(true)
               setIsOpen(false)
@@ -50,8 +50,9 @@ function Login({setIsLoggedIn}) {
                     
                 {/* <div className="login"> */}
                     <button className="login__button" onClick={closeModal}> <img src={closeIcon} /> </button>
-                    <h2>Login</h2>
-                    <form className="login__form" onSubmit={handleSubmit}>
+                    
+                    <form className="login__form" onSubmit={handleLogin}>
+                    <legend>Login</legend>
                         <label htmlFor="email" > Email: </label>
                             <input type="text" name="email" />
                         <label htmlFor="password" > Password: </label>
@@ -61,7 +62,8 @@ function Login({setIsLoggedIn}) {
 
                         {error && <div className="login__message">{error}</div>}
                     </form>
-                    <p>Sign up</p>
+                    <p>don't have an account?</p>
+                    <SignUp />
                 {/* </div> */}
 
             </Modal>

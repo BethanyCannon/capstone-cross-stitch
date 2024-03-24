@@ -18,7 +18,7 @@ function App() {
           {/* <Route path="/design/:id" element={<DetailsPage />} /> */}
           {/* <Route path="/profile/:id" element={<UserPage />} /> */}
           <Route path="/:id" element={<SearchPage />} title={"Search"} />
-          <Route path="*" element={<Navigate to="/" />} />
+          {/* <Route path="*" element={<Navigate to="/" />} /> */}
         </Routes>
         <Footer />
       </BrowserRouter>

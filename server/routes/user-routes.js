@@ -1,8 +1,22 @@
 const express = require("express")
 const router = express.Router();
 const knex = require("knex")(require("../knexfile"));
-// const bcrypt = require("bcryptjs");
+const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
+const multer = require("multer");
+
+const storage = multer.diskStorage({
+  destination: (req, file, cb) => {
+    cb(null, "public/avatars")
+  },
+  filename: (req, file, cb) => {
+    cb(null, `${Date.now()}_${file.originalname}`
+    //path goes here (12:00 in yt)
+    )
+  } 
+})
+
+const upload = multer({  storage: storage });
 
 router.get("/", async (req, res) => {
     console.log(req.headers.authorization)
@@ -28,9 +42,9 @@ router.get("/", async (req, res) => {
 
     // Respond with the appropriate user data
     const user = await knex("user").where({ id: decodedToken.id }).first();
-    console.log(user)
 
     delete user.password;
+    console.log(user)
     res.send(user);
 
   } catch (error) {
@@ -52,11 +66,10 @@ router.post("/login", async (req, res) => {
   }
 
   // Validate the password
-  const isPasswordCorrect = (password === user.password);
+  const isPasswordCorrect = bcrypt.compareSync(password, user.password);
   if (!isPasswordCorrect) {
     return res.status(400).send("Invalid password");
   }
-
 
   // Generate a token
   const token = jwt.sign(
@@ -68,8 +81,49 @@ router.post("/login", async (req, res) => {
   res.send({ token });
 })
 
-router.post("/newuser", async (req, res) => {
-    console.log(req.body)
+router.post("/newuser", upload.single("image"), async (req, res) => {
+  console.log(req.file)
+  //not getting .jpeg
+  const { first_name, last_name, email, password, confirm_password, } = req.body;
+  const image = req.file.filename
+
+  if (confirm_password !== password) {
+    return res.status(400).send("passwords do not match");
+  }
+
+  if (!first_name || !last_name || !email || !password ) {
+    return res.status(400).send("Please enter the required fields");
+  }
+
+  const user = await knex("user").where({ email: email }).first();
+  if (user) {
+    return res.status(400).send("this email is already in use");
+  }
+
+  if (!req.file) {
+    return res.status(400).send("image error")
+  }
+
+  const hashedPassword = bcrypt.hashSync(password);
+
+  const newUser = {
+    first_name,
+    last_name,
+    email,
+    password: hashedPassword,
+    avatar: image,
+  };
+
+  // Insert it into our database
+  try {
+    await knex("user").insert(newUser);
+    res.status(201).send("Registered successfully");
+  } catch (error) {
+    console.error(error);
+    res.status(400).send("Failed registration");
+  }
+
+//stopped at 14:39
 })
 
 
