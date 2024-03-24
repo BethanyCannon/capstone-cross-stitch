@@ -9,7 +9,10 @@ import axios from "axios";
 function Header() {
     const [profile, setProfile] = useState(null);
     const [isLoading, setIsLoading] = useState(true);
-    const [failedAuth, setFailedAuth] = useState(false);
+    // const [failedAuth, setFailedAuth] = useState(false);
+    const [isLoggedIn, setIsLoggedIn] = useState(false)
+
+console.log(profile)
 
     const getUser = async () => {
         const token = sessionStorage.getItem("token");
@@ -19,9 +22,10 @@ function Header() {
                 headers: { Authorization: `Bearer ${token}` }
             })
             setProfile(response.data)
+            setIsLoggedIn(true)
         } catch(error) {
             console.log(error)
-            setFailedAuth(true);
+            setIsLoggedIn(false)
         }
         setIsLoading(false);
     }
@@ -34,7 +38,7 @@ function Header() {
 
       useEffect(() => {
         getUser();
-      }, []);
+      }, [isLoggedIn]);
 
       if (isLoading) {
         return (
@@ -44,28 +48,6 @@ function Header() {
           </main>
         )
       }
-
-    if (failedAuth) {
-        return (
-            <header>
-            <nav className="nav-bar">
-                <Link className="nav-bar__link" to="/" >
-                <img className="nav-bar__logo" src={stitchLogo} alt="X Stitch Logo" />
-                </Link>
-                <div className="nav-bar__container">
-                    <div className="nav-bar__search-container">
-                        <input type="search" placeholder="Search" />
-                        <img src={searchIcon} alt="search icon" />
-                    </div>
-                    <div className="nav-bar__login">
-                    <Login />
-                    </div>
-                </div>
-            </nav>
-        </header>
-        )
-      }
-
 
     return (
         <header>
@@ -78,9 +60,21 @@ function Header() {
                         <input type="search" placeholder="Search" />
                         <img src={searchIcon} alt="search icon" />
                     </div>
+
+                    {!isLoggedIn ?
+                    (                    
                     <div className="nav-bar__login">
-                    <img src={profile.avatar} className="nav-bar__avatar" />
+                    <Login setIsLoggedIn={setIsLoggedIn} />
+                    </div>) :
+                    (
+                    <div>
+                        {profile ? 
+                        (<img src={profile.avatar} className="nav-bar__avatar" />)  :
+                        (<object className="nav-bar__avatar" type="image/jpeg" />)}
                     </div>
+                    )
+                    }
+
                 </div>
             </nav>
         </header>

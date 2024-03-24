@@ -6,17 +6,13 @@ import axios from "axios";
 
 Modal.setAppElement('#root');
 
-function Login() {
+function Login({setIsLoggedIn}) {
+
     const [modalIsOpen, setIsOpen] = useState(false);
     const [error, setError] = useState(null);
 
-
     const handleSubmit = async (event) => {
         event.preventDefault();
-
-        console.log(
-            "email", event.target.email.value,
-            "password", event.target.password.value)
 
         try {
             const response = await axios.post("http://localhost:8080/user/login", {
@@ -24,11 +20,12 @@ function Login() {
                 password: event.target.password.value
               });
 
-              console.log(response)
               sessionStorage.setItem("token", response.data.token);
+              setIsLoggedIn(true)
               setIsOpen(false)
 
         } catch(error){
+            console.log(error)
             setError(error.response.data);
         }
     }

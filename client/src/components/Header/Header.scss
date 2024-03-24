@@ -88,6 +88,9 @@ header{
         height: 40px;
         width: 40px;
         border-radius: 50%;
+        background-color: $AntiWhite;
+        margin-left: 1rem;
+        align-self: center;
 
         &:hover {
             border-bottom: none;
