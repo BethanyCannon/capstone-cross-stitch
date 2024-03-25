@@ -11,6 +11,7 @@ function Login({setIsLoggedIn}) {
 
     const [modalIsOpen, setIsOpen] = useState(false);
     const [error, setError] = useState(null);
+    const [success, setSuccess] = useState(false);
 
     const handleLogin = async (event) => {
         event.preventDefault();
@@ -50,7 +51,7 @@ function Login({setIsLoggedIn}) {
                     
                 {/* <div className="login"> */}
                     <button className="login__button" onClick={closeModal}> <img src={closeIcon} /> </button>
-                    
+    
                     <form className="login__form" onSubmit={handleLogin}>
                     <legend>Login</legend>
                         <label htmlFor="email" > Email: </label>
@@ -61,9 +62,10 @@ function Login({setIsLoggedIn}) {
                         <button>Log in</button>
 
                         {error && <div className="login__message">{error}</div>}
+                        {success && <div> Your account has been made. Please login </div>}
                     </form>
                     <p>don't have an account?</p>
-                    <SignUp />
+                    <SignUp setSuccess={setSuccess} />
                 {/* </div> */}
 
             </Modal>

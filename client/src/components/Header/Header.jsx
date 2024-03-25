@@ -66,11 +66,11 @@ function Header() {
                     <Login setIsLoggedIn={setIsLoggedIn} />
                     </div>) :
                     (
-                    <div>
+                    <Link to={`profile/${profile.id}`}>
                         {profile ? 
                         (<img src={`http://localhost:8080/avatars/${profile.avatar}`} className="nav-bar__avatar" />)  :
                         (<object className="nav-bar__avatar" type="image/jpeg" />)}
-                    </div>
+                    </Link>
                     )
                     }
 

@@ -2,10 +2,11 @@ import "./SignUp.scss"
 import Modal from "react-modal";
 import { useState } from "react";
 import axios from "axios";
+import closeIcon from "../../assets/close.svg"
 
 Modal.setAppElement('#root');
 
-function SignUp() {
+function SignUp({ setSuccess }) {
     const [modalIsOpen, setIsOpen] = useState(false);
     const [error, setError] = useState(null);
     const [file, setFile] = useState("")
@@ -24,7 +25,8 @@ function SignUp() {
         try {
             const response = await axios.post("http://localhost:8080/user/newuser", data
             );
-            //   console.log(response)
+            setSuccess(true)
+            setIsOpen(false)
         } catch(error){
             console.log(error)
             setError(error.response.data);
@@ -53,6 +55,7 @@ function SignUp() {
                 portalClassNam="login"
                 isOpen={modalIsOpen}
                 onRequestClose={closeModal}>
+                <button className="login__button" onClick={closeModal}> <img src={closeIcon} /> </button>
                 <form className="login__form" onSubmit={handleSubmit}>
                 <legend>Sign up</legend>
 
@@ -74,9 +77,7 @@ function SignUp() {
                     <label htmlFor="avatar">Choose a profile picture:</label>
                     <input type="file" name="avatar" onChange={handleFile} accept="image/png, image/jpeg" />
 
-                    <button 
-                    // onClick={handleUpload}
-                    >Create account</button>
+                    <button>Create account</button>
 
                     {error && <div className="login__message">{error}</div>}
                 </form>
