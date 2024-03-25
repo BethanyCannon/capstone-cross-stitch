@@ -20,7 +20,7 @@ header{
     }
 
     @include desktop {
-        max-width: 1080px;
+        max-width: $maxW;
         margin-left: auto;
         margin-right: auto;
     }
@@ -43,6 +43,7 @@ header{
         display: flex;
         align-self: center;
         width: 90%;
+        align-items: center;
 
         @include tablet {
             width: auto;
@@ -57,12 +58,14 @@ header{
         width: 90%;
         border-radius: 20px;
         border: 1px solid $Black;
+        height: max-content;
 
        & input {
             border: none;
             width: 100%;
             background-color: transparent;
             margin-left: 0.5rem;
+            padding: 8px 0;
         }
 
         & img {
@@ -72,11 +75,25 @@ header{
     &__login {
         margin-left: 1rem;
         align-self: center;
+        text-wrap: nowrap;
 
         &:hover {
             color: $DarkBlack;
             cursor: pointer;
             border-bottom: 2px solid $DarkBlack;
+        }
+    }
+
+    &__avatar {
+        height: 40px;
+        width: 40px;
+        border-radius: 50%;
+        background-color: $AntiWhite;
+        margin-left: 1rem;
+        align-self: center;
+
+        &:hover {
+            border-bottom: none;
         }
     }
 }

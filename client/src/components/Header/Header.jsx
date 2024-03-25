@@ -2,8 +2,52 @@ import "./Header.scss";
 import stitchLogo from "../../assets/stitch.svg";
 import searchIcon from "../../assets/search.svg"
 import {Link} from "react-router-dom";
+import Login from "../../components/Login/Login";
+import { useEffect, useState  } from "react";
+import axios from "axios";
 
 function Header() {
+    const [profile, setProfile] = useState(null);
+    const [isLoading, setIsLoading] = useState(true);
+    const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+    console.log(profile)
+
+    const getUser = async () => {
+        const token = sessionStorage.getItem("token");
+
+        try {
+            const response = await axios.get("http://localhost:8080/user", {
+                headers: { Authorization: `Bearer ${token}` }
+            })
+            setProfile(response.data)
+            setIsLoggedIn(true)
+        } catch(error) {
+            console.log(error)
+            setIsLoggedIn(false)
+        }
+        setIsLoading(false);
+    }
+
+    // const logout = () => {
+    //     sessionStorage.removeItem("token");
+    //     setFailedAuth(true);
+    //     setProfile(null);
+    //   }; 
+
+      useEffect(() => {
+        getUser();
+      }, [isLoggedIn]);
+
+      if (isLoading) {
+        return (
+          <main className="dashboard">
+            <h1 className="dashboard__title">Dashboard</h1>
+            <p>Loading...</p>
+          </main>
+        )
+      }
+
     return (
         <header>
             <nav className="nav-bar">
@@ -15,9 +59,21 @@ function Header() {
                         <input type="search" placeholder="Search" />
                         <img src={searchIcon} alt="search icon" />
                     </div>
+
+                    {!isLoggedIn ?
+                    (                    
                     <div className="nav-bar__login">
-                    <p>Login</p>
-                    </div>
+                    <Login setIsLoggedIn={setIsLoggedIn} />
+                    </div>) :
+                    (
+                    <Link to={`profile/${profile.id}`}>
+                        {profile ? 
+                        (<img src={`http://localhost:8080/avatars/${profile.avatar}`} className="nav-bar__avatar" />)  :
+                        (<object className="nav-bar__avatar" type="image/jpeg" />)}
+                    </Link>
+                    )
+                    }
+
                 </div>
             </nav>
         </header>

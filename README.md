@@ -48,6 +48,7 @@ Not that I can think of
     - react
     - react-router-dom
     - axios
+    react-modal
 - Server libraries:
     - knex
     - express
@@ -56,9 +57,8 @@ Not that I can think of
     - nodemon
     - multer
     - mysql2
-    - (possibly path or cloudinary)
-    - react-modal
     - jsonwebtoken
+    - bcryptjs
 
 ### APIs
 
@@ -200,7 +200,7 @@ done - feature-homepage (4)
         - create modals for signing in and signing up
         - include forms - sign up must be able to take an image in avatar
     - backend:
-        - .post /user/:id & .post /user/newuser
+        - .post /user/login & .post /user/newuser
         - JWT token auth
     sources to help with image uploading:
     <!-- https://stackoverflow.com/questions/4007969/application-x-www-form-urlencoded-or-multipart-form-data -->

@@ -1,0 +1,36 @@
+@use "../../styles/partials/mixins" as *;
+@use "../../styles/partials/typography" as *;
+@use "../../styles/partials/variables" as *;
+
+.Modal{
+    position: absolute;
+    inset: 40px;
+    border: 1px solid rgb(204, 204, 204);
+    background: rgb(255, 255, 255);
+    overflow: auto;
+    border-radius: 4px;
+    outline: none;
+    padding: 20px;
+}
+
+.login{
+    // display: flex;
+    // flex-direction: column;
+
+    &__button{
+        background-color: transparent;
+        border: none;
+        margin-left: auto;
+        display: flex;
+
+        & image {
+            margin-left: auto;
+        }
+    }
+
+    &__form{
+    display: flex;
+    flex-direction: column;
+    }
+
+}

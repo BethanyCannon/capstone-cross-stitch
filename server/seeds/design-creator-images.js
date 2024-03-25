@@ -23,10 +23,10 @@ const userData = [
   {
     id: 1,
     email: "bethcan@email.com",
-    password: "pass",
+    password: "$2a$10$c/mGZ3Opysa.2jFwYAnohO.fAUXBiBXMDCLkj84artv9T5s2NLn.e",
     first_name: "Beth",
     last_name: "Can",
-    avatar: "http://localhost:8080/avatars/avatar1.png",
+    avatar: "avatar1.png",
   },
 ];
 
