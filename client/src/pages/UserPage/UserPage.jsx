@@ -1,3 +1,4 @@
+import DesignCard from "../../components/DetailsCard/DetailsCard"
 
 function HomePage() {
 

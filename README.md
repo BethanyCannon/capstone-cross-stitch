@@ -195,7 +195,7 @@ done - feature-homepage (4)
         - .get /designs
         - .get /design?limit=10 (or 15)
 
-- features-signin-signup-page/modal (7)
+done - features-signin-signup-page/modal (7)
     - frontend: 
         - create modals for signing in and signing up
         - include forms - sign up must be able to take an image in avatar

@@ -6,43 +6,42 @@ import Login from "../../components/Login/Login";
 import { useEffect, useState  } from "react";
 import axios from "axios";
 
-function Header() {
-    const [profile, setProfile] = useState(null);
-    const [isLoading, setIsLoading] = useState(true);
-    const [isLoggedIn, setIsLoggedIn] = useState(false);
+function Header({isLoading, isLoggedIn, setIsLoggedIn, profile }) {
+    // const [profile, setProfile] = useState(null);
+    // const [isLoading, setIsLoading] = useState(true);
+    // const [isLoggedIn, setIsLoggedIn] = useState(false);
 
-    console.log(profile)
+    // console.log(profile)
 
-    const getUser = async () => {
-        const token = sessionStorage.getItem("token");
+    // const getUser = async () => {
+    //     const token = sessionStorage.getItem("token");
 
-        try {
-            const response = await axios.get("http://localhost:8080/user", {
-                headers: { Authorization: `Bearer ${token}` }
-            })
-            setProfile(response.data)
-            setIsLoggedIn(true)
-        } catch(error) {
-            console.log(error)
-            setIsLoggedIn(false)
-        }
-        setIsLoading(false);
-    }
+    //     try {
+    //         const response = await axios.get("http://localhost:8080/user", {
+    //             headers: { Authorization: `Bearer ${token}` }
+    //         })
+    //         setProfile(response.data)
+    //         setIsLoggedIn(true)
+    //     } catch(error) {
+    //         console.log(error)
+    //         setIsLoggedIn(false)
+    //     }
+    //     setIsLoading(false);
+    // }
 
-    // const logout = () => {
-    //     sessionStorage.removeItem("token");
-    //     setFailedAuth(true);
-    //     setProfile(null);
-    //   }; 
+    // // const logout = () => {
+    // //     sessionStorage.removeItem("token");
+    // //     setFailedAuth(true);
+    // //     setProfile(null);
+    // //   }; 
 
-      useEffect(() => {
-        getUser();
-      }, [isLoggedIn]);
+    //   useEffect(() => {
+    //     getUser();
+    //   }, [isLoggedIn]);
 
       if (isLoading) {
         return (
-          <main className="dashboard">
-            <h1 className="dashboard__title">Dashboard</h1>
+          <main>
             <p>Loading...</p>
           </main>
         )
@@ -60,17 +59,17 @@ function Header() {
                         <img src={searchIcon} alt="search icon" />
                     </div>
 
-                    {!isLoggedIn ?
-                    (                    
+                    {!isLoggedIn ?(                    
                     <div className="nav-bar__login">
                     <Login setIsLoggedIn={setIsLoggedIn} />
                     </div>) :
-                    (
-                    <Link to={`profile/${profile.id}`}>
+                    (<div>
                         {profile ? 
-                        (<img src={`http://localhost:8080/avatars/${profile.avatar}`} className="nav-bar__avatar" />)  :
+                        (<Link to={`profile/${profile.id}`}>
+                        <img src={`http://localhost:8080/avatars/${profile.avatar}`} className="nav-bar__avatar" />
+                        </Link>)  :
                         (<object className="nav-bar__avatar" type="image/jpeg" />)}
-                    </Link>
+                    </div>
                     )
                     }
 
