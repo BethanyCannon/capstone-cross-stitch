@@ -227,6 +227,13 @@ done - features-signin-signup-page/modal (7)
     - backend:
         - .get /design/:id
 
+- feature-add-and-delete-favourites
+    - frontend: 
+        - .svg heart get's filled out if favourited
+    - backend: 
+        - .post /user/:id/favourite/:id
+        - .delete /user/:id/favourite/:id
+
 - feature-search-page (5)
     - frontend:
         - search bar should already be built - add functionality
