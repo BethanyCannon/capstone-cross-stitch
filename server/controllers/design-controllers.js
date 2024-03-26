@@ -17,11 +17,13 @@ const getDesignData = async (req, res) => {
                         id: (design.id),
                         design_name: (design.design_name),
                         creator_name: (design.first_name + " " + design.last_name),
-                        image: (image)
+                        image: (image[0])
                     }
                     return (designObj)
                 } catch(error) {
-                    console.log(error)
+                    res.status(404).json({
+                        message: `Error retrieving designs: ${error}`,
+                      })
                 }
             })
             )

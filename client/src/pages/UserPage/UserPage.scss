@@ -1,0 +1,14 @@
+@use "../../styles/partials/typography" as *;
+@use "../../styles/partials/variables" as *;
+@use "../../styles/partials/mixins" as *;
+
+.profile {
+    padding: 0 1rem;
+    
+    &__carousel {
+        & li {
+            max-width: 300px !important;
+        }
+        
+    }
+}

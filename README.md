@@ -48,7 +48,8 @@ Not that I can think of
     - react
     - react-router-dom
     - axios
-    react-modal
+    - react-modal
+    - react-multi-carousel
 - Server libraries:
     - knex
     - express
@@ -195,7 +196,7 @@ done - feature-homepage (4)
         - .get /designs
         - .get /design?limit=10 (or 15)
 
-- features-signin-signup-page/modal (7)
+done - features-signin-signup-page/modal (7)
     - frontend: 
         - create modals for signing in and signing up
         - include forms - sign up must be able to take an image in avatar
@@ -225,6 +226,13 @@ done - feature-homepage (4)
             - if not logged in should offer to login/create account
     - backend:
         - .get /design/:id
+
+- feature-add-and-delete-favourites
+    - frontend: 
+        - .svg heart get's filled out if favourited
+    - backend: 
+        - .post /user/:id/favourite/:id
+        - .delete /user/:id/favourite/:id
 
 - feature-search-page (5)
     - frontend:
