@@ -1,10 +1,11 @@
 import "./DesignCard.scss"
+import {Link} from "react-router-dom";
+
 
 function Card({newDesign}) {
 
-    console.log(newDesign)
-
  return(
+    <Link to={`design/${newDesign.id}`} className="design-card__link" >
     <div className="design-card">
         <img className="design-card__img" src={newDesign.image.image_url} />
         <div>
@@ -12,6 +13,7 @@ function Card({newDesign}) {
             <p>{newDesign.creator_name}</p>
         </div>
     </div>
+    </Link>
  )   
 }
 

@@ -1,7 +1,7 @@
 import './styles/global.scss';
 import { BrowserRouter, Route, Routes, Navigate } from "react-router-dom"
 import HomePage from "./pages/HomePage/HomePage"
-import DetailsPage from "./pages/DetailsPage"
+import DetailsPage from "./pages/DetailsPage/DetailsPage"
 import UserPage from "./pages/UserPage/UserPage"
 import SearchPage from "./pages/HomePage/HomePage"
 import Header from "./components/Header/Header"
@@ -48,7 +48,7 @@ function App() {
         <Header isLoading={isLoading} isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} profile={profile} />
         <Routes>
           <Route path="/" element={<HomePage title={"New Designs"} />} />
-          {/* <Route path="/design/:id" element={<DetailsPage />} /> */}
+          <Route path="/design/:id" element={<DetailsPage />} />
           <Route path="/profile/:id" element={<UserPage profile={profile} />} />
           <Route path="/:id" element={<SearchPage />} title={"Search"} />
           <Route path="*" element={<Navigate to="/" />} />

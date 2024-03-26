@@ -208,14 +208,13 @@ done - features-signin-signup-page/modal (7)
     <!-- https://www.youtube.com/watch?v=dLXSJdTK9QI -->
     <!-- https://medium.com/ecmastack/uploading-files-with-react-js-and-node-js-e7e6b707f4ef -->
 
-- feature-userpage (10)
+done - feature-userpage (10)
     - frontend: 
         - create user page
             - include card displaying user information
             - favourites components - remove from favourites button
     - backend: 
         - .get /user/:id api
-        - .delete /user/:id/favourite/:id
 
 - feature-detailspage (5)
     - fronent:

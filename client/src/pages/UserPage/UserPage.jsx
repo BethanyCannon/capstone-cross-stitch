@@ -1,7 +1,7 @@
 import "./UserPage.scss"
 import DetailsCard from "../../components/DetailsCard/DetailsCard";
 import DesignCard from "../../components/DesignCard/DesignCard";
-import {Link} from "react-router-dom";
+// import {Link} from "react-router-dom";
 import axios from "axios";
 import { baseURL } from "../../utils";
 import { useState, useEffect } from "react";
@@ -59,12 +59,12 @@ function HomePage({ profile }) {
             infinite={false} >
                 {favourites.map((favourite) => {
                     return (
-                        <Link to={`design/${favourite.id}`} >
+                        // <Link to={`design/${favourite.id}`} >
                             <DesignCard
                                 key={favourite.id}
                                 newDesign={favourite}
                             />
-                        </Link>
+                        // </Link>
                     )
                 }
                 )}
