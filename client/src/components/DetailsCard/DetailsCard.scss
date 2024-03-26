@@ -1,0 +1,24 @@
+@use "../../styles/partials/typography" as *;
+@use "../../styles/partials/variables" as *;
+@use "../../styles/partials/mixins" as *;
+
+.details {
+    display: flex;
+    flex-direction: column;
+
+    @include tablet {
+        flex-direction: row;
+    }
+
+    &__avatar {
+        width: 150px;
+        height: 150px;
+        border-radius: 50%;
+        margin: 1rem;
+    }
+
+    &__text{
+        margin: 1rem;
+    }
+
+}

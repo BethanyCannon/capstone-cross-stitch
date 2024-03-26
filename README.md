@@ -48,7 +48,8 @@ Not that I can think of
     - react
     - react-router-dom
     - axios
-    react-modal
+    - react-modal
+    - react-multi-carousel
 - Server libraries:
     - knex
     - express

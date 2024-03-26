@@ -14,7 +14,7 @@ function App() {
   const [isLoading, setIsLoading] = useState(true);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
-  console.log(profile)
+  // console.log(profile)
 
   const getUser = async () => {
       const token = sessionStorage.getItem("token");
@@ -41,7 +41,6 @@ function App() {
     useEffect(() => {
       getUser();
     }, [isLoggedIn]);
-
 
   return (
     <div className="App">

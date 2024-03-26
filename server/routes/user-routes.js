@@ -23,6 +23,10 @@ router
   .get(userController.getUserData)
 
 router
+  .route("/:id")
+  .get(userController.getUserFavourites)
+
+router
   .route("/login")
   .post(userController.loginUser)
 
@@ -30,8 +34,6 @@ router
   .route("/newUser")
   .post(upload.single("image"), userController.createNewUser)
 
-    // .get("/:id",)
-    // .post("/:id")
     // .delete("/:id/favourites/:id")
 
 module.exports = router; 
