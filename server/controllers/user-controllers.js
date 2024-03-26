@@ -114,7 +114,7 @@ const loginUser = async (req, res) => {
 const createNewUser = async (req, res) => {
   // upload.single("image")
 
-  // console.log(req.file)
+  // console.log(req.session.id)
 
   const { first_name, last_name, email, password, confirm_password, } = req.body;
   const image = req.file.filename

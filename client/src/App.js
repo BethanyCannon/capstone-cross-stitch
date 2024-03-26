@@ -42,6 +42,7 @@ function App() {
       getUser();
     }, [isLoggedIn]);
 
+
   return (
     <div className="App">
       <BrowserRouter>
