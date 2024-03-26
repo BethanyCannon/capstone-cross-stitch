@@ -8,6 +8,6 @@ router
 
 router
     .route("/:id")
-    // .get()
+    .get(designController.designDetailsData)
 
 module.exports = router; 

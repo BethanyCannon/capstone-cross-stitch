@@ -6,22 +6,54 @@ import axios from "axios"
 
 function DetailsPage() {
     const {id} = useParams()
+    const [designDetails, setDesignDetails] = useState(null)
 
     const getDesignDetails = async () => {
+        const token = sessionStorage.getItem("token");
+
         try{
-            const response = await axios.get(`${baseURL}/design.${id}`)
-            console.log(response)
+            const response = await axios.get(`${baseURL}/design/${id}`, {
+                headers: { Authorization: `Bearer ${token}` }
+            }
+            )
+            setDesignDetails(response.data[0])
         }catch(error){
             console.log(error)
         }
     }
 
     useEffect(() => {
-        DetailsPage();
+        getDesignDetails();
     }, []);
 
+    if (!designDetails) {
+        return <div>Loading...</div>
+    }
+
+    console.log(designDetails)
+
     return(
-    <div>Hello World</div>
+    <div>
+        <h2>{designDetails.design_name}</h2>
+        {/* <div className="design-details__images"> */}
+        {designDetails.image.map((pic) => {
+            console.log(pic)
+            return(
+                <div>
+                    <img src={pic.image_url} className="design-details__images" />
+                </div>
+            )
+        })}
+        <div>
+            {designDetails.created_at}
+            {designDetails.creator_name}
+            {designDetails.description}
+            {designDetails.height_size}
+            {designDetails.height_width}
+            {designDetails.thread_count}
+        </div>
+    {/* </div> */}
+    </div>
     )
 }
 

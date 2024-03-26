@@ -1,7 +1,7 @@
 import "./UserPage.scss"
 import DetailsCard from "../../components/DetailsCard/DetailsCard";
 import DesignCard from "../../components/DesignCard/DesignCard";
-// import {Link} from "react-router-dom";
+import { useParams } from "react-router-dom";
 import axios from "axios";
 import { baseURL } from "../../utils";
 import { useState, useEffect } from "react";
@@ -9,17 +9,19 @@ import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 
 function HomePage({ profile }) {
-    const [favourites, setFavourites] = useState(null)
+    const { id } = useParams();
+    const [favourites, setFavourites] = useState(null);
 
-    const getFavourties = async () => {
-        try {
-            const response = await axios.get(`${baseURL}/user/${profile.id}`)
-            setFavourites(response.data)
-        } catch (error) {
-            console.log(error)
+   
+        const getFavourties = async () => {
+            try {
+                const response = await axios.get(`${baseURL}/user/${id}`)
+                setFavourites(response.data)
+            } catch (error) {
+                console.log(error)
+            }
         }
-    }
-
+        
     useEffect(() => {
         getFavourties();
     }, []);
@@ -53,17 +55,17 @@ function HomePage({ profile }) {
         <div className="profile">
             <DetailsCard profile={profile} />
             <h3>You have {favourites.length} favourite items</h3>
-            <Carousel 
-            responsive={responsive} 
-            className="profile__carousel"
-            infinite={false} >
+            <Carousel
+                responsive={responsive}
+                className="profile__carousel"
+                infinite={false} >
                 {favourites.map((favourite) => {
                     return (
                         // <Link to={`design/${favourite.id}`} >
-                            <DesignCard
-                                key={favourite.id}
-                                newDesign={favourite}
-                            />
+                        <DesignCard
+                            key={favourite.id}
+                            newDesign={favourite}
+                        />
                         // </Link>
                     )
                 }

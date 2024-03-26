@@ -58,7 +58,7 @@ function Header({isLoading, isLoggedIn, setIsLoggedIn, profile }) {
                         <input type="search" placeholder="Search" />
                         <img src={searchIcon} alt="search icon" />
                     </div>
-                    {!isLoggedIn ?(                    
+                    {!isLoggedIn ? (                    
                     <div className="nav-bar__login">
                     <Login setIsLoggedIn={setIsLoggedIn} />
                     </div>) :
