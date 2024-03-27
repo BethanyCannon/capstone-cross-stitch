@@ -38,17 +38,13 @@ function DetailsPage({Pid}) {
     }
 
     const addFavourite = async () => {
-        const newFavourite = await axios.post(`${baseURL}/user/${Pid}/favourites/${Did}`)
+        await axios.post(`${baseURL}/user/${Pid.id}/favourites/${Did}`)
         setIsFavourite(true)
-        console.log(newFavourite)
     }
 
     const deleteFavourite = async () => {
-        const removedFavourite = await axios.delete(`${baseURL}/user/${Pid}/favourites/${Did}`)
-        // setIsFavourite(false)
-        console.log(Did)
-        console.log(Pid)
-        console.log(removedFavourite)
+        await axios.delete(`${baseURL}/user/${Pid.id}/favourites/${Did}`)
+        setIsFavourite(false)
     }
     //react-multi-carousel
     const responsive = {
@@ -74,8 +70,6 @@ function DetailsPage({Pid}) {
     const handleImage = (event) => {
         setHeroImage(event.target.src)
     }
-
-    console.log(designDetails)
 
     return(
     <div className="design-details" >

@@ -216,7 +216,7 @@ done - feature-userpage (10)
     - backend: 
         - .get /user/:id api
 
-- feature-detailspage (5)
+done - feature-detailspage (5)
     - fronent:
         - create design details page (possibly find a way to make user page card component dynamic)
         - favourite:
@@ -226,7 +226,7 @@ done - feature-userpage (10)
     - backend:
         - .get /design/:id
 
-- feature-add-and-delete-favourites
+done - feature-add-and-delete-favourites
     - frontend: 
         - .svg heart get's filled out if favourited
     - backend: 

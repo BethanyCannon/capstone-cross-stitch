@@ -34,7 +34,7 @@ function App() {
 
   const logout = () => {
       sessionStorage.removeItem("token");
-      setIsLoggedIn(true);
+      setIsLoggedIn(false);
       setProfile(null);
     }; 
 
@@ -42,18 +42,14 @@ function App() {
       getUser();
     }, [isLoggedIn]);
 
-    if (!profile) {
-      return <div> loading... </div>
-    }
-
   return (
     <div className="App">
       <BrowserRouter>
         <Header isLoading={isLoading} isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} profile={profile} />
         <Routes>
           <Route path="/" element={<HomePage title={"New Designs"} />} />
-          <Route path="/design/:Did" element={<DetailsPage Pid={profile.id} />} />
-          <Route path="/profile/:Pid" element={<UserPage profile={profile} />} />
+          <Route path="/design/:Did" element={<DetailsPage Pid={profile}  />} />
+          <Route path="/profile/:Pid" element={<UserPage profile={profile} logout={logout} />} />
           <Route path="/:id" element={<SearchPage />} title={"Search"} />
           <Route path="*" element={<Navigate to="/" />} />
         </Routes>
