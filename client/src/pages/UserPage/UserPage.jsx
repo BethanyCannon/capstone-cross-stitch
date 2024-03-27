@@ -1,19 +1,21 @@
 import "./UserPage.scss"
 import DetailsCard from "../../components/DetailsCard/DetailsCard";
 import DesignCard from "../../components/DesignCard/DesignCard";
-import {Link} from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { baseURL } from "../../utils";
 import { useState, useEffect } from "react";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 
-function HomePage({ profile }) {
-    const [favourites, setFavourites] = useState(null)
+function HomePage({ profile, logout }) {
+    const { Pid } = useParams();
+    const [favourites, setFavourites] = useState(null);
+    const navigate = useNavigate()
 
     const getFavourties = async () => {
         try {
-            const response = await axios.get(`${baseURL}/user/${profile.id}`)
+            const response = await axios.get(`${baseURL}/user/${Pid}`)
             setFavourites(response.data)
         } catch (error) {
             console.log(error)
@@ -21,8 +23,12 @@ function HomePage({ profile }) {
     }
 
     useEffect(() => {
-        getFavourties();
+            getFavourties();
     }, []);
+
+    const handleLogout = () => {
+        logout()
+    }
 
     //react-multi-carousel
     const responsive = {
@@ -49,22 +55,29 @@ function HomePage({ profile }) {
         return <div>Loading...</div>
     }
 
+    if (!profile) {
+        return(<div>
+            You must be logged in to see this page
+        </div>)
+    } 
+
     return (
         <div className="profile">
             <DetailsCard profile={profile} />
+            <p onClick={handleLogout}>logout</p>
             <h3>You have {favourites.length} favourite items</h3>
-            <Carousel 
-            responsive={responsive} 
-            className="profile__carousel"
-            infinite={false} >
+            <Carousel
+                responsive={responsive}
+                className="profile__carousel"
+                infinite={false} >
                 {favourites.map((favourite) => {
                     return (
-                        <Link to={`design/${favourite.id}`} >
-                            <DesignCard
-                                key={favourite.id}
-                                newDesign={favourite}
-                            />
-                        </Link>
+                        // <Link to={`design/${favourite.id}`} >
+                        <DesignCard
+                            key={favourite.id}
+                            newDesign={favourite}
+                        />
+                        // </Link>
                     )
                 }
                 )}

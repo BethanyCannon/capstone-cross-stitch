@@ -208,16 +208,15 @@ done - features-signin-signup-page/modal (7)
     <!-- https://www.youtube.com/watch?v=dLXSJdTK9QI -->
     <!-- https://medium.com/ecmastack/uploading-files-with-react-js-and-node-js-e7e6b707f4ef -->
 
-- feature-userpage (10)
+done - feature-userpage (10)
     - frontend: 
         - create user page
             - include card displaying user information
             - favourites components - remove from favourites button
     - backend: 
         - .get /user/:id api
-        - .delete /user/:id/favourite/:id
 
-- feature-detailspage (5)
+done - feature-detailspage (5)
     - fronent:
         - create design details page (possibly find a way to make user page card component dynamic)
         - favourite:
@@ -227,7 +226,7 @@ done - features-signin-signup-page/modal (7)
     - backend:
         - .get /design/:id
 
-- feature-add-and-delete-favourites
+done - feature-add-and-delete-favourites
     - frontend: 
         - .svg heart get's filled out if favourited
     - backend: 
