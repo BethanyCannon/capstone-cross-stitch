@@ -12,11 +12,6 @@ if(authToken === "null") {
     return;
 }
 
-
-
-console.log("header", authHeader)
-console.log("token", authToken)
-
   try{
   const payload = jwt.verify(authToken, process.env.JWT_KEY);
 

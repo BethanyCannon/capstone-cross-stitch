@@ -9,13 +9,12 @@ import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 
 function HomePage({ profile }) {
-    const { id } = useParams();
+    const {Pid} = useParams();
     const [favourites, setFavourites] = useState(null);
-
    
         const getFavourties = async () => {
             try {
-                const response = await axios.get(`${baseURL}/user/${id}`)
+                const response = await axios.get(`${baseURL}/user/${Pid}`)
                 setFavourites(response.data)
             } catch (error) {
                 console.log(error)

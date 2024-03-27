@@ -42,6 +42,9 @@ function App() {
       getUser();
     }, [isLoggedIn]);
 
+    if (!profile) {
+      return <div> loading... </div>
+    }
 
   return (
     <div className="App">
@@ -49,8 +52,8 @@ function App() {
         <Header isLoading={isLoading} isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} profile={profile} />
         <Routes>
           <Route path="/" element={<HomePage title={"New Designs"} />} />
-          <Route path="/design/:id" element={<DetailsPage />} />
-          <Route path="/profile/:id" element={<UserPage profile={profile} />} />
+          <Route path="/design/:Did" element={<DetailsPage Pid={profile.id} />} />
+          <Route path="/profile/:Pid" element={<UserPage profile={profile} />} />
           <Route path="/:id" element={<SearchPage />} title={"Search"} />
           <Route path="*" element={<Navigate to="/" />} />
         </Routes>

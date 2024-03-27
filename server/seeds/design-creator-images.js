@@ -439,13 +439,13 @@ const favouritesData = [
 exports.seed = async function(knex) {
   // Deletes ALL existing entries
   await knex('user').del()
-  await knex('user').insert(userData)
   await knex('creator').del()
-  await knex('creator').insert(creatorData)
   await knex('design').del()
-  await knex('design').insert(designData)
   await knex('images').del()
-  await knex('images').insert(imageData)
   await knex('favourites').del()
+  await knex('user').insert(userData)
+  await knex('creator').insert(creatorData)
+  await knex('design').insert(designData)
+  await knex('images').insert(imageData)
   await knex('favourites').insert(favouritesData)
 };

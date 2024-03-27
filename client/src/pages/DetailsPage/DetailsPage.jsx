@@ -1,26 +1,29 @@
 import "./DetailsPage.scss"
 import { useParams } from "react-router-dom"
 import { useState, useEffect } from "react";
-import {baseURL} from "../../utils"
+import { baseURL } from "../../utils"
 import axios from "axios"
 import Carousel from "react-multi-carousel";
-import heartIcon from "../../assets/heart.svg"
+import Like from "../../components/Like/Like"
 
-function DetailsPage() {
-    const {id} = useParams()
+function DetailsPage({Pid}) {
+    const {Did} = useParams()
     const [designDetails, setDesignDetails] = useState(null)
     const [heroImage, setHeroImage] = useState()
+    const [isFavourite, setIsFavourite] = useState(null)
+    // const params = useParams();
 
     const getDesignDetails = async () => {
         const token = sessionStorage.getItem("token");
 
         try{
-            const response = await axios.get(`${baseURL}/design/${id}`, {
+            const response = await axios.get(`${baseURL}/design/${Did}`, {
                 headers: { Authorization: `Bearer ${token}` }
             }
             )
             setDesignDetails(response.data[0])
             setHeroImage(response.data[0].image[0].image_url)
+            setIsFavourite(response.data[0].favourites)
         }catch(error){
             console.log(error)
         }
@@ -28,12 +31,25 @@ function DetailsPage() {
 
     useEffect(() => {
         getDesignDetails();
-    }, []);
+    }, [isFavourite]);
 
     if (!designDetails) {
         return <div>Loading...</div>
     }
 
+    const addFavourite = async () => {
+        const newFavourite = await axios.post(`${baseURL}/user/${Pid}/favourites/${Did}`)
+        setIsFavourite(true)
+        console.log(newFavourite)
+    }
+
+    const deleteFavourite = async () => {
+        const removedFavourite = await axios.delete(`${baseURL}/user/${Pid}/favourites/${Did}`)
+        // setIsFavourite(false)
+        console.log(Did)
+        console.log(Pid)
+        console.log(removedFavourite)
+    }
     //react-multi-carousel
     const responsive = {
         superLargeDesktop: {
@@ -59,13 +75,13 @@ function DetailsPage() {
         setHeroImage(event.target.src)
     }
 
-    console.log(heroImage)
+    console.log(designDetails)
 
     return(
-    <div>
+    <div className="design-details" >
         <h2 className="design-details__title">{designDetails.design_name}</h2>
-        <div className="design-details">
-            <div>
+        <div className="design-details__container">
+            <div className="design-details__img-container" >
             <img src={heroImage} className="design-details__hero-image" />
         <Carousel
                 responsive={responsive}
@@ -89,10 +105,10 @@ function DetailsPage() {
         <p>{designDetails.thread_count}</p>
         <p>{designDetails.description}</p>
         {/* <img src={heartIcon} /> */}
-        <svg><g>{heartIcon}</g></svg>
+        {/* {heartIcon} */}
 
             {designDetails.favourites === null ? <div> you must be logged in for this </div> :
-                <div> {designDetails.favourites ? "liked" : "not" } </div>}
+                <div> {designDetails.favourites===true ? <div onClick={deleteFavourite} className="design-details__svg" ><Like color="red"  /></div> :  <div className="design-details__svg" onClick={addFavourite}><Like /></div> } </div>}
         </div>
     </div>
     </div>

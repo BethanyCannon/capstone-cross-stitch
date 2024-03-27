@@ -44,10 +44,12 @@ const designDetailsData = async (req, res) => {
             .join("creator", "design.creator_id", "creator.id")
             .select("design.id", "design.thread_count", "design.height_size", "design.height_width", "design.description", "design.created_at", "design.design_name", "creator.first_name", "creator.last_name")
 
-        const isItInFave = null;
+            console.log(designsFound)
+
+        let isItInFave = null;
 
         if (favourites !== null) {
-            isItInFave = favourites.some((favourite) => favourite.user_id === designsFound[0].id)}
+            isItInFave = favourites.some((favourite) => favourite.design_id === designsFound[0].id)}
 
         const designData = await Promise.all(designsFound.map(async (design) => {
             try {

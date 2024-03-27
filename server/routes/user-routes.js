@@ -34,6 +34,11 @@ router
   .route("/newUser")
   .post(upload.single("image"), userController.createNewUser)
 
+router
+  .route("/:Pid/favourites/:Did")
+  .post(userController.newFavourite)
+  .delete(userController.deleteFavourite)
+
     // .delete("/:id/favourites/:id")
 
 module.exports = router; 

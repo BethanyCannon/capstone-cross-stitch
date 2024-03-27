@@ -75,7 +75,6 @@ const getUserFavourites = async (req, res) => {
       }
     })
     )
-    // console.log(favouritesData)
     res.status(200).json(favouritesData)
   } catch (error) {
     res.status(400).send(`could not find favourites: ${error}`)
@@ -113,8 +112,6 @@ const loginUser = async (req, res) => {
 
 const createNewUser = async (req, res) => {
   // upload.single("image")
-
-  // console.log(req.session.id)
 
   const { first_name, last_name, email, password, confirm_password, } = req.body;
   const image = req.file.filename
@@ -156,9 +153,38 @@ const createNewUser = async (req, res) => {
   }
 }
 
+const newFavourite = async (req, res) => {
+  const {Pid, Did} = req.params;
+
+  const favourite = {
+    user_id: Pid,
+    design_id: Did,
+  }
+
+  try{
+    await knex("favourites").insert(favourite);
+    res.status(201).send("favourite added");
+  }catch(error){
+    res.status(400).send("Failed registration");
+  }
+}
+
+const deleteFavourite = async (req, res) => {
+  const {Pid, Did} = req.params
+
+  knex("favourites").where({
+    user_id: Pid,
+    design_id: Did
+  })
+
+  console.log(favourites)
+}
+
 module.exports = {
   getUserData,
   getUserFavourites,
   loginUser,
   createNewUser,
+  newFavourite,
+  deleteFavourite,
 }

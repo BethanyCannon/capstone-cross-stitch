@@ -3,15 +3,27 @@
 @use "../../styles/partials/mixins" as *;
 
 .design-details {
-    display: flex;
-    flex-direction: column;
+    min-height: 100vh;;
 
-    @include tablet {
-        flex-direction: row; 
+    &__container{
+        display: flex;
+        flex-direction: column;
+    
+        @include tablet {
+            flex-direction: row; 
+        }
+    
+    }
+
+    &__img-container {
+        width: 50%;
     }
 
     &__hero-image{
-        max-width: 50%
+        max-width: -webkit-fill-available;
+    padding: 1rem;
+    max-height: 80vh;
+    width: auto;
     }
 
     &__images {
@@ -28,12 +40,20 @@
     &__title {
        order: 2; 
     }
+
+    &__svg{
+
+        &:hover{
+            cursor: pointer;
+            fill: blue;
+        }
+    }
 }
 
-.react-multi-carousel-list {
-    @include mobile{
-        width: 100%;}
+// .react-multi-carousel-list {
+//     @include mobile{
+//         width: 100%;}
 
-    @include tablet{
-        width: 50%; }
-}
+//     @include tablet{
+//         width: 50%; }
+// }
