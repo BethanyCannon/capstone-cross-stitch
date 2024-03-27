@@ -21,7 +21,6 @@ const getUserData = async (req, res) => {
     return res.status(401).send("Please login");
   }
 
-
   // Parse the bearer token
   const authHeader = req.headers.authorization;
   const authToken = authHeader.split(" ")[1];
@@ -41,7 +40,7 @@ const getUserData = async (req, res) => {
     res.send(user);
 
   } catch (error) {
-    res.status(401).send("not working");
+    res.status(401).send("User data unauthorized");
   }
 }
 
@@ -172,12 +171,15 @@ const newFavourite = async (req, res) => {
 const deleteFavourite = async (req, res) => {
   const {Pid, Did} = req.params
 
-  knex("favourites").where({
-    user_id: Pid,
-    design_id: Did
-  })
-
-  console.log(favourites)
+  try{
+    const deletefave = await knex("favourites").where({
+      user_id: Pid,
+      design_id: Did
+    }).del()
+    res.status(201).send("favourite delete");
+  }catch(error){
+    res.status(400).send(`Failed delete ${error}`);
+  }
 }
 
 module.exports = {

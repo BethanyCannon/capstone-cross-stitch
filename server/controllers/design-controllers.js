@@ -43,9 +43,7 @@ const designDetailsData = async (req, res) => {
         const designsFound = await knex("design").where({ "design.id": id })
             .join("creator", "design.creator_id", "creator.id")
             .select("design.id", "design.thread_count", "design.height_size", "design.height_width", "design.description", "design.created_at", "design.design_name", "creator.first_name", "creator.last_name")
-
-            console.log(designsFound)
-
+            
         let isItInFave = null;
 
         if (favourites !== null) {
