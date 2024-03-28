@@ -1,79 +1,82 @@
 import "./Header.scss";
 import stitchLogo from "../../assets/stitch.svg";
 import searchIcon from "../../assets/search.svg"
-import {Link} from "react-router-dom";
+import { Link, useSearchParams, useNavigate } from "react-router-dom";
 import Login from "../../components/Login/Login";
-import { useEffect, useState  } from "react";
+import { useEffect, useState, redirect } from "react";
 import axios from "axios";
+import { baseURL } from "../../utils"
 
-function Header({isLoading, isLoggedIn, setIsLoggedIn, profile }) {
-    // const [profile, setProfile] = useState(null);
-    // const [isLoading, setIsLoading] = useState(true);
-    // const [isLoggedIn, setIsLoggedIn] = useState(false);
+function Header({ isLoading, isLoggedIn, setIsLoggedIn, profile, setNewDesignsData, setSearchValue, setIsSearching, setRefresh, homeData, setQuery}) {
+  const [searchParams, setSearchParams] = useSearchParams();
+  const navigate = useNavigate()
 
-    // console.log(profile)
+  const submitHandler = (event) => {
+    event.preventDefault()
+    setIsSearching(true)
+    const search = event.target.search.value
 
-    // const getUser = async () => {
-    //     const token = sessionStorage.getItem("token");
+    searchDesignData(search);
 
-    //     try {
-    //         const response = await axios.get("http://localhost:8080/user", {
-    //             headers: { Authorization: `Bearer ${token}` }
-    //         })
-    //         setProfile(response.data)
-    //         setIsLoggedIn(true)
-    //     } catch(error) {
-    //         console.log(error)
-    //         setIsLoggedIn(false)
-    //     }
-    //     setIsLoading(false);
-    // }
+    if (search) {
+      setSearchParams({search})
+    } 
+    event.target.reset();
+  }
 
-    // // const logout = () => {
-    // //     sessionStorage.removeItem("token");
-    // //     setFailedAuth(true);
-    // //     setProfile(null);
-    // //   }; 
+  setSearchValue(searchParams.get('search'))
 
-    //   useEffect(() => {
-    //     getUser();
-    //   }, [isLoggedIn]);
+  const searchDesignData = async (search) => {
+    try {
+      const response = await axios.get(`${baseURL}/design/search?s=${search}`
+      )
+      setNewDesignsData(response.data)
+      setSearchValue(search)
 
-      if (isLoading) {
-        return (
-          <main>
-            <p>Loading...</p>
-          </main>
-        )
-      }
+    } catch (error) {
+      console.log(`${error}`)
+    }
+  }
 
+  if (isLoading) {
     return (
-        <header>
-            <nav className="nav-bar">
-                <Link className="nav-bar__link" to="/" >
-                <img className="nav-bar__logo" src={stitchLogo} alt="X Stitch Logo" />
-                </Link>
-                <div className="nav-bar__container">
-                    <div className="nav-bar__search-container">
-                        <input type="search" placeholder="Search" />
-                        <img src={searchIcon} alt="search icon" />
-                    </div>
-                    {!isLoggedIn ? (                    
-                    <div className="nav-bar__login">
-                    <Login setIsLoggedIn={setIsLoggedIn} />
-                    </div>) :
-                    (<div>
-                        {profile ? 
-                        (<Link to={`profile/${profile.id}`}>
-                        <img src={`http://localhost:8080/avatars/${profile.avatar}`} className="nav-bar__avatar" />
-                        </Link>)  :
-                        (<object className="nav-bar__avatar" type="image/jpeg" />)}
-                    </div>)
-                    }
-                </div>
-            </nav>
-        </header>
+      <main>
+        <p>Loading...</p>
+      </main>
     )
+  }
+
+  return (
+    <header>
+      <nav className="nav-bar">
+        <Link className="nav-bar__link" to="/" onClick={() => {setNewDesignsData(homeData)}}  >
+          <img className="nav-bar__logo" src={stitchLogo} alt="X Stitch Logo" />
+        </Link>
+        <div className="nav-bar__container">
+          <form className="nav-bar__search-container" onSubmit={submitHandler}>
+            <input
+              type="search"
+              name="search"
+              // value={query}
+              placeholder="Search"></input>
+            <img src={searchIcon} />
+          </form>
+          {!isLoggedIn ? (
+            <div className="nav-bar__login">
+              <Login setIsLoggedIn={setIsLoggedIn} />
+            </div>) :
+            (<div>
+              {profile ?
+                (<Link to={`profile/${profile.id}`}>
+                  <img src={`http://localhost:8080/avatars/${profile.avatar}`} className="nav-bar__avatar" />
+                </Link>) :
+                (<object className="nav-bar__avatar" type="image/jpeg" />)}
+            </div>)
+          }
+        </div>
+      </nav>
+    </header>
+  )
 }
 
 export default Header

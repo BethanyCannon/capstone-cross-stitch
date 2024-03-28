@@ -4,6 +4,15 @@
 
 header{
     background-color: $LightBlue;
+    padding: 0 16px;
+
+    @include tablet {
+        padding: 0 32px;
+    }
+
+    @include desktop {
+        padding: 0 64px;
+    }
 }
 
 .nav-bar{

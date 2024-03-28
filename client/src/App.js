@@ -1,5 +1,5 @@
 import './styles/global.scss';
-import { BrowserRouter, Route, Routes, Navigate } from "react-router-dom"
+import { BrowserRouter, Route, Routes, Navigate, useSearchParams } from "react-router-dom"
 import HomePage from "./pages/HomePage/HomePage"
 import DetailsPage from "./pages/DetailsPage/DetailsPage"
 import UserPage from "./pages/UserPage/UserPage"
@@ -13,8 +13,13 @@ function App() {
   const [profile, setProfile] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [newDesignsData, setNewDesignsData] = useState(null);
+  const [query, setQuery] = useState("")
+  const [homeData, setHomeData] = useState("")
+  const [searchval, setSearchValue] = useState("")
+  const [isSearching, setIsSearching] = useState(false)
 
-  // console.log(profile)
+  const [refresh, setRefresh] = useState(false);
 
   const getUser = async () => {
       const token = sessionStorage.getItem("token");
@@ -41,16 +46,21 @@ function App() {
     useEffect(() => {
       getUser();
     }, [isLoggedIn]);
+  //  setRefresh(false) 
+  
+    
+// console.log(refresh)
 
   return (
     <div className="App">
       <BrowserRouter>
-        <Header isLoading={isLoading} isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} profile={profile} />
+        <Header isLoading={isLoading} isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} profile={profile} setRefresh={setRefresh} setNewDesignsData={setNewDesignsData} setQuery={setQuery} setIsSearching={setIsSearching} setSearchValue={setSearchValue} homeData={homeData} />
         <Routes>
-          <Route path="/" element={<HomePage title={"New Designs"} />} />
-          <Route path="/design/:Did" element={<DetailsPage Pid={profile}  />} />
-          <Route path="/profile/:Pid" element={<UserPage profile={profile} logout={logout} />} />
-          <Route path="/:id" element={<SearchPage />} title={"Search"} />
+          <Route path="/" element={<HomePage refresh={refresh} newDesignsData={newDesignsData} setNewDesignsData={setNewDesignsData} query={query} setHomeData={setHomeData} searchval={searchval} isSearching={isSearching} />} />
+          <Route path="/search/:sadness" element={<SearchPage newDesignsData={newDesignsData} setNewDesignsData={setNewDesignsData} />}  />
+          <Route path="design/:Did" element={<DetailsPage Pid={profile} searchval={searchval} />} />
+          <Route path="profile/:Pid" element={<UserPage profile={profile} logout={logout} />} />
+
           <Route path="*" element={<Navigate to="/" />} />
         </Routes>
         <Footer />

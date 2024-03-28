@@ -8,7 +8,11 @@ router
     .get(designController.getDesignData)
 
 router
-    .route("/:id")
+    .route("/details/:id")
     .get(authMiddleware, designController.designDetailsData)
+
+router
+    .route("/search")
+    .get(designController.getSearchData)
 
 module.exports = router; 

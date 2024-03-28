@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?><!-- Uploaded to: SVG Repo, www.svgrepo.com, Generator: SVG Repo Mixer Tools -->
 <svg version="1.1" id="Uploaded to svgrepo.com" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" 
-	 width="800px" height="800px" viewBox="0 0 32 32" xml:space="preserve">
+	 width="200px" height="200px" viewBox="0 0 30 30" xml:space="preserve" opacity="0.1" >
 <style type="text/css">
 	.dashing_een{fill:#0B1719;}
 </style>
-<path class="dashing_een" d="M7.139,8.852L5.713,7.426c-0.197-0.197-0.197-0.516,0-0.713c0.197-0.197,0.516-0.197,0.713,0
+<path class="dashing_een" 
+	d="M7.139,8.852L5.713,7.426c-0.197-0.197-0.197-0.516,0-0.713c0.197-0.197,0.516-0.197,0.713,0
 	l1.426,1.426c0.197,0.197,0.197,0.516,0,0.713C7.655,9.049,7.336,9.049,7.139,8.852z M4.287,5.287c0.197-0.197,0.197-0.516,0-0.713
 	L2.861,3.148c-0.197-0.197-0.516-0.197-0.713,0s-0.197,0.516,0,0.713l1.426,1.426C3.771,5.484,4.09,5.484,4.287,5.287z
 	 M14.852,8.852c0.197-0.197,0.197-0.516,0-0.713l-1.426-1.426c-0.197-0.197-0.516-0.197-0.713,0c-0.197,0.197-0.197,0.516,0,0.713

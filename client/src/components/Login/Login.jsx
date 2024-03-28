@@ -40,7 +40,7 @@ function Login({setIsLoggedIn}) {
         setIsOpen(false);
     }
     return (
-        <div>
+        <div className="container" >
             <p onClick={openModal}>Login/Sign up</p>
             <Modal
                 contentLabel="Login form"
@@ -50,21 +50,21 @@ function Login({setIsLoggedIn}) {
                 onRequestClose={closeModal}>
                     
                 {/* <div className="login"> */}
-                    <button className="login__button" onClick={closeModal}> <img src={closeIcon} /> </button>
+                    <button className="login__close" onClick={closeModal}> <img src={closeIcon} /> </button>
     
                     <form className="login__form" onSubmit={handleLogin}>
-                    <legend>Login</legend>
+                    <legend className="login__title">Login</legend>
                         <label htmlFor="email" > Email: </label>
                             <input type="text" name="email" />
                         <label htmlFor="password" > Password: </label>
                             <input type="password" name="password" />
 
-                        <button>Log in</button>
+                        <button className="login__login-btn">Log in</button>
 
-                        {error && <div className="login__message">{error}</div>}
-                        {success && <div> Your account has been made. Please login </div>}
+                        {error && <div className="login__error-message">{error}</div>}
+                        {success && <div className="login__success-message"> Your account has been made. Please login </div>}
                     </form>
-                    <p>don't have an account?</p>
+                    <p>Don't have an account?</p>
                     <SignUp setSuccess={setSuccess} />
                 {/* </div> */}
 

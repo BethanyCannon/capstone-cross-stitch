@@ -5,12 +5,22 @@
 .home-page {
     display: flex;
     flex-direction: column;
+    background-image: url(../../assets//stitch-svgrepo-com.svg);
+    min-height: 100vh;
+    // background-size: contain;
+
 
     &__title {
         padding: 16px;
 
+        @include tablet {
+            padding: 0 32px;
+        }
+    
         @include desktop {
-            width: $maxW;
+            padding: 0 64px;
+            width: 100%;
+            max-width: $maxW;
             margin-left: auto;
             margin-right: auto;
         }
@@ -23,13 +33,20 @@
 
         @include tablet {
             justify-content: unset;
-            gap: 30% 3%;
+            gap: 30% 0.5%;
             flex-direction: row;
             flex-wrap: wrap;
         }
 
 
+        padding: 0 16px;
+
+        @include tablet {
+            padding: 0 32px;
+        }
+    
         @include desktop {
+            padding: 0 64px;
             max-width: $maxW;
             margin-left: auto;
             margin-right: auto;
