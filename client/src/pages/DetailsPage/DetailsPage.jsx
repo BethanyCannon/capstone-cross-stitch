@@ -7,7 +7,7 @@ import Carousel from "react-multi-carousel";
 import Like from "../../components/Like/Like"
 import backIcon from "../../assets/back-arrow.svg"
 
-function DetailsPage({Pid, searchval}) {
+function DetailsPage({Pid}) {
     const {Did} = useParams()
     const [designDetails, setDesignDetails] = useState(null)
     const [heroImage, setHeroImage] = useState()
@@ -68,11 +68,6 @@ function DetailsPage({Pid, searchval}) {
         }
     }
     
-    const handleBack = () => {
-        if(searchval){
-            navigate(`/?search=${searchval}`)
-        } else navigate(-1)
-    }
 
     const handleImage = (event) => {
         setHeroImage(event.target.src)
@@ -82,7 +77,7 @@ function DetailsPage({Pid, searchval}) {
 
     return(
     <div className="design-details" >
-        <img src={backIcon} onClick={handleBack} />
+        <img src={backIcon} onClick={() => {navigate(-1)}} />
         <h2 className="design-details__title">{designDetails.design_name}</h2>
         <div className="design-details__container">
             <div className="design-details__img-container" >

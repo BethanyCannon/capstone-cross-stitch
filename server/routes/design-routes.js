@@ -12,7 +12,7 @@ router
     .get(authMiddleware, designController.designDetailsData)
 
 router
-    .route("/search")
+    .route("/search/:s")
     .get(designController.getSearchData)
 
 module.exports = router; 

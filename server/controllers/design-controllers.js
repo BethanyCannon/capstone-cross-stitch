@@ -84,7 +84,7 @@ const designDetailsData = async (req, res) => {
 }
 
 const getSearchData = async (req, res) => {
-    const { s } = req.query
+    const { s } = req.params
     console.log(s)
 
     try {
@@ -110,7 +110,7 @@ const getSearchData = async (req, res) => {
                 })
             }
         }))
-        console.log(searchData)
+        // console.log(searchData)
         res.status(200).json(searchData)
     } catch (error) {
         res.status(404).json({

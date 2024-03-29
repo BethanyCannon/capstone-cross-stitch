@@ -1,42 +1,22 @@
 import "./Header.scss";
 import stitchLogo from "../../assets/stitch.svg";
 import searchIcon from "../../assets/search.svg"
-import { Link, useSearchParams, useNavigate } from "react-router-dom";
+import { Link, useNavigate, } from "react-router-dom";
 import Login from "../../components/Login/Login";
-import { useEffect, useState, redirect } from "react";
-import axios from "axios";
-import { baseURL } from "../../utils"
 
-function Header({ isLoading, isLoggedIn, setIsLoggedIn, profile, setNewDesignsData, setSearchValue, setIsSearching, setRefresh, homeData, setQuery}) {
-  const [searchParams, setSearchParams] = useSearchParams();
+
+function Header({ isLoading, isLoggedIn, setIsLoggedIn, profile, setSearchData}) {
   const navigate = useNavigate()
+
 
   const submitHandler = (event) => {
     event.preventDefault()
-    setIsSearching(true)
     const search = event.target.search.value
-
-    searchDesignData(search);
-
-    if (search) {
-      setSearchParams({search})
-    } 
+    setSearchData(search);
+    navigate(`search/${search}`)
     event.target.reset();
   }
 
-  setSearchValue(searchParams.get('search'))
-
-  const searchDesignData = async (search) => {
-    try {
-      const response = await axios.get(`${baseURL}/design/search?s=${search}`
-      )
-      setNewDesignsData(response.data)
-      setSearchValue(search)
-
-    } catch (error) {
-      console.log(`${error}`)
-    }
-  }
 
   if (isLoading) {
     return (
@@ -49,7 +29,7 @@ function Header({ isLoading, isLoggedIn, setIsLoggedIn, profile, setNewDesignsDa
   return (
     <header>
       <nav className="nav-bar">
-        <Link className="nav-bar__link" to="/" onClick={() => {setNewDesignsData(homeData)}}  >
+        <Link className="nav-bar__link" to="/"   >
           <img className="nav-bar__logo" src={stitchLogo} alt="X Stitch Logo" />
         </Link>
         <div className="nav-bar__container">

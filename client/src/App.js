@@ -3,7 +3,7 @@ import { BrowserRouter, Route, Routes, Navigate, useSearchParams } from "react-r
 import HomePage from "./pages/HomePage/HomePage"
 import DetailsPage from "./pages/DetailsPage/DetailsPage"
 import UserPage from "./pages/UserPage/UserPage"
-import SearchPage from "./pages/HomePage/HomePage"
+import SearchPage from "./pages/SearchPage/SearchPage"
 import Header from "./components/Header/Header"
 import Footer from "./components/Footer/Footer"
 import { useEffect, useState  } from "react";
@@ -13,13 +13,9 @@ function App() {
   const [profile, setProfile] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [newDesignsData, setNewDesignsData] = useState(null);
-  const [query, setQuery] = useState("")
-  const [homeData, setHomeData] = useState("")
-  const [searchval, setSearchValue] = useState("")
-  const [isSearching, setIsSearching] = useState(false)
 
-  const [refresh, setRefresh] = useState(false);
+  const [searchData, setSearchData] = useState(null);
+  const [searchval, setSearchValue] = useState("")
 
   const getUser = async () => {
       const token = sessionStorage.getItem("token");
@@ -46,19 +42,20 @@ function App() {
     useEffect(() => {
       getUser();
     }, [isLoggedIn]);
-  //  setRefresh(false) 
-  
-    
-// console.log(refresh)
+
+    console.log(profile)
 
   return (
     <div className="App">
       <BrowserRouter>
-        <Header isLoading={isLoading} isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} profile={profile} setRefresh={setRefresh} setNewDesignsData={setNewDesignsData} setQuery={setQuery} setIsSearching={setIsSearching} setSearchValue={setSearchValue} homeData={homeData} />
+        <Header isLoading={isLoading} isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} profile={profile} setSearchData={setSearchData} />
         <Routes>
-          <Route path="/" element={<HomePage refresh={refresh} newDesignsData={newDesignsData} setNewDesignsData={setNewDesignsData} query={query} setHomeData={setHomeData} searchval={searchval} isSearching={isSearching} />} />
-          <Route path="/search/:sadness" element={<SearchPage newDesignsData={newDesignsData} setNewDesignsData={setNewDesignsData} />}  />
-          <Route path="design/:Did" element={<DetailsPage Pid={profile} searchval={searchval} />} />
+
+          <Route path="/" element={<HomePage />} />
+         
+          <Route path="/search/:searchTerm" element={<SearchPage />}  />
+         
+          <Route path="design/:Did" element={<DetailsPage Pid={profile} />} />
           <Route path="profile/:Pid" element={<UserPage profile={profile} logout={logout} />} />
 
           <Route path="*" element={<Navigate to="/" />} />
