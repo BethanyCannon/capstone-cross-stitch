@@ -78,6 +78,8 @@ function DetailsPage({Pid, searchval}) {
         setHeroImage(event.target.src)
     }
 
+    console.log(heroImage)
+
     return(
     <div className="design-details" >
         <img src={backIcon} onClick={handleBack} />
