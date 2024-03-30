@@ -51,7 +51,7 @@ function App() {
           <Route path="/" element={<HomePage />} />
           <Route path="/search/:searchTerm" element={<SearchPage />}  />
           <Route path="design/:Did" element={<DetailsPage Pid={profile} isLoggedIn={isLoggedIn} />} />
-          <Route path="profile/:Pid" element={<UserPage profile={profile} logout={logout} />} />
+          <Route path="profile/:Pid" element={<UserPage profile={profile} logout={logout} setProfile={setProfile} />} />
           <Route path="*" element={<Navigate to="/" />} />
         </Routes>
         <Footer />

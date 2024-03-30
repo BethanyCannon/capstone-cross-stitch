@@ -16,15 +16,16 @@ function SignUp({ setSuccess }) {
         setError(false)
 
         const data = new FormData();
-        data.append("image", file)
+        data.append("avatar", file)
         data.append("first_name", event.target.firstName.value)
         data.append("last_name", event.target.lastName.value)
         data.append("email", event.target.email.value)
         data.append("password", event.target.password.value)
         data.append("confirm_password", event.target.confirmPassword.value)
 
+        console.log(data)
         try {
-            const response = await axios.post("http://localhost:8080/user/newuser", data
+            const response = await axios.patch("http://localhost:8080/user/newuser", data
             );
             console.log(response)
             setSuccess(true)
@@ -62,7 +63,7 @@ function SignUp({ setSuccess }) {
 
                 <button className="sign-up__close" onClick={closeModal}> <img src={closeIcon} /> </button>
                 
-                <form className="sign-up__form" onSubmit={handleSubmit}>
+                <form className="sign-up__form" enctype="multipart/form-data" onSubmit={handleSubmit}>
                     <legend className="sign-up__title">Sign up</legend>
 
                     {error && <div className="sign-up__error-message">{error}</div>}

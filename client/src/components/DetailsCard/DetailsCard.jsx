@@ -2,15 +2,11 @@ import "./DetailsCard.scss";
 import EditUser from "../EditUser/EditUser";
 
 
-function DetailsCard({ profile, logout }) {
+function DetailsCard({ profile, logout, setProfile }) {
 
     const date = new Date(`${profile.created_at}`)
     const convertedDate = date.toLocaleString("en-US", { year: "numeric", month: "short", day: "numeric" })
     console.log(convertedDate)
-
-    const editUser = () => {
-
-    }
 
     const handleLogout = () => {
         logout()
@@ -35,7 +31,7 @@ function DetailsCard({ profile, logout }) {
                 </div>
                 <div>
                     <p onClick={handleLogout} className="details__logout"> logout</p>
-                    <EditUser profile={profile} />
+                    <EditUser setProfile={setProfile} profile={profile} />
                 </div>
             </div>
         </section>

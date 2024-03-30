@@ -53,7 +53,7 @@ const getUserFavourites = async (req, res) => {
       .join("creator", "design.creator_id", "creator.id")
       .select("design.id", "design_name", "creator.first_name", "creator.last_name")
 
-    const favouritesData = await Promise.all(faveData.map(async(fave) => {
+    const favouritesData = await Promise.all(faveData.map(async (fave) => {
       try {
         const image = await knex("images")
           .where("design_id", `${fave.id}`)
@@ -111,9 +111,12 @@ const loginUser = async (req, res) => {
 
 const createNewUser = async (req, res) => {
   // upload.single("image")
-  if(!req.file){
+  if (!req.file) {
     return res.status(400).send("Please add an avatar")
   }
+
+  console.log(req.body)
+  console.log(req.file)
 
   const { first_name, last_name, email, password, confirm_password, } = req.body;
   const image = req.file.filename
@@ -158,33 +161,89 @@ const createNewUser = async (req, res) => {
 }
 
 const newFavourite = async (req, res) => {
-  const {Pid, Did} = req.params;
+  const { Pid, Did } = req.params;
 
   const favourite = {
     user_id: Pid,
     design_id: Did,
   }
 
-  try{
+  try {
     await knex("favourites").insert(favourite);
     res.status(201).send("favourite added");
-  }catch(error){
+  } catch (error) {
     res.status(400).send("Failed registration");
   }
 }
 
 const deleteFavourite = async (req, res) => {
-  const {Pid, Did} = req.params
+  const { Pid, Did } = req.params
 
-  try{
+  try {
     const deletefave = await knex("favourites").where({
       user_id: Pid,
       design_id: Did
     }).del()
     res.status(201).send("favourite delete");
-  }catch(error){
+  } catch (error) {
     res.status(400).send(`Failed delete ${error}`);
   }
+}
+
+const editUser = async (req, res) => {
+
+  try {
+    if (!req.body) {
+      return res.status(400).send("please make sure all inputs are filled out");
+    }
+
+    let { id, avatar, first_name, last_name, email, password, confirm_password } = req.body;
+
+    const user = await knex("user").where({ id: req.params.id }).first();
+    const hashPass = bcrypt.compareSync(password, user.password)
+    let image = null;
+
+    if (password !== confirm_password) {
+      return res.status(400).send("passwords do not match");
+    }
+    if (!hashPass) {
+      if (password === "Password") {
+        password = user.password
+      }
+      if (password !== "Password") {
+        password = bcrypt.hashSync(password);
+      }
+    }
+    if (req.file) {
+      image = req.file.filename
+    } else {
+      image = user.avatar
+    }
+
+    console.log(image)
+    // const editUserData = async () => {
+    const abc = await knex("user").where({ id: req.params.id }).first()
+      .update(
+        {
+          // id,
+          first_name: first_name,
+          last_name: last_name,
+          email: email,
+          password: password,
+          avatar: image,
+          updated_at: new Date(),
+        })
+
+    const getEditedUser = await knex("user").where({ id: id }).first()
+    delete getEditedUser.password;
+    console.log("get", getEditedUser)
+    res.status(200).json(getEditedUser);
+  }
+  catch (error) {
+    res.status(400).send(`${error}`);
+  }
+
+
 }
 
 module.exports = {
@@ -194,4 +253,5 @@ module.exports = {
   createNewUser,
   newFavourite,
   deleteFavourite,
+  editUser,
 }

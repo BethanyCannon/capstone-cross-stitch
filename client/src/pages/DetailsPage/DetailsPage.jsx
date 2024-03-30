@@ -79,8 +79,6 @@ function DetailsPage({ Pid, isLoggedIn }) {
         setHeroImage(event.target.src)
     }
 
-    console.log(heroImage)
-
     return (
         <div className="design-details">
             <div className="design-details__header-container">
