@@ -1,6 +1,7 @@
 @use "../../styles/partials/typography" as *;
 @use "../../styles/partials/variables" as *;
 @use "../../styles/partials/mixins" as *;
+@use "../../pages/DetailsPage/DetailsPage.scss";
 
 .details {
     display: flex;
@@ -15,10 +16,30 @@
         height: 150px;
         border-radius: 50%;
         margin: 1rem;
+        align-self: center;
+        border: 2px solid $CadetGray;
+        // border: ;
+
+        @include tablet {
+            align-self: unset;
+        }
     }
 
     &__text{
-        margin: 1rem;
+        @extend .design-details__text;
+    }
+
+    &__logout{
+        @extend .design-details__svg-container;
+        @extend .design-details__svg;
+        padding: 4px 8px;
+        border-radius: 20px;
+        background-color: rgb(143, 170, 170, 0.5);
+
+        &:hover{
+            font-weight: 600;
+            background-color: $CadetGray;
+        }
     }
 
 }

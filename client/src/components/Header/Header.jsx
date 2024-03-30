@@ -5,14 +5,13 @@ import { Link, useNavigate, } from "react-router-dom";
 import Login from "../../components/Login/Login";
 
 
-function Header({ isLoading, isLoggedIn, setIsLoggedIn, profile, setSearchData}) {
+function Header({ isLoading, isLoggedIn, setIsLoggedIn, profile}) {
   const navigate = useNavigate()
 
 
   const submitHandler = (event) => {
     event.preventDefault()
     const search = event.target.search.value
-    setSearchData(search);
     navigate(`search/${search}`)
     event.target.reset();
   }
@@ -34,11 +33,7 @@ function Header({ isLoading, isLoggedIn, setIsLoggedIn, profile, setSearchData})
         </Link>
         <div className="nav-bar__container">
           <form className="nav-bar__search-container" onSubmit={submitHandler}>
-            <input
-              type="search"
-              name="search"
-              // value={query}
-              placeholder="Search"></input>
+            <input  type="search"  name="search"  placeholder="Search"></input>
             <img src={searchIcon} />
           </form>
           {!isLoggedIn ? (

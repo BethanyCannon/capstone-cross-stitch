@@ -1,9 +1,10 @@
 import "./DetailsCard.scss"
-import {baseURL} from "../../utils"
 
-function DetailsCard({profile}) {
+function DetailsCard({profile, logout}) {
 
-    // console.log(`${baseURL}/avatars/${profile.avatar}`)
+    const handleLogout = () => {
+        logout()
+    }
 
     if(!profile) {
         return <div>loading</div>
@@ -13,6 +14,7 @@ function DetailsCard({profile}) {
         <section className="details">
             <img src={`http://localhost:8080/avatars/${profile.avatar}`} className="details__avatar" />
             <div className="details__text">
+                <p onClick={handleLogout} className="details__logout" >logout</p>
                <h2>{`${profile.first_name} ${profile.last_name}`}</h2>
                <p>
                {profile.email}

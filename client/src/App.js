@@ -14,8 +14,6 @@ function App() {
   const [isLoading, setIsLoading] = useState(true);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
-  const [searchData, setSearchData] = useState(null);
-  const [searchval, setSearchValue] = useState("")
 
   const getUser = async () => {
       const token = sessionStorage.getItem("token");
@@ -48,16 +46,12 @@ function App() {
   return (
     <div className="App">
       <BrowserRouter>
-        <Header isLoading={isLoading} isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} profile={profile} setSearchData={setSearchData} />
+        <Header isLoading={isLoading} isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} profile={profile} />
         <Routes>
-
           <Route path="/" element={<HomePage />} />
-         
           <Route path="/search/:searchTerm" element={<SearchPage />}  />
-         
           <Route path="design/:Did" element={<DetailsPage Pid={profile} />} />
           <Route path="profile/:Pid" element={<UserPage profile={profile} logout={logout} />} />
-
           <Route path="*" element={<Navigate to="/" />} />
         </Routes>
         <Footer />
