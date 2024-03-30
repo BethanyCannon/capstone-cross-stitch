@@ -25,9 +25,9 @@
         }
     }
 
-    &__text{
+    &__text-container {
         @extend .design-details__text-container;
-        flex-direction: column;
+        // flex-direction: column;
 
         & h2 {
             margin-bottom: 4px;
@@ -38,15 +38,18 @@
         }
     }
 
+    &__text{
+        width: 100%;
+    }
+
     &__logout{
-        @extend .design-details__svg-container;
-        @extend .design-details__svg;
         padding: 4px 8px;
         border-radius: 20px;
-        background-color: rgb(143, 170, 170, 0.5);
+        background-color: $CadetGrayL;
 
         &:hover{
             font-weight: 600;
+            cursor: pointer;
             background-color: $CadetGray;
         }
     }

@@ -39,6 +39,8 @@ function SignUp({ setSuccess }) {
         setFile(event.target.files[0])
     }
 
+    console.log(file)
+
     function openModal() {
         setIsOpen(true);
     }
