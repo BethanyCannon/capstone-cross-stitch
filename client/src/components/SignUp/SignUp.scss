@@ -1,10 +1,60 @@
+@use "../../styles/partials/mixins" as *;
+@use "../../styles/partials/typography" as *;
+@use "../../styles/partials/variables" as *;
+@use "../Login/Login.scss" as *;
 
+.Modal {
+    position: absolute;
+    inset: 40px;
+    border: 1px solid rgb(204, 204, 204);
+    background: rgb(255, 255, 255);
+    overflow: auto;
+    border-radius: 4px;
+    outline: none;
+    padding: 20px;
 
-.sign-up{
-    &__modal-btn{
-        &:hover{
-            font-weight: 600;
-            cursor: pointer;
+    @include tablet {
+        max-width: 800px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+}
+
+.sign-up {
+
+    &__close{
+        @extend .login__close;
+    }
+
+    &__title{
+        @extend .login__title;
+    }
+
+    &__modal-btn {
+        @include button;
+    }
+
+    &__form{
+        @extend .login__form
+    }
+
+    &__avatar-upload{
+        border: none !important;
+
+        &::file-selector-button {
+            @include button;
+            border: none;
+            margin-right: 1rem;
         }
+    }
+
+    &__submit-btn{
+        @extend .login__login-btn;
+
+        margin: 16px auto 0;
+    }
+
+    &__error-message{
+        @extend .login__error-message;
     }
 }

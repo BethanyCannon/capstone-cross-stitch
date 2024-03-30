@@ -20,8 +20,6 @@
 }
 
 .login{
-    // display: flex;
-    // flex-direction: column;
     &__title {
         @include subheading;
         margin-bottom: 16px;
@@ -41,26 +39,30 @@
     &__form{
     display: flex;
     flex-direction: column;
+    max-width: 600px;
+    margin: 0 auto;
 
     & label {
         @include text;
+        padding: 4px 0;
+    }
+
+    & input{
+        border: 1px solid $Black;
+        border-radius: 5px;
+        padding: 4px;
+
+        &:focus{
+            outline: 2px solid $CadetGray;
+            // border: 1px solid $CadetGray;
+        }
     }
     }
 
     &__login-btn {
-        margin: 1.1rem 0;
+        @include button;
+        margin: 1rem 0;
         border: none;
-        background-color: transparent;
-        width: 4rem;
-        // margin-left: auto;
-        font-size: 1rem;
-        padding: 0;
-        text-align: left;
-
-        &:hover {
-            font-weight: 550;
-            cursor: pointer;
-        }
     }
 
     &__error-message{
@@ -75,4 +77,7 @@
         color: $SeaGreen;
     }
 
+    &__text{
+        text-align: center;
+    }
 }

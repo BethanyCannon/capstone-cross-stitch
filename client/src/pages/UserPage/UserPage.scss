@@ -4,8 +4,6 @@
 
 .profile {
     @include format;
-    // padding: 0 1rem;
-
     
     &__carousel {
         
@@ -15,12 +13,32 @@
             }
         }
     }
+
+    &__logout{
+        text-align: center;
+        margin-top: 32px;
+
+        &-title{
+            margin: 16px;
+            @include subheading;
+        }
+
+        &-link{
+            margin: 16px;
+            @include text;
+            text-decoration: none;
+
+            &:hover {
+                cursor: pointer;
+                font-weight: 600;
+            }
+        }
+    }
 }
 
 
 .react-multiple-carousel__arrow {
     background-color: rgb(184, 216, 216, 0.8) !important;
-    // background-color: rgb(143, 170, 170, 0.5) !important;
 
     &:hover{
         background-color: rgb(143, 170, 170, 0.8) !important;

@@ -19,7 +19,7 @@
 }
 
 @mixin format {
-    min-height: 100vh;
+    min-height: 80vh;
     padding: 0 16px;
 
     @include tablet {
@@ -31,6 +31,22 @@
         margin: 0 auto;
         width: 100%;
         max-width: $maxW;
+    }
+}
+
+@mixin button {
+    background-color: $LightBlueL;
+    width: fit-content;
+    font-size: 1rem;
+    border-radius: 20px;
+    text-align: center;
+    margin: 0 auto;
+    padding: 6px 10px;
+
+    &:hover {
+        font-weight: 600;
+        cursor: pointer;
+        background-color: $CadetGrayL;
     }
 }
 

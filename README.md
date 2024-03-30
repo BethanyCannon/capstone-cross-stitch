@@ -233,7 +233,7 @@ done - feature-add-and-delete-favourites
         - .post /user/:id/favourite/:id
         - .delete /user/:id/favourite/:id
 
-- feature-search-page (5)
+done - feature-search-page (5)
     - frontend:
         - search bar should already be built - add functionality
     - backend:
