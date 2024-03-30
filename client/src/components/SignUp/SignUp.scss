@@ -1,0 +1,10 @@
+
+
+.sign-up{
+    &__modal-btn{
+        &:hover{
+            font-weight: 600;
+            cursor: pointer;
+        }
+    }
+}

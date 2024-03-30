@@ -11,13 +11,23 @@
     border-radius: 4px;
     outline: none;
     padding: 20px;
+
+    @include tablet {
+        max-width: 800px;
+        margin-left: auto;
+        margin-right: auto;
+    }
 }
 
 .login{
     // display: flex;
     // flex-direction: column;
+    &__title {
+        @include subheading;
+        margin-bottom: 16px;
+    }
 
-    &__button{
+    &__close{
         background-color: transparent;
         border: none;
         margin-left: auto;
@@ -31,6 +41,38 @@
     &__form{
     display: flex;
     flex-direction: column;
+
+    & label {
+        @include text;
+    }
+    }
+
+    &__login-btn {
+        margin: 1.1rem 0;
+        border: none;
+        background-color: transparent;
+        width: 4rem;
+        // margin-left: auto;
+        font-size: 1rem;
+        padding: 0;
+        text-align: left;
+
+        &:hover {
+            font-weight: 550;
+            cursor: pointer;
+        }
+    }
+
+    &__error-message{
+        @include text;
+        font-weight: 500;
+        color: $RustyRed;
+    }
+
+    &__success-message {
+        @include text;
+        font-weight: 500;
+        color: $SeaGreen;
     }
 
 }

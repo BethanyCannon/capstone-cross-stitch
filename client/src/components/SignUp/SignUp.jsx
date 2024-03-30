@@ -48,7 +48,7 @@ function SignUp({ setSuccess }) {
 
     return (
         <div>
-            <p onClick={openModal}>Sign up</p>
+            <p onClick={openModal} className="sign-up__modal-btn">Sign up</p>
             <Modal
                 contentLabel="Login form"
                 className="Modal"

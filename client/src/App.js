@@ -1,9 +1,9 @@
 import './styles/global.scss';
-import { BrowserRouter, Route, Routes, Navigate } from "react-router-dom"
+import { BrowserRouter, Route, Routes, Navigate, useSearchParams } from "react-router-dom"
 import HomePage from "./pages/HomePage/HomePage"
 import DetailsPage from "./pages/DetailsPage/DetailsPage"
 import UserPage from "./pages/UserPage/UserPage"
-import SearchPage from "./pages/HomePage/HomePage"
+import SearchPage from "./pages/SearchPage/SearchPage"
 import Header from "./components/Header/Header"
 import Footer from "./components/Footer/Footer"
 import { useEffect, useState  } from "react";
@@ -14,7 +14,6 @@ function App() {
   const [isLoading, setIsLoading] = useState(true);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
-  // console.log(profile)
 
   const getUser = async () => {
       const token = sessionStorage.getItem("token");
@@ -42,15 +41,17 @@ function App() {
       getUser();
     }, [isLoggedIn]);
 
+    console.log(profile)
+
   return (
     <div className="App">
       <BrowserRouter>
         <Header isLoading={isLoading} isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} profile={profile} />
         <Routes>
-          <Route path="/" element={<HomePage title={"New Designs"} />} />
-          <Route path="/design/:Did" element={<DetailsPage Pid={profile}  />} />
-          <Route path="/profile/:Pid" element={<UserPage profile={profile} logout={logout} />} />
-          <Route path="/:id" element={<SearchPage />} title={"Search"} />
+          <Route path="/" element={<HomePage />} />
+          <Route path="/search/:searchTerm" element={<SearchPage />}  />
+          <Route path="design/:Did" element={<DetailsPage Pid={profile} />} />
+          <Route path="profile/:Pid" element={<UserPage profile={profile} logout={logout} />} />
           <Route path="*" element={<Navigate to="/" />} />
         </Routes>
         <Footer />

@@ -3,14 +3,26 @@
 @use "../../styles/partials/mixins" as *;
 
 .profile {
-    padding: 0 1rem;
+    @include format;
+    // padding: 0 1rem;
+
     
     &__carousel {
+        
         & li {
             @include tablet {
                 max-width: 220px !important;
             }
         }
-        
+    }
+}
+
+
+.react-multiple-carousel__arrow {
+    background-color: rgb(184, 216, 216, 0.8) !important;
+    // background-color: rgb(143, 170, 170, 0.5) !important;
+
+    &:hover{
+        background-color: rgb(143, 170, 170, 0.8) !important;
     }
 }

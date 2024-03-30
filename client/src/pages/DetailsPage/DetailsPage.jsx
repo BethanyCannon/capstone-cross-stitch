@@ -1,30 +1,31 @@
 import "./DetailsPage.scss"
-import { useParams } from "react-router-dom"
+import { useParams, useNavigate } from "react-router-dom"
 import { useState, useEffect } from "react";
 import { baseURL } from "../../utils"
 import axios from "axios"
 import Carousel from "react-multi-carousel";
 import Like from "../../components/Like/Like"
+import backIcon from "../../assets/back-arrow.svg"
 
-function DetailsPage({Pid}) {
-    const {Did} = useParams()
+function DetailsPage({ Pid }) {
+    const { Did } = useParams()
     const [designDetails, setDesignDetails] = useState(null)
     const [heroImage, setHeroImage] = useState()
     const [isFavourite, setIsFavourite] = useState(null)
-    // const params = useParams();
+    const navigate = useNavigate()
 
     const getDesignDetails = async () => {
         const token = sessionStorage.getItem("token");
 
-        try{
-            const response = await axios.get(`${baseURL}/design/${Did}`, {
+        try {
+            const response = await axios.get(`${baseURL}/design/details/${Did}`, {
                 headers: { Authorization: `Bearer ${token}` }
             }
             )
             setDesignDetails(response.data[0])
             setHeroImage(response.data[0].image[0].image_url)
             setIsFavourite(response.data[0].favourites)
-        }catch(error){
+        } catch (error) {
             console.log(error)
         }
     }
@@ -66,46 +67,56 @@ function DetailsPage({Pid}) {
             items: 1
         }
     }
-    
+
+
     const handleImage = (event) => {
         setHeroImage(event.target.src)
     }
 
-    return(
-    <div className="design-details" >
-        <h2 className="design-details__title">{designDetails.design_name}</h2>
-        <div className="design-details__container">
-            <div className="design-details__img-container" >
-            <img src={heroImage} className="design-details__hero-image" />
-        <Carousel
-                responsive={responsive}
-                className="design-details__carousel"
-                infinite={false} >
-        {designDetails.image.map((pic) => {
-            return(
-                    <img className="design-details__images"
-                    src={pic.image_url} 
-                    key={pic.id} 
-                    onClick={handleImage}
-                    />
-            )
-        })}
-        </Carousel>
-        </div>
-        <div className="design-details__text" >
-        <p>{designDetails.created_at}</p>
-        <p>{designDetails.creator_name}</p>
-        <p>{designDetails.height_size} x {designDetails.height_width}</p>
-        <p>{designDetails.thread_count}</p>
-        <p>{designDetails.description}</p>
-        {/* <img src={heartIcon} /> */}
-        {/* {heartIcon} */}
+    console.log(heroImage)
 
-            {designDetails.favourites === null ? <div> you must be logged in for this </div> :
-                <div> {designDetails.favourites===true ? <div onClick={deleteFavourite} className="design-details__svg" ><Like color="red"  /></div> :  <div className="design-details__svg" onClick={addFavourite}><Like /></div> } </div>}
+    return (
+        <div className="design-details" >
+            <div className="design-details__header-container">
+            <img src={backIcon} className="design-details__design-btn" onClick={() => { navigate(-1) }} />
+            <h2 className="design-details__title">{designDetails.design_name}</h2>
+            </div>
+            <div className="design-details__container">
+                <div className="design-details__img-container" >
+                    <img src={heroImage} className="design-details__hero-image" />
+                    <Carousel
+                        containerClass={{ borderBottom: '1px solid black',
+                        backgroundColor: "lightblue",
+                     }}
+                        responsive={responsive}
+                        className="design-details__carousel"
+                        infinite={false} >
+                        {designDetails.image.map((pic) => {
+                            return (
+                                <img className="design-details__images"
+                                    src={pic.image_url}
+                                    key={pic.id}
+                                    onClick={handleImage}
+                                />
+                            )
+                        })}
+                    </Carousel>
+                </div>
+                <div className="design-details__text" >
+                {designDetails.favourites === null ? <div> you must be logged in for this </div> :
+                        <div className="design-details__svg-container" > {designDetails.favourites === true ? <div onClick={deleteFavourite} className="design-details__svg" ><Like color="red" /></div> : <div className="design-details__svg" onClick={addFavourite}><Like /></div>} </div>}
+                    <p>{designDetails.created_at}</p>
+                    <p>{designDetails.creator_name}</p>
+                    <p>{designDetails.height_size} x {designDetails.height_width}</p>
+                    <p>{designDetails.thread_count}</p>
+                    <p>{designDetails.description}</p>
+                    {/* <img src={heartIcon} /> */}
+                    {/* {heartIcon} */}
+
+
+                </div>
+            </div>
         </div>
-    </div>
-    </div>
     )
 }
 

@@ -3,57 +3,125 @@
 @use "../../styles/partials/mixins" as *;
 
 .design-details {
-    min-height: 100vh;;
+    @include format;
 
-    &__container{
+    &__design-btn {
+        margin: 10px 16px;
+        padding: 0.3rem;
+        background-color: rgb(184, 216, 216, 0.5);
+        border-radius: 50%;
+
+        @include tablet {
+            margin: 0
+        }
+
+        &:hover {
+            background-color: rgb(143, 170, 170, 0.5);
+            cursor: pointer;
+        }
+    }
+
+    &__container {
         display: flex;
         flex-direction: column;
-    
+
         @include tablet {
-            flex-direction: row; 
+            flex-direction: row;
         }
-    
+
     }
 
     &__img-container {
-        width: 50%;
+        width: 100%;
+
+        @include tablet {
+            width: 50%;
+        }
     }
 
-    &__hero-image{
+    &__hero-image {
         max-width: -webkit-fill-available;
-    padding: 1rem;
-    max-height: 80vh;
-    width: auto;
+        padding: 1rem;
+        max-height: 80vh;
+        width: auto;
+
+        @include tablet {
+            padding: 1rem 1rem 1rem 0;
+        }
     }
 
     &__images {
-       width: 100%; 
+        width: 100%;
 
     }
 
     &__carousel {
-        & li {    
-        max-width: 50px !important;
+        border-bottom: 2px solid $CadetGray;
+        padding-bottom: 16px;
+    
+        @include tablet {
+            border-bottom: none;
+        }
+
+        & li {
+            max-width: 50px !important;
         }
     }
 
     &__title {
-       order: 2; 
+        order: 2;
+        margin-left: 16px;
+        text-transform: capitalize;
+
+        @include tablet {
+            text-align: center;
+            align-self: center;
+        }
     }
 
-    &__svg{
+    &__svg-container {
+        position: absolute;
+        top: 1rem;
+        right: 1rem;
+    }
 
-        &:hover{
+    &__svg {
+        margin-left: auto;
+
+        &:hover {
             cursor: pointer;
-            fill: blue;
+            fill: $CadetGray;
+        }
+    }
+
+    &__header-container {
+        @include tablet {
+            display: flex;
+            margin-top: 10px;
+        }
+    }
+
+    &__text {
+        margin: 16px 10px;
+        padding: 16px;
+        background-color: rgba(184, 216, 216, 0.5);
+        border-radius: 20px;
+        position: relative;
+        width: 95%;
+
+        @include tablet {
+            width: 100%;
+            margin-right: auto;
+            margin: 16px 0 auto 32px;
         }
     }
 }
 
-// .react-multi-carousel-list {
-//     @include mobile{
-//         width: 100%;}
+.react-multi-carousel-list {
+    // border-bottom: 2px solid $CadetGray;
+    padding-bottom: 16px;
 
-//     @include tablet{
-//         width: 50%; }
-// }
+    // @include tablet {
+    //     border-bottom: none;
+    // }
+}

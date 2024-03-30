@@ -237,7 +237,7 @@ done - feature-add-and-delete-favourites
     - frontend:
         - search bar should already be built - add functionality
     - backend:
-        - /designs?="search-term" 
+        - /designs/search/?="search-term" 
             - return items with title that matches part of of term
 
 

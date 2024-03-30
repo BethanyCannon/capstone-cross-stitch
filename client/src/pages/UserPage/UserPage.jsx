@@ -26,9 +26,9 @@ function HomePage({ profile, logout }) {
             getFavourties();
     }, []);
 
-    const handleLogout = () => {
-        logout()
-    }
+    // const handleLogout = () => {
+    //     logout()
+    // }
 
     //react-multi-carousel
     const responsive = {
@@ -63,10 +63,11 @@ function HomePage({ profile, logout }) {
 
     return (
         <div className="profile">
-            <DetailsCard profile={profile} />
-            <p onClick={handleLogout}>logout</p>
+            <DetailsCard profile={profile} logout={logout} />
+            {/* <p onClick={handleLogout}>logout</p> */}
             <h3>You have {favourites.length} favourite items</h3>
             <Carousel
+                // containerClass={{ borderBottom: "none" }}
                 responsive={responsive}
                 className="profile__carousel"
                 infinite={false} >
