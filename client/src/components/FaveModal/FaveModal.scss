@@ -1,0 +1,20 @@
+@use "../../styles/partials/mixins" as *;
+@use "../../styles/partials/typography" as *;
+@use "../../styles/partials/variables" as *;
+
+.fave{
+
+    &__text{
+        background-color: rgba(143, 170, 170, 0.5);
+        width: fit-content;
+        margin-left: 16px;
+        padding: 8px 16px;
+        border-radius: 20px;
+
+        margin-top: 16px;
+
+        @include tablet {
+            margin-left: 32px;
+        }
+    }
+}

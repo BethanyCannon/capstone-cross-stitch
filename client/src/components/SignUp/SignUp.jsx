@@ -13,6 +13,7 @@ function SignUp({ setSuccess }) {
 
     const handleSubmit = async (event) => {
         event.preventDefault();
+        setError(false)
 
         const data = new FormData();
         data.append("image", file)
@@ -25,10 +26,11 @@ function SignUp({ setSuccess }) {
         try {
             const response = await axios.post("http://localhost:8080/user/newuser", data
             );
+            console.log(response)
             setSuccess(true)
             setIsOpen(false)
-        } catch(error){
-            console.log(error)
+        } catch (error) {
+            console.log("error", error)
             setError(error.response.data);
         }
     }
@@ -50,14 +52,18 @@ function SignUp({ setSuccess }) {
         <div>
             <p onClick={openModal} className="sign-up__modal-btn">Sign up</p>
             <Modal
-                contentLabel="Login form"
+                contentLabel="sign up form"
                 className="Modal"
-                portalClassNam="login"
+                portalClassNam="sign-up"
                 isOpen={modalIsOpen}
                 onRequestClose={closeModal}>
-                <button className="login__button" onClick={closeModal}> <img src={closeIcon} /> </button>
-                <form className="login__form" onSubmit={handleSubmit}>
-                <legend>Sign up</legend>
+
+                <button className="sign-up__close" onClick={closeModal}> <img src={closeIcon} /> </button>
+                
+                <form className="sign-up__form" onSubmit={handleSubmit}>
+                    <legend className="sign-up__title">Sign up</legend>
+
+                    {error && <div className="sign-up__error-message">{error}</div>}
 
                     <label htmlFor="first-name" > First Name: </label>
                     <input type="text" name="firstName" />
@@ -75,11 +81,9 @@ function SignUp({ setSuccess }) {
                     <input type="password" name="confirmPassword" />
 
                     <label htmlFor="avatar">Choose a profile picture:</label>
-                    <input type="file" name="avatar" onChange={handleFile} accept="image/png, image/jpeg" />
+                    <input type="file" name="avatar" className="sign-up__avatar-upload" onChange={handleFile} accept="image/png, image/jpeg" />
 
-                    <button>Create account</button>
-
-                    {error && <div className="login__message">{error}</div>}
+                    <button className="sign-up__submit-btn">Create account</button>
                 </form>
             </Modal>
         </div>

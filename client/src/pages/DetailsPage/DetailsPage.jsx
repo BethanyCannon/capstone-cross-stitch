@@ -4,14 +4,17 @@ import { useState, useEffect } from "react";
 import { baseURL } from "../../utils"
 import axios from "axios"
 import Carousel from "react-multi-carousel";
-import Like from "../../components/Like/Like"
-import backIcon from "../../assets/back-arrow.svg"
+import Like from "../../components/Like/Like";
+import backIcon from "../../assets/back-arrow.svg";
+import likeIcon from "../../assets/heart.svg"
+import FaveModal from "../../components/FaveModal/FaveModal"
 
-function DetailsPage({ Pid }) {
+function DetailsPage({ Pid, isLoggedIn }) {
     const { Did } = useParams()
     const [designDetails, setDesignDetails] = useState(null)
     const [heroImage, setHeroImage] = useState()
     const [isFavourite, setIsFavourite] = useState(null)
+    const [isOpen, setIsOpen] = useState(false)
     const navigate = useNavigate()
 
     const getDesignDetails = async () => {
@@ -25,6 +28,7 @@ function DetailsPage({ Pid }) {
             setDesignDetails(response.data[0])
             setHeroImage(response.data[0].image[0].image_url)
             setIsFavourite(response.data[0].favourites)
+            setIsOpen(false)
         } catch (error) {
             console.log(error)
         }
@@ -32,7 +36,7 @@ function DetailsPage({ Pid }) {
 
     useEffect(() => {
         getDesignDetails();
-    }, [isFavourite]);
+    }, [isFavourite, isLoggedIn]);
 
     if (!designDetails) {
         return <div>Loading...</div>
@@ -68,6 +72,8 @@ function DetailsPage({ Pid }) {
         }
     }
 
+    const date = new Date(`${designDetails.created_at}`)
+    const convertedDate = date.toLocaleString("en-US", { year: "numeric", month: "short", day: "numeric" })
 
     const handleImage = (event) => {
         setHeroImage(event.target.src)
@@ -76,18 +82,19 @@ function DetailsPage({ Pid }) {
     console.log(heroImage)
 
     return (
-        <div className="design-details" >
+        <div className="design-details">
             <div className="design-details__header-container">
-            <img src={backIcon} className="design-details__design-btn" onClick={() => { navigate(-1) }} />
-            <h2 className="design-details__title">{designDetails.design_name}</h2>
+                <img src={backIcon} className="design-details__design-btn" onClick={() => { navigate(-1) }} />
+                <h2 className="design-details__title">{designDetails.design_name}</h2>
             </div>
             <div className="design-details__container">
                 <div className="design-details__img-container" >
                     <img src={heroImage} className="design-details__hero-image" />
                     <Carousel
-                        containerClass={{ borderBottom: '1px solid black',
-                        backgroundColor: "lightblue",
-                     }}
+                        containerClass={{
+                            borderBottom: '1px solid black',
+                            backgroundColor: "lightblue",
+                        }}
                         responsive={responsive}
                         className="design-details__carousel"
                         infinite={false} >
@@ -102,18 +109,31 @@ function DetailsPage({ Pid }) {
                         })}
                     </Carousel>
                 </div>
-                <div className="design-details__text" >
-                {designDetails.favourites === null ? <div> you must be logged in for this </div> :
-                        <div className="design-details__svg-container" > {designDetails.favourites === true ? <div onClick={deleteFavourite} className="design-details__svg" ><Like color="red" /></div> : <div className="design-details__svg" onClick={addFavourite}><Like /></div>} </div>}
-                    <p>{designDetails.created_at}</p>
-                    <p>{designDetails.creator_name}</p>
-                    <p>{designDetails.height_size} x {designDetails.height_width}</p>
-                    <p>{designDetails.thread_count}</p>
-                    <p>{designDetails.description}</p>
-                    {/* <img src={heartIcon} /> */}
-                    {/* {heartIcon} */}
+                <div className="design-details__modal-container">
+                    {isOpen && <FaveModal setIsOpen={setIsOpen} />}
+                    <div className="design-details__text-container" >
+                        {designDetails.favourites === null ? <div className="design-details__svg-container" onClick={() => setIsOpen(true)}> <img src={likeIcon} />    </div> :
+                            <div className="design-details__svg-container" > {designDetails.favourites === true ? <div onClick={deleteFavourite} className="design-details__svg" ><Like color="red" /></div> : <div className="design-details__svg" onClick={addFavourite}><Like /></div>} </div>}
+                        <div className="design-details__text-title">
+                            <p>Creator </p>
+                            <p>Published</p>
+                            <p>Size</p>
+                            <p>Thread Count</p>
+                            <p>Description</p>
+                        </div>
+                        <div className="design-details__text">
+                        <p>{designDetails.creator_name} </p>
+                        <p>{convertedDate}</p>
+                        <p>{designDetails.height_size}cm x {designDetails.height_width}cm</p>
+                        <p>{designDetails.thread_count} colours</p>
+                        <p>{designDetails.description}</p>
+                        </div>
+
+                        {/* <img src={heartIcon} /> */}
+                        {/* {heartIcon} */}
 
 
+                    </div>
                 </div>
             </div>
         </div>

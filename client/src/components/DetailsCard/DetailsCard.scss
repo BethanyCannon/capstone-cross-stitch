@@ -26,7 +26,16 @@
     }
 
     &__text{
-        @extend .design-details__text;
+        @extend .design-details__text-container;
+        flex-direction: column;
+
+        & h2 {
+            margin-bottom: 4px;
+        }
+
+        & p {
+            @include text
+        }
     }
 
     &__logout{

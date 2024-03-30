@@ -2,6 +2,10 @@ import "./DetailsCard.scss"
 
 function DetailsCard({profile, logout}) {
 
+    const date = new Date(`${profile.created_at}`)
+    const convertedDate = date.toLocaleString("en-US", { year: "numeric", month: "short", day: "numeric" })
+    console.log(convertedDate)
+
     const handleLogout = () => {
         logout()
     }
@@ -20,7 +24,7 @@ function DetailsCard({profile, logout}) {
                {profile.email}
                 </p>
                 <p>
-                User since {profile.created_at}
+                User since {convertedDate}
                 </p>
                
             </div>

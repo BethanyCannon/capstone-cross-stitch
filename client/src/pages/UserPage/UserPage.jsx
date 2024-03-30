@@ -1,7 +1,7 @@
 import "./UserPage.scss"
 import DetailsCard from "../../components/DetailsCard/DetailsCard";
 import DesignCard from "../../components/DesignCard/DesignCard";
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams, useNavigate, Link } from "react-router-dom";
 import axios from "axios";
 import { baseURL } from "../../utils";
 import { useState, useEffect } from "react";
@@ -56,29 +56,28 @@ function HomePage({ profile, logout }) {
     }
 
     if (!profile) {
-        return(<div>
-            You must be logged in to see this page
+        return(<div className="profile profile__logout">
+            <h2 className="profile__logout-title">You must be logged in to see this page</h2>
+            <Link to="/" className="profile__logout-link">
+            Click here to return Home
+            </Link>
         </div>)
     } 
 
     return (
         <div className="profile">
             <DetailsCard profile={profile} logout={logout} />
-            {/* <p onClick={handleLogout}>logout</p> */}
             <h3>You have {favourites.length} favourite items</h3>
             <Carousel
-                // containerClass={{ borderBottom: "none" }}
                 responsive={responsive}
                 className="profile__carousel"
                 infinite={false} >
                 {favourites.map((favourite) => {
                     return (
-                        // <Link to={`design/${favourite.id}`} >
                         <DesignCard
                             key={favourite.id}
                             newDesign={favourite}
                         />
-                        // </Link>
                     )
                 }
                 )}

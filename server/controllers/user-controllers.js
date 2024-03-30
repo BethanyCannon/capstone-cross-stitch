@@ -111,9 +111,13 @@ const loginUser = async (req, res) => {
 
 const createNewUser = async (req, res) => {
   // upload.single("image")
+  if(!req.file){
+    return res.status(400).send("Please add an avatar")
+  }
 
   const { first_name, last_name, email, password, confirm_password, } = req.body;
   const image = req.file.filename
+
 
   if (confirm_password !== password) {
     return res.status(400).send("passwords do not match");
@@ -122,6 +126,7 @@ const createNewUser = async (req, res) => {
   if (!first_name || !last_name || !email || !password) {
     return res.status(400).send("Please enter the required fields");
   }
+
 
   const user = await knex("user").where({ email: email }).first();
   if (user) {
