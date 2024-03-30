@@ -90,14 +90,17 @@ const getSearchData = async (req, res) => {
     try {
         const searchFound = await knex("design").where("design.design_name", "like", `%${s}%`).orWhere("design.description", "like", `%${s}%`)
             .join("creator", "design.creator_id", "creator.id")
+            .select('design.id', 'design.design_name', 'design.creator_id', 'creator.first_name', 'creator.last_name')
 
         const searchData = await Promise.all(searchFound.map(async (design) => {
+            console.log(searchFound)
+            // console.log()
             try {
                 const image = await knex("images")
                     .where("design_id", `${design.id}`)
+                    console.log("design_id", `${design.id}`)
 
                 const searchObj = {
-                    title: s,
                     id: design.id,
                     design_name: design.design_name,
                     creator_name: `${design.first_name} ${design.last_name}`,
