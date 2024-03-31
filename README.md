@@ -247,8 +247,8 @@ Scope your project as a sprint. Break down the tasks that will need to be comple
 ## Nice-to-haves
 
 - user details
-    - edit user details
-    - delete user (cascade to include favourites)
+    done - edit user details
+    done - delete user (cascade to include favourites)
 - projects components that can set a project as favourites, in-progess, or completed 
     - the ability to add notes to projects
     - bonus: (including photos)

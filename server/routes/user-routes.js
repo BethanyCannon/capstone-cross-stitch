@@ -2,7 +2,6 @@ const express = require("express")
 const router = express.Router();
 const userController = require("../controllers/user-controllers");
 const {editUserMiddleware} = require("../middleware/editUser-middleware")
-
 const multer = require("multer");
 
 const storage = multer.diskStorage({
@@ -26,6 +25,7 @@ router
   .route("/:id")
   .get(userController.getUserFavourites)
   .patch(upload.single("avatar"), userController.editUser)
+  .delete(userController.deleteUser)
 
 router
   .route("/login")
@@ -33,7 +33,7 @@ router
 
 router
   .route("/newUser")
-  .post(upload.single("image"), userController.createNewUser)
+  .post(upload.single("avatar"), userController.createNewUser)
 
 router
   .route("/:Pid/favourites/:Did")

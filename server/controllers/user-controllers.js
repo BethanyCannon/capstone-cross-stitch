@@ -121,6 +121,9 @@ const createNewUser = async (req, res) => {
   const { first_name, last_name, email, password, confirm_password, } = req.body;
   const image = req.file.filename
 
+  console.log(req.body)
+  console.log(password, confirm_password)
+
 
   if (confirm_password !== password) {
     return res.status(400).send("passwords do not match");
@@ -184,14 +187,14 @@ const deleteFavourite = async (req, res) => {
       user_id: Pid,
       design_id: Did
     }).del()
-    res.status(201).send("favourite delete");
+    res.status(201).send("favourite deleted");
   } catch (error) {
     res.status(400).send(`Failed delete ${error}`);
   }
 }
 
 const editUser = async (req, res) => {
-
+  console.log("hi")
   try {
     if (!req.body) {
       return res.status(400).send("please make sure all inputs are filled out");
@@ -240,10 +243,23 @@ const editUser = async (req, res) => {
     res.status(200).json(getEditedUser);
   }
   catch (error) {
-    res.status(400).send(`${error}`);
+    res.status(400).send(`Patch error ${error}`);
   }
 
 
+}
+
+const deleteUser = async (req, res) => {
+  const {id} = req.params
+
+  try{
+    const deleteProfile = await knex("user").where({id: id})
+    .del()
+    // console.log(deleteProfile)
+    res.status(201).send("User deleted");
+  }catch(error){
+    res.status(400).send(`Failed user delete ${error}. Could not find user ${Pid}`);
+  }
 }
 
 module.exports = {
@@ -254,4 +270,5 @@ module.exports = {
   newFavourite,
   deleteFavourite,
   editUser,
+  deleteUser,
 }

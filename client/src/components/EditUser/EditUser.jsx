@@ -22,9 +22,6 @@ function EditUser({profile, setProfile}) {
         confirmPassword: "Password",
       });
 
-    //   console.log("p", profile)
-    //   console.log("s", selectedProfile.avatar)
-
     const handleFile = (event) => {
         setFile(event.target.files[0])
     }
@@ -53,7 +50,6 @@ function EditUser({profile, setProfile}) {
         const editUser = async () => {
             try{
                const response = await axios.patch(`${baseURL}/user/${profile.id}`, data)
-               console.log("r", response.data)
                setProfile(response.data)
                setSelectedProfile({...selectedProfile, avatar: response.data.avatar})
                setIsOpen(false)
@@ -78,10 +74,10 @@ function EditUser({profile, setProfile}) {
 
                 <button className="edit__close" onClick={() => setIsOpen(false)}> <img src={closeIcon} /> </button>
 
-                <form className="sign-up__form" onSubmit={handleSubmit}>
-                    <legend className="sign-up__title">Edit</legend>
+                <form className="edit__form" onSubmit={handleSubmit}>
+                    <legend className="edit__title">Edit</legend>
 
-                    {error && <div className="sign-up__error-message">{error}</div>}
+                    {error && <div className="edit__error-message">{error}</div>}
 
                     <label htmlFor="first-name" > First Name: </label>
                     <input type="text" name="firstName" value={selectedProfile.firstName} onChange={onChange} />
@@ -100,9 +96,9 @@ function EditUser({profile, setProfile}) {
 
                     <label htmlFor="avatar">Choose a profile picture:</label>
                     <img className="edit__avatar" src={`http://localhost:8080/avatars/${selectedProfile.avatar}`} />
-                    <input type="file" name="edit_avatar" className="sign-up__avatar-upload" onChange={handleFile}  accept="image/png, image/jpeg" />
+                    <input type="file" name="edit_avatar" className="edit__avatar-upload" onChange={handleFile}  accept="image/png, image/jpeg" />
 
-                    <button className="sign-up__submit-btn">Update Account</button>
+                    <button className="edit__submit-btn">Update Account</button>
                     <button onClick={() => setIsOpen(false)} type="button">Cancel</button>
                 </form>
 

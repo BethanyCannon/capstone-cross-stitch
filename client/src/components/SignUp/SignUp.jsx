@@ -11,7 +11,7 @@ function SignUp({ setSuccess }) {
     const [error, setError] = useState(null);
     const [file, setFile] = useState("")
 
-    const handleSubmit = async (event) => {
+    const handleSignUp = async (event) => {
         event.preventDefault();
         setError(false)
 
@@ -23,11 +23,13 @@ function SignUp({ setSuccess }) {
         data.append("password", event.target.password.value)
         data.append("confirm_password", event.target.confirmPassword.value)
 
-        console.log(data)
+        console.log(event.target.password.value)
+        console.log(event.target.confirmPassword.value)
         try {
-            const response = await axios.patch("http://localhost:8080/user/newuser", data
+            const response = await axios.post("http://localhost:8080/user/newuser", data
             );
             console.log(response)
+            console.log("hi")
             setSuccess(true)
             setIsOpen(false)
         } catch (error) {
@@ -63,7 +65,7 @@ function SignUp({ setSuccess }) {
 
                 <button className="sign-up__close" onClick={closeModal}> <img src={closeIcon} /> </button>
                 
-                <form className="sign-up__form" enctype="multipart/form-data" onSubmit={handleSubmit}>
+                <form className="sign-up__form" enctype="multipart/form-data" onSubmit={handleSignUp}>
                     <legend className="sign-up__title">Sign up</legend>
 
                     {error && <div className="sign-up__error-message">{error}</div>}
