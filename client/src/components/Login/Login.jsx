@@ -40,6 +40,8 @@ function Login({ setIsLoggedIn }) {
 
     function closeModal() {
         setIsOpen(false);
+        setError(null)
+        setSuccess(null)
     }
     return (
         <div>

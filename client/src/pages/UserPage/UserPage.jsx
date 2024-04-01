@@ -26,10 +26,6 @@ function HomePage({ profile, logout, setProfile, setIsLoggedIn }) {
             getFavourties();
     }, []);
 
-    // const handleLogout = () => {
-    //     logout()
-    // }
-
     //react-multi-carousel
     const responsive = {
         superLargeDesktop: {

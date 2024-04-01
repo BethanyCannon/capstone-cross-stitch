@@ -25,7 +25,7 @@ function App() {
           setProfile(response.data)
           setIsLoggedIn(true)
       } catch(error) {
-          console.log(error)
+        console.log(error)
           setIsLoggedIn(false)
       }
       setIsLoading(false);

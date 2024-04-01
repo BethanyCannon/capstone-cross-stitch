@@ -15,9 +15,7 @@ function SearchPage () {
         const getSearch = async () => 
         {
             try {
-                console.log(searchTerm)
                 const response = await axios.get(`${baseURL}/design/search/${searchTerm}`)
-                console.log(response)
                 setSearchData(response.data)
             } catch (error) {
                 console.log(error)

@@ -7,7 +7,6 @@ function DetailsCard({ profile, logout, setProfile, setIsLoggedIn }) {
 
     const date = new Date(`${profile.created_at}`)
     const convertedDate = date.toLocaleString("en-US", { year: "numeric", month: "short", day: "numeric" })
-    console.log(convertedDate)
 
     const handleLogout = () => {
         logout()
@@ -30,10 +29,12 @@ function DetailsCard({ profile, logout, setProfile, setIsLoggedIn }) {
                         User since {convertedDate}
                     </p>
                 </div>
-                <div>
+                <div className="details__btn-container">
                     <p onClick={handleLogout} className="details__logout"> logout</p>
+                    <div className="details__modals">
                     <EditUser setProfile={setProfile} profile={profile} />
                     <DeleteUser profile={profile} setIsLoggedIn={setIsLoggedIn} />
+                    </div>
                 </div>
             </div>
         </section>

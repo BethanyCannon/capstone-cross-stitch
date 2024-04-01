@@ -122,15 +122,10 @@ function DetailsPage({ Pid, isLoggedIn }) {
                         <div className="design-details__text">
                         <p>{designDetails.creator_name} </p>
                         <p>{convertedDate}</p>
-                        <p>{designDetails.height_size}cm x {designDetails.height_width}cm</p>
+                        <p>{designDetails.size_height}cm x {designDetails.size_width}cm</p>
                         <p>{designDetails.thread_count} colours</p>
                         <p>{designDetails.description}</p>
                         </div>
-
-                        {/* <img src={heartIcon} /> */}
-                        {/* {heartIcon} */}
-
-
                     </div>
                 </div>
             </div>

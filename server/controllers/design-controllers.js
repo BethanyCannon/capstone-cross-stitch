@@ -58,8 +58,8 @@ const designDetailsData = async (req, res) => {
                 const designObj = {
                     id: (design.id),
                     thread_count: (design.thread_count),
-                    height_size: (design.height_size),
-                    height_width: (design.height_width),
+                    size_height: (design.height_size),
+                    size_width: (design.height_width),
                     description: (design.description),
                     created_at: (design.created_at),
                     design_name: (design.design_name),
@@ -85,7 +85,6 @@ const designDetailsData = async (req, res) => {
 
 const getSearchData = async (req, res) => {
     const { s } = req.params
-    console.log(s)
 
     try {
         const searchFound = await knex("design").where("design.design_name", "like", `%${s}%`).orWhere("design.description", "like", `%${s}%`)
@@ -93,12 +92,10 @@ const getSearchData = async (req, res) => {
             .select('design.id', 'design.design_name', 'design.creator_id', 'creator.first_name', 'creator.last_name')
 
         const searchData = await Promise.all(searchFound.map(async (design) => {
-            console.log(searchFound)
-            // console.log()
+
             try {
                 const image = await knex("images")
                     .where("design_id", `${design.id}`)
-                    console.log("design_id", `${design.id}`)
 
                 const searchObj = {
                     id: design.id,
@@ -113,7 +110,7 @@ const getSearchData = async (req, res) => {
                 })
             }
         }))
-        // console.log(searchData)
+
         res.status(200).json(searchData)
     } catch (error) {
         res.status(404).json({

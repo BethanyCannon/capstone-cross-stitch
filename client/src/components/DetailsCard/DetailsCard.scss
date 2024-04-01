@@ -11,14 +11,38 @@
         flex-direction: row;
     }
 
+    &__btn-container {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+        justify-content: space-between;
+    }
+
+    &__modals{
+        display: flex;
+        align-items: flex-end;
+
+        & img {
+            padding: 4px;
+            margin-left: 4px;
+            background-color: $CadetGrayL;
+            border-radius: 50%;
+
+            &:hover {
+                cursor: pointer;
+                background-color: $CadetGray;
+            }
+        }
+    }
+
     &__avatar {
         width: 150px;
+        min-width: 150px;
         height: 150px;
         border-radius: 50%;
         margin: 1rem;
         align-self: center;
         border: 2px solid $CadetGray;
-        // border: ;
 
         @include tablet {
             align-self: unset;
@@ -38,16 +62,16 @@
         }
     }
 
-    &__text{
+    &__text {
         width: 100%;
     }
 
-    &__logout{
+    &__logout {
         padding: 4px 8px;
         border-radius: 20px;
         background-color: $CadetGrayL;
 
-        &:hover{
+        &:hover {
             font-weight: 600;
             cursor: pointer;
             background-color: $CadetGray;

@@ -1,19 +1,6 @@
 const knex = require("knex")(require("../knexfile"));
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
-const multer = require("multer");
-
-// const storage = multer.diskStorage({
-//   destination: (req, file, cb) => {
-//     cb(null, "public/avatars")
-//   },
-//   filename: (req, file, cb) => {
-//     cb(null, `${Date.now()}_${file.originalname}`
-//     )
-//   } 
-// })
-
-// const upload = multer({  storage: storage });
 
 const getUserData = async (req, res) => {
 
@@ -36,6 +23,7 @@ const getUserData = async (req, res) => {
     // Respond with the appropriate user data
     const user = await knex("user").where({ id: decodedToken.id }).first();
     delete user.password;
+    delete user.updated_at;
 
     res.send(user);
 
@@ -67,7 +55,6 @@ const getUserFavourites = async (req, res) => {
         return (faveObj)
 
       } catch (error) {
-        console.log(error)
         res.status(404).json({
           message: `Error retrieving designs: ${error}`
         })
@@ -110,29 +97,23 @@ const loginUser = async (req, res) => {
 }
 
 const createNewUser = async (req, res) => {
-  // upload.single("image")
+
   if (!req.file) {
     return res.status(400).send("Please add an avatar")
   }
 
-  console.log(req.body)
-  console.log(req.file)
-
   const { first_name, last_name, email, password, confirm_password, } = req.body;
+
+ 
   const image = req.file.filename
-
-  console.log(req.body)
-  console.log(password, confirm_password)
-
-
-  if (confirm_password !== password) {
-    return res.status(400).send("passwords do not match");
-  }
 
   if (!first_name || !last_name || !email || !password) {
     return res.status(400).send("Please enter the required fields");
   }
 
+  if (confirm_password !== password) {
+    return res.status(400).send("passwords do not match");
+  }
 
   const user = await knex("user").where({ email: email }).first();
   if (user) {
@@ -153,12 +134,11 @@ const createNewUser = async (req, res) => {
     avatar: image,
   };
 
-  // Insert it into our database
+  // Insert it into database
   try {
     await knex("user").insert(newUser);
     res.status(201).send("Registered successfully");
   } catch (error) {
-    console.error(error);
     res.status(400).send("Failed registration");
   }
 }
@@ -194,7 +174,6 @@ const deleteFavourite = async (req, res) => {
 }
 
 const editUser = async (req, res) => {
-  console.log("hi")
   try {
     if (!req.body) {
       return res.status(400).send("please make sure all inputs are filled out");
@@ -202,33 +181,34 @@ const editUser = async (req, res) => {
 
     let { id, avatar, first_name, last_name, email, password, confirm_password } = req.body;
 
+    if (!first_name || !last_name || !email || !password || !confirm_password) {
+      return res.status(400).send("please ensure all inputs are filled");
+    }
+
     const user = await knex("user").where({ id: req.params.id }).first();
     const hashPass = bcrypt.compareSync(password, user.password)
     let image = null;
 
-    if (password !== confirm_password) {
-      return res.status(400).send("passwords do not match");
-    }
     if (!hashPass) {
-      if (password === "Password") {
-        password = user.password
+      if (password !== confirm_password) {
+        return res.status(400).send("passwords do not match");
       }
       if (password !== "Password") {
-        password = bcrypt.hashSync(password);
+      password = bcrypt.hashSync(password);
+      } else {
+       password = user.password
       }
+
     }
     if (req.file) {
       image = req.file.filename
     } else {
-      image = user.avatar
+      image = avatar
     }
 
-    console.log(image)
-    // const editUserData = async () => {
-    const abc = await knex("user").where({ id: req.params.id }).first()
+    await knex("user").where({ id: req.params.id }).first()
       .update(
         {
-          // id,
           first_name: first_name,
           last_name: last_name,
           email: email,
@@ -239,7 +219,8 @@ const editUser = async (req, res) => {
 
     const getEditedUser = await knex("user").where({ id: id }).first()
     delete getEditedUser.password;
-    console.log("get", getEditedUser)
+    delete getEditedUser.created_at;
+
     res.status(200).json(getEditedUser);
   }
   catch (error) {
@@ -250,14 +231,14 @@ const editUser = async (req, res) => {
 }
 
 const deleteUser = async (req, res) => {
-  const {id} = req.params
+  const { id } = req.params
 
-  try{
-    const deleteProfile = await knex("user").where({id: id})
-    .del()
-    // console.log(deleteProfile)
+  try {
+    await knex("user").where({ id: id })
+      .del()
     res.status(201).send("User deleted");
-  }catch(error){
+
+  } catch (error) {
     res.status(400).send(`Failed user delete ${error}. Could not find user ${Pid}`);
   }
 }

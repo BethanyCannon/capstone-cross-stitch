@@ -37,6 +37,7 @@ function EditUser({profile, setProfile}) {
 
     const handleSubmit = (event) => {
         event.preventDefault();
+        setError(null)
 
         const data = new FormData();
         data.append("avatar", file)
@@ -54,7 +55,7 @@ function EditUser({profile, setProfile}) {
                setSelectedProfile({...selectedProfile, avatar: response.data.avatar})
                setIsOpen(false)
             }catch(error){
-                console.log(error)
+                setError(error.response.data)
             }
         }
         editUser()
@@ -64,7 +65,7 @@ function EditUser({profile, setProfile}) {
 
     return(
         <div>
-            <img src={editIcon} onClick={() => setIsOpen(true)} className="details__logout" />
+            <img src={editIcon} onClick={() => setIsOpen(true)} className="edit__btn" />
             <Modal
                 contentLabel="Edit form"
                 className="Modal"
@@ -86,7 +87,7 @@ function EditUser({profile, setProfile}) {
                     <input type="text" name="lastName" value={selectedProfile.lastName} onChange={onChange} />
 
                     <label htmlFor="email" > Email: </label>
-                    <input type="text" name="email" value={selectedProfile.email} onChange={onChange} />
+                    <input type="email" name="email" value={selectedProfile.email} onChange={onChange} />
 
                     <label htmlFor="password" > Password: </label>
                     <input type="password" name="password" value={selectedProfile.password} onChange={onChange} />
@@ -95,11 +96,15 @@ function EditUser({profile, setProfile}) {
                     <input type="password" name="confirmPassword" value={selectedProfile.confirmPassword} onChange={onChange} />
 
                     <label htmlFor="avatar">Choose a profile picture:</label>
+                    <div className="edit__avatar-label">
                     <img className="edit__avatar" src={`http://localhost:8080/avatars/${selectedProfile.avatar}`} />
-                    <input type="file" name="edit_avatar" className="edit__avatar-upload" onChange={handleFile}  accept="image/png, image/jpeg" />
+                    <input type="file" name="edit__avatar" className="edit__avatar-upload" onChange={handleFile}  accept="image/png, image/jpeg" />
+                    </div>
 
+                    <div className="edit__btn-container">
                     <button className="edit__submit-btn">Update Account</button>
-                    <button onClick={() => setIsOpen(false)} type="button">Cancel</button>
+                    <button onClick={() => setIsOpen(false)} type="button" className="edit__cancel-btn">Cancel</button>
+                    </div>
                 </form>
 
             </Modal>

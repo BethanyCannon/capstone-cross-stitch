@@ -51,6 +51,7 @@ function SignUp({ setSuccess }) {
 
     function closeModal() {
         setIsOpen(false);
+        setError(null)
     }
 
     return (
@@ -77,7 +78,7 @@ function SignUp({ setSuccess }) {
                     <input type="text" name="lastName" />
 
                     <label htmlFor="email" > Email: </label>
-                    <input type="text" name="email" />
+                    <input type="email" name="email" />
 
                     <label htmlFor="password" > Password: </label>
                     <input type="password" name="password" />
