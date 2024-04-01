@@ -16,6 +16,7 @@
         max-width: 800px;
         margin-left: auto;
         margin-right: auto;
+        height: fit-content;
     }
 }
 
@@ -30,6 +31,10 @@
         border: none;
         margin-left: auto;
         display: flex;
+
+        &:hover{
+            cursor: pointer;
+        }
 
         & image {
             margin-left: auto;

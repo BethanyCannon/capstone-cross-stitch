@@ -11,22 +11,25 @@ function SignUp({ setSuccess }) {
     const [error, setError] = useState(null);
     const [file, setFile] = useState("")
 
-    const handleSubmit = async (event) => {
+    const handleSignUp = async (event) => {
         event.preventDefault();
         setError(false)
 
         const data = new FormData();
-        data.append("image", file)
+        data.append("avatar", file)
         data.append("first_name", event.target.firstName.value)
         data.append("last_name", event.target.lastName.value)
         data.append("email", event.target.email.value)
         data.append("password", event.target.password.value)
         data.append("confirm_password", event.target.confirmPassword.value)
 
+        console.log(event.target.password.value)
+        console.log(event.target.confirmPassword.value)
         try {
             const response = await axios.post("http://localhost:8080/user/newuser", data
             );
             console.log(response)
+            console.log("hi")
             setSuccess(true)
             setIsOpen(false)
         } catch (error) {
@@ -39,6 +42,8 @@ function SignUp({ setSuccess }) {
         setFile(event.target.files[0])
     }
 
+    console.log(file)
+
     function openModal() {
         setIsOpen(true);
     }
@@ -46,6 +51,7 @@ function SignUp({ setSuccess }) {
 
     function closeModal() {
         setIsOpen(false);
+        setError(null)
     }
 
     return (
@@ -60,7 +66,7 @@ function SignUp({ setSuccess }) {
 
                 <button className="sign-up__close" onClick={closeModal}> <img src={closeIcon} /> </button>
                 
-                <form className="sign-up__form" onSubmit={handleSubmit}>
+                <form className="sign-up__form" enctype="multipart/form-data" onSubmit={handleSignUp}>
                     <legend className="sign-up__title">Sign up</legend>
 
                     {error && <div className="sign-up__error-message">{error}</div>}
@@ -72,7 +78,7 @@ function SignUp({ setSuccess }) {
                     <input type="text" name="lastName" />
 
                     <label htmlFor="email" > Email: </label>
-                    <input type="text" name="email" />
+                    <input type="email" name="email" />
 
                     <label htmlFor="password" > Password: </label>
                     <input type="password" name="password" />

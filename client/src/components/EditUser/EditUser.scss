@@ -1,0 +1,73 @@
+@use "../../styles/partials/typography" as *;
+@use "../../styles/partials/variables" as *;
+@use "../../styles/partials/mixins" as *;
+@use "../SignUp/SignUp.scss" as *;
+
+.ReactModal__Overlay {
+    z-index: 2;
+}
+
+.edit{
+
+    &__close {
+        @extend .sign-up__close;
+    }
+
+    &__title {
+        @extend .sign-up__title;
+    }
+
+    &__modal-btn {
+        @extend .sign-up__modal-btn;
+    }
+
+    &__form{
+        @extend .sign-up__form;
+    }
+
+    &__avatar-label{
+        display: flex;
+        // flex-direction: column;
+    }
+
+    &__avatar{
+        height: 40px;
+        width: 40px;
+        border-radius: 50%;
+        background-color: $AntiWhite;
+        margin-right: 1rem;
+        align-self: center;
+        border: 1px solid $CadetGray;
+    }
+
+    &__avatar-upload{
+        @extend .sign-up__avatar-upload;
+    }
+
+    &__btn-container{
+        display: flex;
+        margin: 16px auto 0;
+        flex-direction: row-reverse
+    }
+
+    &__submit-btn{
+        @extend .sign-up__submit-btn;
+        margin: 1rem 1rem;
+    }
+
+    &__cancel-btn{
+        border: none;
+        background-color: transparent;
+        color: $LightBlue;
+        @include text;
+
+        &:hover{
+           color: $CadetGray;
+           cursor: pointer;
+        }
+    }
+
+    &__error-message{
+        @extend .sign-up__error-message
+    }
+}

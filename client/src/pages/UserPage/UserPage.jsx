@@ -8,7 +8,7 @@ import { useState, useEffect } from "react";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 
-function HomePage({ profile, logout }) {
+function HomePage({ profile, logout, setProfile, setIsLoggedIn }) {
     const { Pid } = useParams();
     const [favourites, setFavourites] = useState(null);
     const navigate = useNavigate()
@@ -25,10 +25,6 @@ function HomePage({ profile, logout }) {
     useEffect(() => {
             getFavourties();
     }, []);
-
-    // const handleLogout = () => {
-    //     logout()
-    // }
 
     //react-multi-carousel
     const responsive = {
@@ -66,7 +62,7 @@ function HomePage({ profile, logout }) {
 
     return (
         <div className="profile">
-            <DetailsCard profile={profile} logout={logout} />
+            <DetailsCard profile={profile} logout={logout} setProfile={setProfile} setIsLoggedIn={setIsLoggedIn} />
             <h3>You have {favourites.length} favourite items</h3>
             <Carousel
                 responsive={responsive}

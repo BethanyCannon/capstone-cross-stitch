@@ -25,7 +25,7 @@ function App() {
           setProfile(response.data)
           setIsLoggedIn(true)
       } catch(error) {
-          console.log(error)
+        console.log(error)
           setIsLoggedIn(false)
       }
       setIsLoading(false);
@@ -41,8 +41,6 @@ function App() {
       getUser();
     }, [isLoggedIn]);
 
-    console.log(profile)
-
   return (
     <div className="App">
       <BrowserRouter>
@@ -51,7 +49,7 @@ function App() {
           <Route path="/" element={<HomePage />} />
           <Route path="/search/:searchTerm" element={<SearchPage />}  />
           <Route path="design/:Did" element={<DetailsPage Pid={profile} isLoggedIn={isLoggedIn} />} />
-          <Route path="profile/:Pid" element={<UserPage profile={profile} logout={logout} />} />
+          <Route path="profile/:Pid" element={<UserPage profile={profile} logout={logout} setProfile={setProfile} setIsLoggedIn={setIsLoggedIn} />} />
           <Route path="*" element={<Navigate to="/" />} />
         </Routes>
         <Footer />

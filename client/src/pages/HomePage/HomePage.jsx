@@ -5,7 +5,6 @@ import axios from "axios";
 import { useState, useEffect, useParams } from "react";
 
 function HomePage() {
-
     const [newDesignsData, setNewDesignsData] = useState(null);
 
 useEffect(() => {
@@ -14,7 +13,7 @@ useEffect(() => {
                 const data = await axios.get(`${baseURL}/design`)
                 setNewDesignsData(data.data)
             } catch (error) {
-                console.log(`${error}`)
+                console.log(error)
             }
     }
         getDesignData()
@@ -27,7 +26,6 @@ if (!newDesignsData) {
         </div>
     )
 }
-
 
 return (
     <section className="home-page">
