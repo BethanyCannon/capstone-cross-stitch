@@ -3,6 +3,7 @@ const knex = require("knex")(require("../knexfile"));
 
 
 const authMiddleware = async (req, res, next) => {
+  //check to see if header is sent
 if(req.headers.authorization === undefined || !req.headers.authorization){
     req.user = null;
     next();
@@ -12,6 +13,7 @@ if(req.headers.authorization === undefined || !req.headers.authorization){
 const authHeader = req.headers.authorization;
 const authToken = authHeader.split(" ")[1];
 
+//check to ensure token exists
 if(authToken === "null") {
     req.user = null;
     next();

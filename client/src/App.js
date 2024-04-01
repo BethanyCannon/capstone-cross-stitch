@@ -14,7 +14,7 @@ function App() {
   const [isLoading, setIsLoading] = useState(true);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
-
+  //check to see if user is logged in; if so return data
   const getUser = async () => {
       const token = sessionStorage.getItem("token");
 
@@ -31,6 +31,7 @@ function App() {
       setIsLoading(false);
   }
 
+  //log user out and triggers rerender of getUser
   const logout = () => {
       sessionStorage.removeItem("token");
       setIsLoggedIn(false);
@@ -48,8 +49,8 @@ function App() {
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/search/:searchTerm" element={<SearchPage />}  />
-          <Route path="design/:Did" element={<DetailsPage Pid={profile} isLoggedIn={isLoggedIn} />} />
-          <Route path="profile/:Pid" element={<UserPage profile={profile} logout={logout} setProfile={setProfile} setIsLoggedIn={setIsLoggedIn} />} />
+          <Route path="design/:DesignId" element={<DetailsPage Pid={profile} isLoggedIn={isLoggedIn} />} />
+          <Route path="profile/:UserId" element={<UserPage profile={profile} logout={logout} setProfile={setProfile} setIsLoggedIn={setIsLoggedIn} />} />
           <Route path="*" element={<Navigate to="/" />} />
         </Routes>
         <Footer />

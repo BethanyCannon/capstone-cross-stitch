@@ -10,18 +10,19 @@ import likeIcon from "../../assets/heart.svg"
 import FaveModal from "../../components/FaveModal/FaveModal"
 
 function DetailsPage({ Pid, isLoggedIn }) {
-    const { Did } = useParams()
+    const { DesignId } = useParams()
     const [designDetails, setDesignDetails] = useState(null)
     const [heroImage, setHeroImage] = useState()
     const [isFavourite, setIsFavourite] = useState(null)
     const [isOpen, setIsOpen] = useState(false)
     const navigate = useNavigate()
 
+    //Call to get design details and set variables for Hero image, favourite (null, true, false)
     const getDesignDetails = async () => {
         const token = sessionStorage.getItem("token");
 
         try {
-            const response = await axios.get(`${baseURL}/design/details/${Did}`, {
+            const response = await axios.get(`${baseURL}/design/details/${DesignId}`, {
                 headers: { Authorization: `Bearer ${token}` }
             }
             )
@@ -42,19 +43,21 @@ function DetailsPage({ Pid, isLoggedIn }) {
         return <div>Loading...</div>
     }
 
+    //funtion for logged in users to add favourites
     const addFavourite = async () => {
-        await axios.post(`${baseURL}/user/${Pid.id}/favourites/${Did}`)
+        await axios.post(`${baseURL}/user/${Pid.id}/favourites/${DesignId}`)
         setIsFavourite(true)
     }
 
+    //funtion for logged in users to delete favourites
     const deleteFavourite = async () => {
-        await axios.delete(`${baseURL}/user/${Pid.id}/favourites/${Did}`)
+        await axios.delete(`${baseURL}/user/${Pid.id}/favourites/${DesignId}`)
         setIsFavourite(false)
     }
+
     //react-multi-carousel
     const responsive = {
         superLargeDesktop: {
-            // the naming can be any, depends on you.
             breakpoint: { max: 4000, min: 3000 },
             items: 5
         },
@@ -63,18 +66,20 @@ function DetailsPage({ Pid, isLoggedIn }) {
             items: 3
         },
         tablet: {
-            breakpoint: { max: 1024, min: 464 },
+            breakpoint: { max: 1023, min: 601 },
             items: 2
         },
         mobile: {
-            breakpoint: { max: 464, min: 0 },
+            breakpoint: { max: 600, min: 0 },
             items: 1
         }
     }
 
+    //convert sql timestamp
     const date = new Date(`${designDetails.created_at}`)
     const convertedDate = date.toLocaleString("en-US", { year: "numeric", month: "short", day: "numeric" })
 
+    //onClick response that changes heroImage
     const handleImage = (event) => {
         setHeroImage(event.target.src)
     }
@@ -110,8 +115,11 @@ function DetailsPage({ Pid, isLoggedIn }) {
                 <div className="design-details__modal-container">
                     {isOpen && <FaveModal setIsOpen={setIsOpen} />}
                     <div className="design-details__text-container" >
-                        {designDetails.favourites === null ? <div className="design-details__svg-container" onClick={() => setIsOpen(true)}> <img src={likeIcon} />    </div> :
-                            <div className="design-details__svg-container" > {designDetails.favourites === true ? <div onClick={deleteFavourite} className="design-details__svg" ><Like color="red" /></div> : <div className="design-details__svg" onClick={addFavourite}><Like /></div>} </div>}
+
+                        {designDetails.favourites === null ? <div className="design-details__svg-container" onClick={() => setIsOpen(true)}> <img src={likeIcon} />    </div>
+                            : <div className="design-details__svg-container" >
+                                {designDetails.favourites === true ? <div onClick={deleteFavourite} className="design-details__svg" ><Like color="#DE3C4B" stroke="#DE3C4B" /></div>
+                                    : <div className="design-details__svg" onClick={addFavourite}><Like stroke="#14182a" color="transparent" /></div>} </div>}
                         <div className="design-details__text-title">
                             <p>Creator </p>
                             <p>Published</p>
@@ -120,11 +128,11 @@ function DetailsPage({ Pid, isLoggedIn }) {
                             <p>Description</p>
                         </div>
                         <div className="design-details__text">
-                        <p>{designDetails.creator_name} </p>
-                        <p>{convertedDate}</p>
-                        <p>{designDetails.size_height}cm x {designDetails.size_width}cm</p>
-                        <p>{designDetails.thread_count} colours</p>
-                        <p>{designDetails.description}</p>
+                            <p>{designDetails.creator_name} </p>
+                            <p>{convertedDate}</p>
+                            <p>{designDetails.size_height}cm x {designDetails.size_width}cm</p>
+                            <p>{designDetails.thread_count} colours</p>
+                            <p>{designDetails.description}</p>
                         </div>
                     </div>
                 </div>

@@ -12,6 +12,8 @@ function EditUser({profile, setProfile}) {
     const [modalIsOpen, setIsOpen] = useState(false);
     const [error, setError] = useState(null);
     const [file, setFile] = useState(profile.avatar)
+
+    //original start for edit profile modal data/value
     const [selectedProfile, setSelectedProfile] = useState({
         id: profile.id,
         avatar: file,
@@ -22,10 +24,12 @@ function EditUser({profile, setProfile}) {
         confirmPassword: "Password",
       });
 
+    //handle if new avatar added
     const handleFile = (event) => {
         setFile(event.target.files[0])
     }
 
+    //function to display changes in input to user; addapted inStock - finch code
     const onChange = (event) => {
         const fieldName = event.target.name;
         const fieldValue = event.target.value;
@@ -35,10 +39,12 @@ function EditUser({profile, setProfile}) {
         setSelectedProfile(newFormData)
     }
 
+    //function that handles submit and passes object to backend
     const handleSubmit = (event) => {
         event.preventDefault();
         setError(null)
 
+        //new Form best way that I could find to handle images with form
         const data = new FormData();
         data.append("avatar", file)
         data.append("id", profile.id)        
@@ -51,7 +57,9 @@ function EditUser({profile, setProfile}) {
         const editUser = async () => {
             try{
                const response = await axios.patch(`${baseURL}/user/${profile.id}`, data)
+               //set Profile to updated information (so name change will not reflect App.js call and instead reflect newest update)
                setProfile(response.data)
+               //update avatar in selectedProfile so if edit modal is opened without refresh it will show the current profile and not old one
                setSelectedProfile({...selectedProfile, avatar: response.data.avatar})
                setIsOpen(false)
             }catch(error){
@@ -60,8 +68,6 @@ function EditUser({profile, setProfile}) {
         }
         editUser()
     }
-
-    // console.log(file)
 
     return(
         <div>

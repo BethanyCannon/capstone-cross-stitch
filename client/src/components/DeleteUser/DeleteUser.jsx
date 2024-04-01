@@ -10,18 +10,17 @@ Modal.setAppElement('#root');
 
 function DeleteUser({ setIsLoggedIn }) {
     const [modalIsOpen, setIsOpen] = useState(false);
-    const { Pid } = useParams();
+    const { UserId } = useParams();
     const navigate = useNavigate()
-    // console.log(params)
-    //setProfile
 
+    //function to delete user account (and corresponding favourited items in Favouraites table)
     const handleDelete = () => {
         const deleteUser = async () => {
-            const response = await axios.delete(`http://localhost:8080/user/${Pid}`)
+            const response = await axios.delete(`http://localhost:8080/user/${UserId}`)
+            //removes token and navigates them to home page
             sessionStorage.removeItem("token")
             navigate("/")
             setIsLoggedIn(false)
-            console.log(response)
         }
         deleteUser()
     }

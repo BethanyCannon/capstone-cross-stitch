@@ -8,7 +8,7 @@ import Login from "../../components/Login/Login";
 function Header({ isLoading, isLoggedIn, setIsLoggedIn, profile}) {
   const navigate = useNavigate()
 
-
+  //get search bar data and navigate to searhc page
   const submitHandler = (event) => {
     event.preventDefault()
     const search = event.target.search.value
@@ -25,6 +25,7 @@ function Header({ isLoading, isLoggedIn, setIsLoggedIn, profile}) {
     )
   }
 
+  //displays different html is isLoggedIn is true or not
   return (
     <header>
       <nav className="nav-bar">
@@ -34,8 +35,9 @@ function Header({ isLoading, isLoggedIn, setIsLoggedIn, profile}) {
         <div className="nav-bar__container">
           <form className="nav-bar__search-container" onSubmit={submitHandler}>
             <input  type="search"  name="search"  placeholder="Search"></input>
-            <img src={searchIcon} />
+            <button><img src={searchIcon} /></button>
           </form>
+
           {!isLoggedIn ? (
             <div className="nav-bar__login">
               <Login setIsLoggedIn={setIsLoggedIn} />
@@ -48,6 +50,7 @@ function Header({ isLoading, isLoggedIn, setIsLoggedIn, profile}) {
                 (<object className="nav-bar__avatar" type="image/jpeg" />)}
             </div>)
           }
+          
         </div>
       </nav>
     </header>
