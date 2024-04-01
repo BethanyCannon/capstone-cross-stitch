@@ -43,6 +43,7 @@
         margin: 1rem;
         align-self: center;
         border: 2px solid $CadetGray;
+        object-fit: cover;
 
         @include tablet {
             align-self: unset;
@@ -51,7 +52,6 @@
 
     &__text-container {
         @extend .design-details__text-container;
-        // flex-direction: column;
 
         & h2 {
             margin-bottom: 4px;
