@@ -82,50 +82,50 @@ No external APIs for this project
 
 ![](./mock_ups/DataMap.png)
 
-### Endpoints
+# Endpoints
 
 List endpoints that your server will implement, including HTTP methods, parameters, and example responses.
 
 ## GET:
-# designs list
+### designs list
         - /designs
         - params: renders on homepage load
         - response (set limit to 10/15):
 
 "   
-     {
+    [{
         "id": 1,
         "design_name": "Cool Design",
         "creator_name": "Jane Doe"      
-        "image": {
+        "image": [{
             "design_id": 1,
             "id": 1, 
             "image_url": "http://localhost:8080/designs/design1.png"
-        }
-    }
+        }]
+    }]
 "
 
-# user data
+### user data
     - /user
     - params: token
     - response:
 "
-    {
+    [{
         "avatar": "image1.jpg",
         "created_at": "2024-04-01T01:08:50.000Z",
         "email": "email@email.com"
         "id": 1,
         "first_name": "Joe",
         "last_name": "Smirth",
-    }
+    }]
 "
 
-# design details 
+### design details 
     - /designs/details/:id
     - params: design id, token
     - response:
 "   
-    {
+    [{
         "created_at": "2024-04-01T01:08:50.000Z",
         "creator_name": "Jane Doe",
         "description": "I am describing this image",
@@ -135,100 +135,99 @@ List endpoints that your server will implement, including HTTP methods, paramete
         "size_height": "16",
         "size_width": "16",
         "thread_count": "4"
-        "image": {
+        "image": [{
             "design_id": 1,
             "id": 1, 
             "image_url": "http://localhost:8080/designs/design1.png"
-        },  
-    }
+        }],  
+    }]
 "
 
-# user favourites list
+### user favourites list
     - /user/:id
     - params: user id
     - response:
 "
-    {
+    [{
         "creator_name": "John Smith",
         "design_name": "border grapes",
         "id": 2,
-        "image": {
+        "image": [{
             "design_id": 2, 
             "id": 3,
             "image_url": "http://localhost:8080/designs/design3.png"
-        }
-    }
+        }]
+    }]
 "
 
 ## POST:
-# create user
+### create user
      - /user/newUser
         - params: email, username, first_name, last_name, password, confirm_password, avatar
         - response:
-"
-    {
-       "Registered successfully"
-    }
-"
 
-# log-in user 
+    [{
+       "Registered successfully"
+    }]
+
+
+### log-in user 
     - /user/login 
     - params: email, password
     - response:
-" 
-    {
+ 
+    [{
     "token": "token"
-    }
-"
+    }]
 
-# - (login) add to favourites
+
+### (login) add to favourites
     - /users/:id/favourites/:id
     - params: user id, token, favourites id
     - response:
-"
-    {
+
+    [{
         "favourite added"
-   }
-"
+   }]
+
 
 ## DELETE:
-# (login) delete from favourites
+### (login) delete from favourites
     - /user/:id/favourites/:id
     - params: user id, favourites id, token
     - response:
-"
-    {
-        "favourite deleted"
-    }
-"
 
-# delete user
+    [{
+        "favourite deleted"
+    }]
+
+
+### (login) delete user
     - /user/:id
     - params: user id
     - response:
-"
-    {
+
+    [{
         "User deleted"
-    }
-"
+    }]
+
 
 ## PATCH:
-# edit user
+### edit user
     - /user/:id
     - params: id, avatar, first_name, last_name, email, password, confirm_password
     - response:
-"
-    {
+
+    [{
         "id": 1,
         "first_name": 'Joe',
         "last_name:" 'Smith',
         "email": 'email@email.com',
         "avatar": 'avatar1.png',
         "updated_at": '2024-04-01T02:18:44.000Z'
-    }
-"
+    }]
 
-### Auth
+# Auth
 
 JWD token authentication for logging in and accessing favourites
 

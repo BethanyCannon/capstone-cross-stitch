@@ -8,6 +8,7 @@ const getDesignData = async (req, res) => {
             .join("creator", "design.creator_id", "creator.id")
             .select('design.id', 'design.design_name', 'design.creator_id', 'creator.first_name', 'creator.last_name')
 
+        //map to got over each design object so that images go as one object to design
         const designData = await Promise.all(designsFound.map(async (design) => {
             try {
                 const image = await knex("images")
@@ -44,12 +45,15 @@ const designDetailsData = async (req, res) => {
             .join("creator", "design.creator_id", "creator.id")
             .select("design.id", "design.thread_count", "design.height_size", "design.height_width", "design.description", "design.created_at", "design.design_name", "creator.first_name", "creator.last_name")
 
+        //set favourite as null
         let isItInFave = null;
 
+        //if a user is logged in it checks to see if design id exists in user favourites list and returns true if it does and false if it doesnt
         if (favourites !== null) {
             isItInFave = favourites.some((favourite) => favourite.design_id === designsFound[0].id)
         }
 
+        //map to got over each design object so that images go as one object to design
         const designData = await Promise.all(designsFound.map(async (design) => {
             try {
                 const image = await knex("images")
@@ -86,13 +90,14 @@ const designDetailsData = async (req, res) => {
 const getSearchData = async (req, res) => {
     const { s } = req.params
 
+    //takes search param and looks to see if any design items match part of it
     try {
         const searchFound = await knex("design").where("design.design_name", "like", `%${s}%`).orWhere("design.description", "like", `%${s}%`)
             .join("creator", "design.creator_id", "creator.id")
             .select('design.id', 'design.design_name', 'design.creator_id', 'creator.first_name', 'creator.last_name')
 
+        //map to got over each design object so that images go as one object to design
         const searchData = await Promise.all(searchFound.map(async (design) => {
-
             try {
                 const image = await knex("images")
                     .where("design_id", `${design.id}`)

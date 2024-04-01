@@ -10,11 +10,20 @@
         margin-left: 16px;
         padding: 8px 16px;
         border-radius: 20px;
-
+        display: flex;
         margin-top: 16px;
-
+        display: flex;
+        text-align: center;
+        
         @include tablet {
             margin-left: 32px;
+        }
+
+        & img {
+            align-self: center;
+            height: 1.2rem;
+            width: 1.2rem;
+            padding-left: 4px;
         }
     }
 }

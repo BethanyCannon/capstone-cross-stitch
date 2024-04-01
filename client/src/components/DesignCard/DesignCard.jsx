@@ -3,6 +3,7 @@ import {Link} from "react-router-dom";
 
 function Card({newDesign}) {
 
+    //design cards, mapped in various components and pages
  return(
     <Link to={`/design/${newDesign.id}`} className="design-card__link" >
     <div className="design-card">

@@ -22,6 +22,7 @@ const getUserData = async (req, res) => {
 
     // Respond with the appropriate user data
     const user = await knex("user").where({ id: decodedToken.id }).first();
+    //delete unneccesary and sensitive data
     delete user.password;
     delete user.updated_at;
 
@@ -36,11 +37,13 @@ const getUserFavourites = async (req, res) => {
   const { id } = req.params
 
   try {
+    //gets favourites that match user id
     const faveData = await knex("favourites").where({ user_id: id })
       .join("design", "favourites.design_id", "design.id")
       .join("creator", "design.creator_id", "creator.id")
       .select("design.id", "design_name", "creator.first_name", "creator.last_name")
 
+    //map to got over each design object so that images go as one object to design
     const favouritesData = await Promise.all(faveData.map(async (fave) => {
       try {
         const image = await knex("images")
@@ -70,6 +73,7 @@ const getUserFavourites = async (req, res) => {
 const loginUser = async (req, res) => {
   const { email, password } = req.body
 
+  // checks to make sure body is there
   if (!email || !password) {
     return res.status(404).send("Please enter the required fields");
   }
@@ -98,15 +102,17 @@ const loginUser = async (req, res) => {
 
 const createNewUser = async (req, res) => {
 
+  //check to see if image file is there
   if (!req.file) {
     return res.status(400).send("Please add an avatar")
   }
 
   const { first_name, last_name, email, password, confirm_password, } = req.body;
 
- 
+  //set image to image filename
   const image = req.file.filename
 
+  //checks: ensure body exists, ensuring passwords match, search to see if email already eists
   if (!first_name || !last_name || !email || !password) {
     return res.status(400).send("Please enter the required fields");
   }
@@ -120,12 +126,9 @@ const createNewUser = async (req, res) => {
     return res.status(400).send("this email is already in use");
   }
 
-  if (!req.file) {
-    return res.status(400).send("image error")
-  }
-
   const hashedPassword = bcrypt.hashSync(password);
 
+  //create object with modified data
   const newUser = {
     first_name,
     last_name,
@@ -144,13 +147,15 @@ const createNewUser = async (req, res) => {
 }
 
 const newFavourite = async (req, res) => {
-  const { Pid, Did } = req.params;
+  const { UserId, DesignId } = req.params;
 
+  //favourite object
   const favourite = {
-    user_id: Pid,
-    design_id: Did,
+    user_id: UserId,
+    design_id: DesignId,
   }
 
+  //add to favourties database
   try {
     await knex("favourites").insert(favourite);
     res.status(201).send("favourite added");
@@ -160,13 +165,15 @@ const newFavourite = async (req, res) => {
 }
 
 const deleteFavourite = async (req, res) => {
-  const { Pid, Did } = req.params
+  const { UserId, DesignId } = req.params
 
   try {
-    const deletefave = await knex("favourites").where({
-      user_id: Pid,
-      design_id: Did
+    //find item that matches ids
+    await knex("favourites").where({
+      user_id: UserId,
+      design_id: DesignId
     }).del()
+    //delete
     res.status(201).send("favourite deleted");
   } catch (error) {
     res.status(400).send(`Failed delete ${error}`);
@@ -175,37 +182,46 @@ const deleteFavourite = async (req, res) => {
 
 const editUser = async (req, res) => {
   try {
-    if (!req.body) {
-      return res.status(400).send("please make sure all inputs are filled out");
-    }
 
     let { id, avatar, first_name, last_name, email, password, confirm_password } = req.body;
 
+    //check to make sure all values are filled out
     if (!first_name || !last_name || !email || !password || !confirm_password) {
       return res.status(400).send("please ensure all inputs are filled");
     }
 
+    //get user data
     const user = await knex("user").where({ id: req.params.id }).first();
+    //check to see it password matches current user password
     const hashPass = bcrypt.compareSync(password, user.password)
-    let image = null;
 
+    //password check, if hashPass is flase
     if (!hashPass) {
+      //check to see if passwords match
       if (password !== confirm_password) {
         return res.status(400).send("passwords do not match");
       }
+      //if they do make sure password is non-placehold value and hash new password
       if (password !== "Password") {
-      password = bcrypt.hashSync(password);
+        password = bcrypt.hashSync(password);
       } else {
-       password = user.password
+      //if password if placehold vlaue set is as old pasword (not getting re-hashed)
+        password = user.password
       }
 
+    //set image variable to null
+    let image = null;
+
+    //check to see if new image has been added
     }
     if (req.file) {
       image = req.file.filename
     } else {
+      //if not see image to old avatar filename
       image = avatar
     }
 
+    //update user data
     await knex("user").where({ id: req.params.id }).first()
       .update(
         {
@@ -217,6 +233,7 @@ const editUser = async (req, res) => {
           updated_at: new Date(),
         })
 
+    //get new user data and send as repsonse
     const getEditedUser = await knex("user").where({ id: id }).first()
     delete getEditedUser.password;
     delete getEditedUser.created_at;
@@ -233,13 +250,14 @@ const editUser = async (req, res) => {
 const deleteUser = async (req, res) => {
   const { id } = req.params
 
+  //find user and delete
   try {
     await knex("user").where({ id: id })
       .del()
     res.status(201).send("User deleted");
 
   } catch (error) {
-    res.status(400).send(`Failed user delete ${error}. Could not find user ${Pid}`);
+    res.status(400).send(`Failed user delete ${error}. Could not find user ${UserId}`);
   }
 }
 

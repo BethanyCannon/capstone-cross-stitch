@@ -7,11 +7,11 @@ import { useParams } from "react-router-dom"
 
 function SearchPage () {
     const [searchData, setSearchData] = useState(null)
-    
     const {searchTerm} = useParams()
 
+    //function to collect search input and send to api
+    //set variab'e to display search page with results
     useEffect(() => {
- 
         const getSearch = async () => 
         {
             try {

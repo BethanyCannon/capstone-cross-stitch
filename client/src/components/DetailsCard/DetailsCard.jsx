@@ -5,9 +5,11 @@ import DeleteUser from "../DeleteUser/DeleteUser";
 
 function DetailsCard({ profile, logout, setProfile, setIsLoggedIn }) {
 
+    //sql date conversion
     const date = new Date(`${profile.created_at}`)
     const convertedDate = date.toLocaleString("en-US", { year: "numeric", month: "short", day: "numeric" })
 
+    //function that triggers App.js logout
     const handleLogout = () => {
         logout()
     }
