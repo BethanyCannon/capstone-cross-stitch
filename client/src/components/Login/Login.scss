@@ -1,0 +1,87 @@
+@use "../../styles/partials/mixins" as *;
+@use "../../styles/partials/typography" as *;
+@use "../../styles/partials/variables" as *;
+
+.Modal{
+    position: absolute;
+    inset: 40px;
+    border: 1px solid rgb(204, 204, 204);
+    background: rgb(255, 255, 255);
+    overflow: auto;
+    border-radius: 4px;
+    outline: none;
+    padding: 20px;
+
+    @include tablet {
+        max-width: 800px;
+        margin-left: auto;
+        margin-right: auto;
+        height: fit-content;
+    }
+}
+
+.login{
+    &__title {
+        @include subheading;
+        margin-bottom: 16px;
+    }
+
+    &__close{
+        background-color: transparent;
+        border: none;
+        margin-left: auto;
+        display: flex;
+
+        &:hover{
+            cursor: pointer;
+        }
+
+        & image {
+            margin-left: auto;
+        }
+    }
+
+    &__form{
+    display: flex;
+    flex-direction: column;
+    max-width: 600px;
+    margin: 0 auto;
+
+    & label {
+        @include text;
+        padding: 4px 0;
+    }
+
+    & input{
+        border: 1px solid $Black;
+        border-radius: 5px;
+        padding: 4px;
+
+        &:focus{
+            outline: 2px solid $CadetGray;
+        }
+    }
+    }
+
+    &__login-btn {
+        @include button;
+        margin: 1rem 0;
+        border: none;
+    }
+
+    &__error-message{
+        @include text;
+        font-weight: 500;
+        color: $RustyRed;
+    }
+
+    &__success-message {
+        @include text;
+        font-weight: 500;
+        color: $SeaGreen;
+    }
+
+    &__text{
+        text-align: center;
+    }
+}

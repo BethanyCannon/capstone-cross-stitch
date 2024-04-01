@@ -1,0 +1,144 @@
+@use "../../styles/partials/typography" as *;
+@use "../../styles/partials/variables" as *;
+@use "../../styles/partials/mixins" as *;
+
+.design-details {
+    @include format;
+
+    &__design-btn {
+        margin: 10px 16px;
+        padding: 0.3rem;
+        background-color: $LightBlueL;
+        border-radius: 50%;
+
+        @include tablet {
+            margin: 0
+        }
+
+        &:hover {
+            background-color: $CadetGrayL;
+            cursor: pointer;
+        }
+    }
+
+    &__container {
+        display: flex;
+        flex-direction: column;
+
+        @include tablet {
+            flex-direction: row;
+        }
+
+    }
+
+    &__img-container {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+
+        @include tablet {
+            width: 50%;
+        }
+    }
+
+    &__hero-image {
+        max-width: -webkit-fill-available;
+        padding: 1rem;
+        max-height: 80vh;
+        width: auto;
+        align-self: center;
+
+        @include tablet {
+            padding: 1rem 1rem 1rem 0;
+        }
+    }
+
+    &__images {
+        width: 100%;
+
+    }
+
+    &__carousel {
+        border-bottom: 2px solid $CadetGray;
+        padding-bottom: 16px;
+    
+        @include tablet {
+            border-bottom: none;
+        }
+
+        & li {
+            max-width: 50px !important;
+        }
+    }
+
+    &__title {
+        order: 2;
+        margin-left: 16px;
+        text-transform: capitalize;
+
+        @include tablet {
+            text-align: center;
+            align-self: center;
+        }
+    }
+
+    &__svg-container {
+        position: absolute;
+        top: 1rem;
+        right: 1rem;
+    }
+
+    &__svg {
+        margin-left: auto;
+
+        &:hover {
+            cursor: pointer;
+        }
+    }
+
+    &__header-container {
+        @include tablet {
+            display: flex;
+            margin-top: 10px;
+        }
+    }
+
+    &__text-container {
+        margin: 16px 10px;
+        padding: 16px;
+        background-color: rgba(184, 216, 216, 0.5);
+        border-radius: 20px;
+        position: relative;
+        width: 95%;
+        display: flex;
+
+        @include tablet {
+            width: 100%;
+            margin-right: auto;
+            margin: 16px 0 auto 32px;
+        }
+    }
+
+    &__modal-container{
+        width: 100%;
+        margin-right: 32px;
+    }
+
+    &__text-title{
+        padding-right: 8px;
+
+        & p {
+            @include text;
+        }
+    }
+
+    &__text {
+        & p {
+            @include text;
+        }  
+    }
+}
+
+.react-multi-carousel-list {
+    padding-bottom: 16px;
+}

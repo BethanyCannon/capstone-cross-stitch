@@ -1,0 +1,9 @@
+@use "./partials/typography" as *;
+@use "./partials/variables" as *;
+
+*,*::before,*::after {
+    font-family: $font;
+    margin: 0;
+    color: $Black;
+    box-sizing: border-box;
+}

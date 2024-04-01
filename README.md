@@ -22,20 +22,18 @@ Not that I can think of
 
 ### Features
 
-- Icon should take the user back home
+- Logo should take the user back home
+    -  A Home page with a list of the newest 15 designs on display 
 - A search bar to look up specific content
     - A search page that will pull up designs that match search terms
-- Icon/avatar what will take their use to their account
-- A Home page with a list of the 'newest' designs (20?) on display
-- When clicking on a design it should go to a page 
-    - that provides details on the design:
-        - (fabric used, colours and brand used, size, difficulty,)
-    - the ability to save a project (only for logged in users)
-    - link to external site where design is being sold
-- log-in and create accounts page
-- User account that has a list of save projects
-
-*List the functionality that your app will include. These can be written as user stories or descriptions with related details. Do not describe _how_ these features are implemented, only _what_ needs to be implemented.*
+- Avatar what will take their use to their account
+    - User page that has a list of save projects
+    - Edit and delete user Modals
+    - Logout button
+- When clicking on a design it should go to a page that provides details on the design:
+    - (colours, size, description, creator, pushlished date, images array)
+    - the ability to favourite a project (only for logged in users)
+- Log-in and create accounts Modals
 
 ## Implementation
 
@@ -48,15 +46,18 @@ Not that I can think of
     - react
     - react-router-dom
     - axios
+    - react-modal
+    - react-multi-carousel
 - Server libraries:
     - knex
     - express
     - cors/typescript
+    - dotenv
     - nodemon
     - multer
-    - (possibly path or cloudinary)
-    - react-modal
+    - mysql2
     - jsonwebtoken
+    - bcryptjs
 
 ### APIs
 
@@ -65,156 +66,222 @@ No external APIs for this project
 ### Sitemap
 
 - User page
-- Home page * (should share same page and pass data similar to brainfilx)
-- Search page * (should share same page and pass data similar to brainfilx)
+    - in User Page: edit and delete modals
+- Home page
+- Search page
 - Design detail page
-- Sign in/Sign up page (might makes this this modal instead)
+- Sign in/Sign up Modals
 
 ### Mockups
 
-![](HomePage.jpeg)
-![](ProfilePage.jpeg)
-![](DesignPage.jpeg)
+![](./mock_ups/HomePage.jpeg)
+![](./mock_ups/ProfilePage.jpeg)
+![](./mock_ups/DesignPage.jpeg)
 
 ### Data
 
-![](DataMap.png)
+![](./mock_ups/DataMap.png)
 
-### Endpoints
+# Endpoints
 
 List endpoints that your server will implement, including HTTP methods, parameters, and example responses.
-- GET:
-    - designs - sends list of designs
+
+## GET:
+### designs list
         - /designs
         - params: renders on homepage load
         - response (set limit to 10/15):
 
-        {
-            "id": 1,
-            "design_name": "Cool Design",
-            "creator_name": "Jane Doe"               (comes from foreign key "creator_id": "Jane Doe")
-            "img_url": "ASK ABOUT THIS ONE",
-        }
+"   
+    [{
+        "id": 1,
+        "design_name": "Cool Design",
+        "creator_name": "Jane Doe"      
+        "image": [{
+            "design_id": 1,
+            "id": 1, 
+            "image_url": "http://localhost:8080/designs/design1.png"
+        }]
+    }]
+"
 
-    - user data
-        - /user/:id - sends user data 
-        - params: token
+### user data
+    - /user
+    - params: token
+    - response:
+"
+    [{
+        "avatar": "image1.jpg",
+        "created_at": "2024-04-01T01:08:50.000Z",
+        "email": "email@email.com"
+        "id": 1,
+        "first_name": "Joe",
+        "last_name": "Smirth",
+    }]
+"
+
+### design details 
+    - /designs/details/:id
+    - params: design id, token
+    - response:
+"   
+    [{
+        "created_at": "2024-04-01T01:08:50.000Z",
+        "creator_name": "Jane Doe",
+        "description": "I am describing this image",
+        "design_name": "Cool Design",
+        "favourites": false,
+        "id": 1,
+        "size_height": "16",
+        "size_width": "16",
+        "thread_count": "4"
+        "image": [{
+            "design_id": 1,
+            "id": 1, 
+            "image_url": "http://localhost:8080/designs/design1.png"
+        }],  
+    }]
+"
+
+### user favourites list
+    - /user/:id
+    - params: user id
+    - response:
+"
+    [{
+        "creator_name": "John Smith",
+        "design_name": "border grapes",
+        "id": 2,
+        "image": [{
+            "design_id": 2, 
+            "id": 3,
+            "image_url": "http://localhost:8080/designs/design3.png"
+        }]
+    }]
+"
+
+## POST:
+### create user
+     - /user/newUser
+        - params: email, username, first_name, last_name, password, confirm_password, avatar
         - response:
-        {
-            "id": 1,
-            "avatar": "localhost-image1.jpg",
-            "username": Idontknow,
-            "favourites": [{obj}, {obj}, {obj}]
-        }
 
-    - get design details 
-        - /designs/:id - 
-        - params: design id, token
-        - response:
-        {
-            "id": 1,
-            "design_name": "Cool Design",
-            "creator_id": "Jane Doe",               (comes from foreign key)
-            "img_url": "localhost-image1.jpg",      (return first image only)
-            "size": "16cm x 16cm"
-            "thread_count": "4"
-            "date_created": Jan 16 2024
-            "favourites": "false"                   (logged in) 
-        }
+    [{
+       "Registered successfully"
+    }]
 
-- POST
-    - create user
-        - /user/newuser
-        - params: email, username, first_name, last_name, password, username, avatar
-        - response:
-        {
-            "token": "token"
-        }
 
-    - log in user 
-        - /users/:id 
-        - params: email, password
-        - response:
-        {
-            "token": "token"
-        }
+### log-in user 
+    - /user/login 
+    - params: email, password
+    - response:
+ 
+    [{
+    "token": "token"
+    }]
 
-    - (login) add to favourites
-       - /users/:id/favourites
-       - params: user id, token
 
-       {
-        "id": 1
-        "user_id": 1
-        "design_id": 23
-        "date_added": Jan 16 2024
-       }
+### (login) add to favourites
+    - /users/:id/favourites/:id
+    - params: user id, token, favourites id
+    - response:
 
-- DELETE
-    - (login) delete from favourites
-       - /user/:id/favourites/:id
-       - params: user id, favourites id, token
+    [{
+        "favourite added"
+   }]
 
-       {
-        remove item from favourite list, no response body
-       }
 
-### Auth
+## DELETE:
+### (login) delete from favourites
+    - /user/:id/favourites/:id
+    - params: user id, favourites id, token
+    - response:
+
+    [{
+        "favourite deleted"
+    }]
+
+
+### (login) delete user
+    - /user/:id
+    - params: user id
+    - response:
+
+    [{
+        "User deleted"
+    }]
+
+
+## PATCH:
+### edit user
+    - /user/:id
+    - params: id, avatar, first_name, last_name, email, password, confirm_password
+    - response:
+
+    [{
+        "id": 1,
+        "first_name": 'Joe',
+        "last_name:" 'Smith',
+        "email": 'email@email.com',
+        "avatar": 'avatar1.png',
+        "updated_at": '2024-04-01T02:18:44.000Z'
+    }]
+
+# Auth
 
 JWD token authentication for logging in and accessing favourites
 
 ## Roadmap
 
-done - create client (score: 1)
+- create client
     - routes & pages
         - pages: HomePage, DetailsPage, UserPage
         -cd routes: "/", "/:itemID", "/:userID"
 
-- create serve (score: 1)
+- create serve
     - routes, controllers
 
-- create migration (score: 2)
+- create migration
 
-- create seed (score: 2)
+- create seed
     - create 20 x stitch designs
     - create 1 user
 
-- feature-layout (score: 3)
+- feature-layout
     - front end:
         - set up sass: mixins, variables, typography, global styling
         - create header & nav bar
         - create footer
     
-- feature-homepage (4)
+- feature-homepage
     - frontend: 
         - create page components (similar to mock up)
             - cross stitch card with data filled - .map
     - backend:
-        - .get /designs
-        - .get /design?limit=10 (or 15)
+        - .get /design
 
-- features-signin-signup-page/modal (7)
+- features-signin-signup-page/modal
     - frontend: 
         - create modals for signing in and signing up
         - include forms - sign up must be able to take an image in avatar
     - backend:
-        - .post /user/:id & .post /user/newuser
+        - .post /user/login & .post /user/newuser
         - JWT token auth
+
     sources to help with image uploading:
     <!-- https://stackoverflow.com/questions/4007969/application-x-www-form-urlencoded-or-multipart-form-data -->
     <!-- https://www.youtube.com/watch?v=dLXSJdTK9QI -->
     <!-- https://medium.com/ecmastack/uploading-files-with-react-js-and-node-js-e7e6b707f4ef -->
 
-- feature-userpage (10)
+- feature-userpage
     - frontend: 
         - create user page
             - include card displaying user information
             - favourites components - remove from favourites button
     - backend: 
         - .get /user/:id api
-        - .delete /user/:id/favourite/:id
 
-- feature-detailspage (5)
+ - feature-detailspage
     - fronent:
         - create design details page (possibly find a way to make user page card component dynamic)
         - favourite:
@@ -224,11 +291,18 @@ done - create client (score: 1)
     - backend:
         - .get /design/:id
 
-- feature-search-page (5)
+ - feature-add-and-delete-favourites
+    - frontend: 
+        - .svg heart get's filled out if favourited
+    - backend: 
+        - .post /user/:id/favourite/:id
+        - .delete /user/:id/favourite/:id
+
+ - feature-search-page
     - frontend:
         - search bar should already be built - add functionality
     - backend:
-        - /designs?="search-term" 
+        - /designs/search/?="search-term" 
             - return items with title that matches part of of term
 
 
@@ -238,8 +312,8 @@ Scope your project as a sprint. Break down the tasks that will need to be comple
 ## Nice-to-haves
 
 - user details
-    - edit user details
-    - delete user (cascade to include favourites)
+    done - edit user details
+    done - delete user (cascade to include favourites)
 - projects components that can set a project as favourites, in-progess, or completed 
     - the ability to add notes to projects
     - bonus: (including photos)

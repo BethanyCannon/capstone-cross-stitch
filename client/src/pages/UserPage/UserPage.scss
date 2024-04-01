@@ -1,0 +1,47 @@
+@use "../../styles/partials/typography" as *;
+@use "../../styles/partials/variables" as *;
+@use "../../styles/partials/mixins" as *;
+
+.profile {
+    @include format;
+    
+    &__carousel {
+        
+        & li {
+            @include tablet {
+                max-width: 220px !important;
+            }
+        }
+    }
+
+    &__logout{
+        text-align: center;
+        margin-top: 32px;
+
+        &-title{
+            margin: 16px;
+            @include subheading;
+        }
+
+        &-link{
+            margin: 16px;
+            @include text;
+            text-decoration: none;
+
+            &:hover {
+                cursor: pointer;
+                font-weight: 600;
+            }
+        }
+    }
+}
+
+
+.react-multiple-carousel__arrow {
+    background-color: rgb(184, 216, 216, 0.8) !important;
+    z-index: 1 !important;
+
+    &:hover{
+        background-color: rgb(143, 170, 170, 0.8) !important;
+    }
+}

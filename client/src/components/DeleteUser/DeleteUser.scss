@@ -1,0 +1,40 @@
+@use "../../styles/partials/typography" as *;
+@use "../../styles/partials/variables" as *;
+@use "../../styles/partials/mixins" as *;
+@use "../../components/EditUser/EditUser.scss" as *;
+
+.delete{
+    &__delete-icon{
+        fill: $LightBlue;
+
+        &:hover{
+            cursor: pointer;
+            fill: $CadetGray;
+        }
+        
+    }
+
+    &__close {
+        @extend .edit__close;
+    }
+
+    &__title {
+        @extend .edit__title;
+    }
+
+    &__text{
+        @include text;
+    }
+
+    &__btn-container{
+        @extend .edit__btn-container;
+    }
+
+    &__delete-btn{
+        @extend .edit__submit-btn;
+    }
+
+    &__cancel-btn{
+        @extend .edit__cancel-btn;
+    }
+}

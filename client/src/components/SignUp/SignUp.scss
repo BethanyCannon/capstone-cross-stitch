@@ -1,0 +1,43 @@
+@use "../../styles/partials/mixins" as *;
+@use "../../styles/partials/typography" as *;
+@use "../../styles/partials/variables" as *;
+@use "../Login/Login.scss" as *;
+
+.sign-up {
+
+    &__close{
+        @extend .login__close;
+    }
+
+    &__title{
+        @extend .login__title;
+    }
+
+    &__modal-btn {
+        @include button;
+    }
+
+    &__form{
+        @extend .login__form
+    }
+
+    &__avatar-upload{
+        border: none !important;
+
+        &::file-selector-button {
+            @include button;
+            border: none;
+            margin-right: 1rem;
+        }
+    }
+
+    &__submit-btn{
+        @extend .login__login-btn;
+
+        margin: 16px auto 0;
+    }
+
+    &__error-message{
+        @extend .login__error-message;
+    }
+}
