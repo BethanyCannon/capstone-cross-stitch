@@ -32,7 +32,7 @@
         align-items: center;
 
         @include tablet {
-            align-items: self-start;
+            align-items: flex-start;
             justify-content: unset;
             gap: 30% 0.5%;
             flex-direction: row;
