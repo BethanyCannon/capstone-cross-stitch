@@ -21,6 +21,7 @@
         @extend .login__form
     }
 
+
     &__avatar-upload{
         border: none !important;
 
@@ -28,6 +29,10 @@
             @include button;
             border: none;
             margin-right: 1rem;
+        }
+
+        &:focus{
+            outline: none !important;
         }
     }
 
