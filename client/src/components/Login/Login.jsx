@@ -57,10 +57,12 @@ function Login({ setIsLoggedIn }) {
 
                 <form className="login__form" onSubmit={handleLogin}>
                     <legend className="login__title">Login</legend>
+
                     <label htmlFor="email" > Email: </label>
-                    <input type="text" name="email" />
+                    <input type="text" placeholder="email@wmail.com" name="email" />
+
                     <label htmlFor="password" > Password: </label>
-                    <input type="password" name="password" />
+                    <input type="password" placeholder="******" name="password" />
 
                     <button className="login__login-btn">Log in</button>
 

@@ -33,7 +33,7 @@ router
 
 router
   .route("/newUser")
-  .post(upload.single("image"), userController.createNewUser)
+  .post(upload.single("avatar"), userController.createNewUser)
 
 router
   .route("/:UserId/favourites/:DesignId")

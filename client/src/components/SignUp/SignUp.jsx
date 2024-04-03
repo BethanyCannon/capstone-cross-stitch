@@ -72,19 +72,19 @@ function SignUp({ setSuccess }) {
                     {error && <div className="sign-up__error-message">{error}</div>}
 
                     <label htmlFor="first-name" > First Name: </label>
-                    <input type="text" name="firstName" />
+                    <input type="text" placeholder="Morgan" name="firstName" />
 
                     <label htmlFor="last-name" > Last Name: </label>
-                    <input type="text" name="lastName" />
+                    <input type="text" placeholder="Smyth" name="lastName" />
 
                     <label htmlFor="email" > Email: </label>
-                    <input type="email" name="email" />
+                    <input type="email" placeholder="email@email.com" name="email" />
 
                     <label htmlFor="password" > Password: </label>
-                    <input type="password" name="password" />
+                    <input type="password" placeholder="******" name="password" />
 
                     <label htmlFor="password" > Comfirm Password: </label>
-                    <input type="password" name="confirmPassword" />
+                    <input type="password" placeholder="******" name="confirmPassword" />
 
                     <label htmlFor="avatar">Choose a profile picture:</label>
                     <input type="file" name="avatar" className="sign-up__avatar-upload" onChange={handleFile} accept="image/png, image/jpeg" />
