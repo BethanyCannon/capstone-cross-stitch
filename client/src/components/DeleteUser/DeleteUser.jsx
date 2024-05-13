@@ -38,7 +38,7 @@ function DeleteUser({ setIsLoggedIn }) {
                     <button className="delete__close" onClick={() => setIsOpen(false)}> <img src={closeIcon} /> </button>
 
                     <h2 className="delete__title">Delete account</h2>
-                    <p className="delete__text">Are you sure you want to delete? This cannon be undone</p>
+                    <p className="delete__text">Are you sure you want to delete? This cannot be undone</p>
                     <div>
                         <button className="delete__cancel-btn" onClick={() => setIsOpen(false)}> Cancel</button>
                         <button className="delete__delete-btn" onClick={handleDelete}>Delete</button>

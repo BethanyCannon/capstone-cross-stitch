@@ -56,7 +56,7 @@ const designData =[
     thread_count: 5,
     height_size: 5,
     height_width: 5,
-    description: "beautiful flower designs (cite)",
+    description: "beautiful flower designs  ",
   },
   {
     id: 2,
@@ -65,7 +65,7 @@ const designData =[
     thread_count: 5,
     height_size: 5,
     height_width: 5,
-    description: "grapes and flowers (cite)",
+    description: "grapes and flowers  ",
   },
   {
     id: 3,
@@ -74,7 +74,7 @@ const designData =[
     thread_count: 5,
     height_size: 5,
     height_width: 5,
-    description: "truely amazing (cite)",
+    description: "truely amazing  ",
   },
   {
     id: 4,
@@ -83,7 +83,7 @@ const designData =[
     thread_count: 5,
     height_size: 5,
     height_width: 5,
-    description: "inspiring (cite)",
+    description: "inspiring  ",
   },
   {
     id: 5,
@@ -92,7 +92,7 @@ const designData =[
     thread_count: 5,
     height_size: 5,
     height_width: 5,
-    description: "complex patterns (cite)",
+    description: "complex patterns  ",
   }, 
   {
     id: 6,
@@ -101,7 +101,7 @@ const designData =[
     thread_count: 5,
     height_size: 5,
     height_width: 5,
-    description: "neaveu (cite)",
+    description: "Art Nouveau",
   },
   {
     id: 7,
@@ -110,7 +110,7 @@ const designData =[
     thread_count: 5,
     height_size: 5,
     height_width: 5,
-    description: "borders (cite)",
+    description: "borders  ",
   },
   {
     id: 8,
@@ -119,7 +119,7 @@ const designData =[
     thread_count: 5,
     height_size: 5,
     height_width: 5,
-    description: "alphabets (cite)",
+    description: "alphabets",
   },
   {
     id: 9,
@@ -128,7 +128,7 @@ const designData =[
     thread_count: 5,
     height_size: 5,
     height_width: 5,
-    description: "(cite)",
+    description: "Art",
   },
   {
     id: 10,
@@ -137,7 +137,7 @@ const designData =[
     thread_count: 5,
     height_size: 5,
     height_width: 5,
-    description: "pattern for chairs (cite)",
+    description: "pattern for chairs  ",
   },
   {
     id: 11,
@@ -146,7 +146,7 @@ const designData =[
     thread_count: 5,
     height_size: 5,
     height_width: 5,
-    description: "bird (cite)",
+    description: "bird  ",
   },
   {
     id: 12,
@@ -155,7 +155,7 @@ const designData =[
     thread_count: 5,
     height_size: 5,
     height_width: 5,
-    description: "spring flowers (cite)",
+    description: "spring flowers  ",
   },
   {
     id: 13,
@@ -164,7 +164,7 @@ const designData =[
     thread_count: 5,
     height_size: 5,
     height_width: 5,
-    description: "colourful borders (cite)",
+    description: "colourful borders  ",
   },
   {
     id: 14,
@@ -173,7 +173,7 @@ const designData =[
     thread_count: 5,
     height_size: 5,
     height_width: 5,
-    description: "honey bees (cite)",
+    description: "honey bees  ",
   },
   {
     id: 15,
@@ -182,7 +182,7 @@ const designData =[
     thread_count: 5,
     height_size: 5,
     height_width: 5,
-    description: "multiple bird patterns (cite)",
+    description: "multiple bird patterns  ",
   },
   {
     id: 16,
@@ -191,7 +191,7 @@ const designData =[
     thread_count: 5,
     height_size: 5,
     height_width: 5,
-    description: "fishies (cite)",
+    description: "fishies  ",
   },
   {
     id: 17,
@@ -200,7 +200,7 @@ const designData =[
     thread_count: 5,
     height_size: 5,
     height_width: 5,
-    description: "winter animals (cite)",
+    description: "winter animals  ",
   },
   {
     id: 18,
@@ -209,7 +209,7 @@ const designData =[
     thread_count: 5,
     height_size: 5,
     height_width: 5,
-    description: "savannah mammals (cite)",
+    description: "savannah mammals  ",
   },
   {
     id: 19,
@@ -218,7 +218,7 @@ const designData =[
     thread_count: 5,
     height_size: 5,
     height_width: 5,
-    description: "Canadian wildlief (cite)",
+    description: "Canadian wildlief  ",
   },
   {
     id: 20,
@@ -227,7 +227,7 @@ const designData =[
     thread_count: 5,
     height_size: 5,
     height_width: 5,
-    description: "birds of prey (cite)",
+    description: "birds of prey  ",
   },
   {
     id: 21,
@@ -236,7 +236,7 @@ const designData =[
     thread_count: 5,
     height_size: 5,
     height_width: 5,
-    description: "birds on the barn (cite)",
+    description: "birds on the barn  ",
   },
 ];
 

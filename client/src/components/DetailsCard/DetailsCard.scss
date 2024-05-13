@@ -7,18 +7,53 @@
     display: flex;
     flex-direction: column;
 
-    @include tablet {
-        flex-direction: row;
-    }
-
-    &__btn-container {
+    &__container {
         display: flex;
         flex-direction: column;
-        align-items: flex-end;
-        justify-content: space-between;
+
+        @include tablet {
+            flex-direction: row;
+            display: flex;
+        }
     }
 
-    &__modals{
+    &__title-mobile {
+        @include tablet {
+            visibility: hidden;
+            display: none;
+        }
+    }
+
+    &__btn-container-mobile {
+        display: flex;
+        align-items: center;
+        // margin-left: auto;
+        margin: 0 10px 0 auto;
+
+        @include tablet {
+            visibility: hidden;
+            display: none;
+
+        }
+    }
+
+    &__btn-container-desktop {
+
+        visibility: hidden;
+        display: none;
+
+        @include tablet {
+            visibility: visible;
+            display: block;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            margin-left: auto;
+        }
+
+    }
+
+    &__modals {
         display: flex;
         align-items: flex-end;
 
@@ -70,6 +105,8 @@
         padding: 4px 8px;
         border-radius: 20px;
         background-color: $CadetGrayL;
+        line-height: 1rem !important;
+        margin-left: auto;
 
         &:hover {
             font-weight: 600;

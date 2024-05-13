@@ -20,23 +20,36 @@ function DetailsCard({ profile, logout, setProfile, setIsLoggedIn }) {
 
     return (
         <section className="details">
-            <img src={`http://localhost:8080/avatars/${profile.avatar}`} className="details__avatar" />
-            <div className="details__text-container">
-                <div className="details__text" >
-                    <h2>{`${profile.first_name} ${profile.last_name}`}</h2>
-                    <p>
-                        {profile.email}
-                    </p>
-                    <p>
-                        User since {convertedDate}
-                    </p>
+
+            <div className="details__container">
+                <img src={`http://localhost:8080/avatars/${profile.avatar}`} className="details__avatar" />
+                <div className="details__text-container">
+                    <div className="details__text" >
+                        <div className="details__btn-container-desktop">
+                            <h2>{`${profile.first_name} ${profile.last_name}`}</h2>
+                            <p onClick={handleLogout} className="details__logout"> logout</p>
+                            <div className="details__modals">
+                                <EditUser setProfile={setProfile} profile={profile} />
+                                <DeleteUser profile={profile} setIsLoggedIn={setIsLoggedIn} />
+                            </div>
+                        </div>
+
+                        <h2 className="details__title-mobile">{`${profile.first_name} ${profile.last_name}`}</h2>
+
+                        <p>
+                            {profile.email}
+                        </p>
+                        <p>
+                            User since {convertedDate}
+                        </p>
+                    </div>
                 </div>
-                <div className="details__btn-container">
-                    <p onClick={handleLogout} className="details__logout"> logout</p>
-                    <div className="details__modals">
+            </div>
+            <div className="details__btn-container-mobile">
+                <p onClick={handleLogout} className="details__logout"> logout</p>
+                <div className="details__modals">
                     <EditUser setProfile={setProfile} profile={profile} />
                     <DeleteUser profile={profile} setIsLoggedIn={setIsLoggedIn} />
-                    </div>
                 </div>
             </div>
         </section>

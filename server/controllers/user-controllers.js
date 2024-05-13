@@ -103,6 +103,10 @@ const loginUser = async (req, res) => {
 const createNewUser = async (req, res) => {
 
   //check to see if image file is there
+  if (!req.body) {
+    return res.status(400).send("Please enter the required fields");
+  }
+
   if (!req.file) {
     return res.status(400).send("Please add an avatar")
   }
@@ -236,7 +240,7 @@ const editUser = async (req, res) => {
     //get new user data and send as repsonse
     const getEditedUser = await knex("user").where({ id: id }).first()
     delete getEditedUser.password;
-    delete getEditedUser.created_at;
+    delete getEditedUser.updated_at;
 
     res.status(200).json(getEditedUser);
   }

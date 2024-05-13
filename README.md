@@ -236,7 +236,8 @@ JWD token authentication for logging in and accessing favourites
 - create client
     - routes & pages
         - pages: HomePage, DetailsPage, UserPage
-        -cd routes: "/", "/:itemID", "/:userID"
+        - cd routes: "/", "/:itemID", "/:userID"
+        - user-password: "pass"
 
 - create serve
     - routes, controllers

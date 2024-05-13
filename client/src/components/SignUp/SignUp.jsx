@@ -23,8 +23,6 @@ function SignUp({ setSuccess }) {
         data.append("password", event.target.password.value)
         data.append("confirm_password", event.target.confirmPassword.value)
 
-        console.log(event.target.password.value)
-        console.log(event.target.confirmPassword.value)
         try {
             const response = await axios.post("http://localhost:8080/user/newuser", data
             );
@@ -42,12 +40,9 @@ function SignUp({ setSuccess }) {
         setFile(event.target.files[0])
     }
 
-    console.log(file)
-
     function openModal() {
         setIsOpen(true);
     }
-
 
     function closeModal() {
         setIsOpen(false);
@@ -75,7 +70,7 @@ function SignUp({ setSuccess }) {
                     <input type="text" placeholder="Morgan" name="firstName" />
 
                     <label htmlFor="last-name" > Last Name: </label>
-                    <input type="text" placeholder="Smyth" name="lastName" />
+                    <input type="text" placeholder="Smith" name="lastName" />
 
                     <label htmlFor="email" > Email: </label>
                     <input type="email" placeholder="email@email.com" name="email" />

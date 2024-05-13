@@ -59,7 +59,7 @@ function Login({ setIsLoggedIn }) {
                     <legend className="login__title">Login</legend>
 
                     <label htmlFor="email" > Email: </label>
-                    <input type="text" placeholder="email@wmail.com" name="email" />
+                    <input type="text" placeholder="email@email.com" name="email" />
 
                     <label htmlFor="password" > Password: </label>
                     <input type="password" placeholder="******" name="password" />
